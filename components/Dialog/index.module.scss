@@ -1,0 +1,26 @@
+.container {
+  :global {
+    .MuiPaper-root {
+      background: transparent;
+      width: auto;
+      max-width: none;
+    }
+  }
+  .dialogTitle {
+    width: 100%;
+    background: #272750;
+    border-radius: 1.67rem 1.67rem 0rem 0rem;
+    font-size: 2rem;
+    font-family: Poppins-SemiBold, Poppins;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 2.67rem;
+    text-align: center;
+    padding: 2rem 0;
+  }
+  .dialogContent {
+    border-radius: 0rem 0rem 1.67rem 1.67rem;
+    background-color: #1a1a46;
+    overflow: hidden;
+  }
+}

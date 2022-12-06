@@ -1,0 +1,117 @@
+.normalText {
+  font-size: 1.33rem;
+  font-family: Poppins-Regular, Poppins;
+  font-weight: 400;
+  color: #fcfcfd;
+  line-height: 2rem;
+  max-width: 40rem;
+}
+
+.tipsText {
+  @extend .normalText;
+  color: #777e90;
+}
+
+.addressBox {
+  width: 100%;
+  margin-top: 2.67rem;
+  padding: 1.25rem;
+  background: rgba($color: white, $alpha: 0.15);
+  border-radius: 1rem;
+  text-align: center;
+  font-size: 1.17rem;
+  font-family: Poppins-Medium, Poppins;
+  font-weight: 500;
+  color: #e3e3e8;
+  line-height: 1.67rem;
+}
+
+.defaultButton {
+  text-align: center;
+}
+
+.returnNFTDialogBox {
+  padding: 2rem 3.33rem;
+  max-width: 46.67rem;
+}
+
+.alertTxErrorMsg {
+  width: 100%;
+  word-wrap: break-word;
+  word-break: break-all;
+  max-height: 30rem;
+  overflow-y: scroll;
+}
+
+.baseButton {
+  width: 100%;
+  text-align: center;
+}
+
+.disableButton {
+  background: #777e90 !important;
+  cursor: not-allowed !important;
+  font-size: 1.33rem !important;
+  font-family: Poppins-SemiBold, Poppins !important;
+  font-weight: 600 !important;
+  color: #d6d7dc !important;
+  line-height: 2rem !important;
+}
+.normalRedeemBox {
+  padding: 2rem 3.33rem;
+  width: 46.67rem;
+  p {
+    font-size: 1.33rem;
+    font-family: Poppins-Regular, Poppins;
+    color: #ffffff;
+    line-height: 2.33rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.redeemNFTBox {
+  box-sizing: border-box;
+  padding: 2rem 3.33rem;
+  width: 46.67rem;
+
+  .redeemInfo,
+  .payDetail {
+    & > div {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 1.33rem;
+      font-family: Poppins-Regular, Poppins;
+      font-weight: 400;
+      color: #777e90;
+      line-height: 2rem;
+      div {
+        display: inline-flex;
+        align-items: center;
+        img {
+          width: 1.67rem;
+          height: 1.67rem;
+          margin-right: 0.5rem;
+        }
+      }
+    }
+  }
+
+  .payDetail {
+    margin-bottom: 2.67rem;
+  }
+
+  .totalLabelValue {
+    font-size: 1.67rem;
+    font-family: Poppins-SemiBold, Poppins;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 2.33rem;
+  }
+  .stackLine {
+    background: #d8d8d8;
+    opacity: 0.08;
+    border: 0.08rem solid #979797;
+    margin: 2rem auto;
+  }
+}

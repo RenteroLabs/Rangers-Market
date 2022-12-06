@@ -1,0 +1,70 @@
+.navBox {
+  height: 5.67rem;
+  background: rgba(255, 255, 255, 0);
+  border-bottom: 0.08rem solid rgba($color: #fff, $alpha: 0.2);
+  line-height: 5.67rem;
+  padding-left: 12.67rem;
+
+  :global {
+    .MuiBreadcrumbs-li {
+      line-height: 5.67rem;
+    }
+  }
+
+  & p {
+    font-size: 1.17rem;
+    font-family: Poppins-SemiBold, Poppins;
+    font-weight: 600;
+    color: #fcfcfd;
+    line-height: 1.67rem;
+  }
+  & a {
+    font-size: 1.17rem;
+    font-family: Poppins-Regular, Poppins;
+    font-weight: 400;
+    color: #777e90;
+    line-height: 1.67rem;
+  }
+}
+
+.sectionHeader {
+  display: flex;
+  justify-content: space-between;
+  margin: 4rem 12.67rem 2rem;
+
+  p {
+    font-size: 2rem;
+    font-family: MonumentExtended-Black, MonumentExtended;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 3.33rem;
+  }
+}
+
+.nftCardList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  margin: auto 12.67rem;
+}
+
+.showMore {
+  margin: 1.33rem auto 4rem;
+  font-size: 1.17rem;
+  font-family: Poppins-SemiBold, Poppins;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+
+  span {
+    display: inline-block;
+    width: auto;
+    margin: 0 auto;
+    padding: 0.67rem 2rem;
+    line-height: 2rem;
+    color: #ffffff;
+    cursor: pointer;
+    background: url(../public/color_btn_irregular.svg);
+    border-radius: 1rem;
+  }
+}

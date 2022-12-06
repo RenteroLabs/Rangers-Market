@@ -1,0 +1,17 @@
+// default button preset style
+.defaultButton {
+  // box style
+  display: inline-block;
+  background: linear-gradient(270deg, #b721ff 0%, #5adcfe 100%);
+  border-radius: 1rem;
+  padding: 0.67rem 5rem;
+
+  // text style
+  font-size: 1.33rem;
+  font-family: Poppins-SemiBold, Poppins;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 2rem;
+  cursor: pointer;
+  user-select: none;
+}

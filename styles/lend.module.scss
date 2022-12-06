@@ -1,0 +1,263 @@
+.title {
+  font-size: 3.33rem;
+  font-family: MonumentExtended-Black, MonumentExtended;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 5.33rem;
+  letter-spacing: 1px;
+  margin: 7.33rem auto 2rem;
+
+  .highLight {
+    color: #5bd8fe;
+  }
+}
+
+.subTitle {
+  font-size: 1.67rem;
+  font-family: Poppins-Regular, Poppins;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 2.5rem;
+  opacity: 0.6;
+}
+
+.lendButton {
+  cursor: pointer;
+  background-image: url(../public/lend_overview_btn.svg);
+  background-repeat: no-repeat;
+  width: 18.92rem;
+  height: 5.58rem;
+  text-align: center;
+  margin: auto;
+  font-size: 1.5rem;
+  font-family: Agrandir-GrandHeavy, Agrandir;
+  font-weight: normal;
+  color: #ffffff;
+  line-height: 4.67rem;
+}
+
+.overview {
+  min-height: 38rem;
+  overflow: hidden;
+
+  .overviewTitle {
+    font-size: 2.67rem;
+    font-family: MonumentExtended-Black, MonumentExtended;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 3.33rem;
+    margin: 10rem auto 6.58rem;
+  }
+
+  :global {
+    .MuiGrid-item {
+      max-width: 23.17rem;
+    }
+  }
+
+  .baseCard {
+    height: 12.58rem;
+    background: linear-gradient(180deg, #1a182e 0%, rgba(14, 4, 23, 0) 100%);
+    border-radius: 1.67rem;
+    box-sizing: border-box;
+    overflow: hidden;
+
+    h4 {
+      font-size: 2.33rem;
+      font-family: MonumentExtended-Black, MonumentExtended;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 3.33rem;
+      margin: 3.42rem auto 0.58rem;
+    }
+    p {
+      font-size: 1.33rem;
+      font-family: Poppins-Regular, Poppins;
+      font-weight: 400;
+      color: #777e90;
+      line-height: 2rem;
+    }
+  }
+
+  .overviewCard_1 {
+    @extend .baseCard;
+    background: url(../public/overview_1.svg) no-repeat;
+    background-size: 100%;
+  }
+  .overviewCard_2 {
+    @extend .baseCard;
+    background: url(../public/overview_2.svg) no-repeat;
+    background-size: 100%;
+  }
+  .overviewCard_3 {
+    @extend .baseCard;
+    background: url(../public/overview_3.svg) no-repeat;
+    background-size: 100%;
+  }
+  .overviewCard_4 {
+    @extend .baseCard;
+    background: url(../public/overview_4.svg) no-repeat;
+    background-size: 100%;
+  }
+}
+
+.procedure {
+  min-height: 48.5rem;
+  overflow: hidden;
+  max-width: 100rem;
+  margin: auto;
+  // width: 100vw;
+  // background-color: black;
+
+  h2 {
+    font-size: 2.67rem;
+    font-family: MonumentExtended-Black, MonumentExtended;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 3.33rem;
+    margin: 10rem auto 6.67rem;
+  }
+
+  .stepList {
+    background: linear-gradient(180deg, #1a182e 0%, #1a182e 100%);
+    border-radius: 1.67rem;
+    padding: 4.83rem 3.33rem;
+    background-color: #1a182d;
+    display: flex;
+    justify-content: space-between;
+
+    .stepCard {
+      width: 30%;
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      text-align: left;
+
+      span {
+        display: flex;
+        align-items: center;
+        width: 4rem;
+        height: 4rem;
+        // background: rgba(255, 255, 255, 0.1);
+        border-radius: 1rem;
+      }
+      div > h4 {
+        margin: 0.75rem 0.92rem 0.92rem;
+        font-size: 1.67rem;
+        font-family: Poppins-Bold, Poppins;
+        font-weight: bold;
+        color: #ffffff;
+        line-height: 2.33rem;
+      }
+      div > p {
+        font-size: 1.17rem;
+        font-family: Poppins-Regular, Poppins;
+        font-weight: 400;
+        color: #777e90;
+        line-height: 1.67rem;
+        margin-left: 0.92rem;
+      }
+    }
+
+    .stepNext {
+      flex-grow: 0.5;
+      display: flex;
+      align-items: flex-start;
+      padding-top: 13px;
+      opacity: 0.8;
+    }
+  }
+}
+
+.integration {
+  text-align: center;
+  min-height: 65rem;
+  overflow: hidden;
+  padding-bottom: 1rem;
+
+  h2 {
+    font-size: 2.67rem;
+    font-family: MonumentExtended-Black, MonumentExtended;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 3.33rem;
+    margin: 10rem 6.67rem;
+  }
+}
+
+.container {
+  text-align: center;
+  :global {
+    .MuiPaper-root {
+      background: transparent;
+      min-width: 46.67rem;
+      width: auto;
+      max-width: none;
+    }
+    .MuiPaper-root {
+      width: 46.67rem;
+    }
+  }
+  .dialogTitle {
+    width: 100%;
+    background: #272750;
+    border-radius: 1.67rem 1.67rem 0rem 0rem;
+    font-size: 2rem;
+    font-family: Poppins-SemiBold, Poppins;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 2.67rem;
+    text-align: center;
+    padding: 2rem 0;
+    vertical-align: middle;
+    position: relative;
+
+    svg {
+      position: absolute;
+      right: 1.5rem;
+      top: 2.5rem;
+      cursor: pointer;
+    }
+  }
+  .dialogContent {
+    background: #141436;
+    overflow: hidden;
+    padding: 2rem 3.33rem;
+    text-align: left;
+    font-size: 1.33rem;
+    font-family: Poppins-Regular, Poppins;
+    font-weight: 400;
+    color: #fcfcfd;
+    line-height: 2rem;
+  }
+  .dialogAction {
+    display: flex;
+    justify-content: center;
+    background-color: #1a1a46;
+    padding: 2.67rem 3.33rem;
+
+    div {
+      font-size: 1.5rem;
+      font-family: Agrandir-GrandHeavy, Agrandir;
+      font-weight: normal;
+      color: #ffffff;
+      line-height: 2.67rem;
+      background: linear-gradient(270deg, #b721ff 0%, #5adcfe 100%);
+      padding: 0.75rem 2rem;
+      border-radius: 1rem;
+      cursor: pointer;
+      user-select: none;
+      border-top-right-radius: 2rem;
+      clip-path: polygon(
+        30% 0%,
+        96% 0%,
+        100% 40%,
+        100% 100%,
+        70% 100%,
+        0 100%,
+        0% 70%,
+        0 0
+      );
+    }
+  }
+}

@@ -1,0 +1,148 @@
+.card {
+  width: 27.67rem;
+  height: 33.33rem;
+  background-color: #313158;
+  border-radius: 2.67rem;
+  position: relative;
+  text-align: center;
+
+  .cover_image {
+    height: 13.83rem;
+    background-color: #464669;
+    border-top-left-radius: 2.9rem;
+    border-top-right-radius: 2.9rem;
+    overflow: hidden;
+    position: relative;
+    // background-image: url(../../public/game-upcoming.svg);
+    background-repeat: no-repeat;
+    background-position: 50% 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+      object-fit: cover;
+    }
+  }
+
+  .game_logo {
+    position: absolute;
+    overflow: hidden;
+    top: 10.83rem;
+    left: 1.67rem;
+    width: 6rem;
+    height: 6rem;
+    background-color: transparent;
+    border-radius: 1.5rem;
+  }
+
+  h4 {
+    font-size: 2rem;
+    font-family: Poppins-Bold, Poppins;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 2.33rem;
+    margin: 1.67rem 1.67rem 1.33rem;
+  }
+
+  p {
+    font-size: 1.33rem;
+    font-family: Poppins-Regular, Poppins;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 2rem;
+    opacity: 0.5;
+    margin: auto 1.67rem 2rem;
+  }
+
+  .depositButton {
+    width: 20rem;
+    height: 4.17rem;
+    cursor: pointer;
+    background: linear-gradient(270deg, #b721ff 0%, #5adcfe 100%);
+    font-size: 1.5rem;
+    font-family: Agrandir-GrandHeavy, Agrandir;
+    font-weight: normal;
+    color: #ffffff;
+    line-height: 4.17rem;
+    text-align: center;
+    user-select: none;
+    border-radius: 0.8rem;
+    border-top-right-radius: 2.2rem;
+    margin: auto;
+    clip-path: polygon(
+      30% 0%,
+      92.5% 0%,
+      100% 40%,
+      100% 100%,
+      70% 100%,
+      0 100%,
+      0% 70%,
+      0 0
+    );
+  }
+
+  .disableButton {
+    background: #777e90;
+    cursor: not-allowed;
+    opacity: 0.8;
+  }
+}
+
+.nftCard {
+  position: relative;
+  width: 27.67rem;
+  height: 33.33rem;
+  border-radius: 1.67rem;
+  background-color: #313158;
+  padding: 1.33rem;
+  cursor: pointer;
+  &:hover {
+    box-shadow: 0px 0px 20px 0px rgba(158, 137, 153, 1);
+  }
+
+  .radioOff {
+    position: absolute;
+    top: 2rem;
+    right: 2rem;
+  }
+
+  .radioCheck {
+    position: absolute;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    top: 2rem;
+    right: 2rem;
+    width: 2.67rem;
+    height: 2.67rem;
+    background: #aa3ff8;
+    border-radius: 1.33rem;
+    border: 0.17rem solid #ffffff;
+    color: white;
+  }
+
+  .nftCover {
+    width: 25rem;
+    height: 25rem;
+    border-radius: 1rem;
+    object-fit: contain;
+  }
+  .nftName {
+    font-size: 1.33rem;
+    font-family: Poppins-Regular, Poppins;
+    font-weight: 400;
+    color: #ffffff;
+    line-height: 1.67rem;
+    margin: 1.33rem auto 1rem;
+  }
+  .nftNumber {
+    font-size: 1.17rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #777e90;
+    line-height: 1.67rem;
+    display: flex;
+    align-items: center;
+  }
+}

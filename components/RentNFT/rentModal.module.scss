@@ -1,0 +1,181 @@
+.rentModal {
+  padding: 2rem;
+  min-height: 20rem;
+  max-width: 70rem;
+}
+
+.txProcessing {
+  font-size: 1.2rem;
+  color: rgba($color: white, $alpha: 0.9);
+  img {
+    width: 1.8rem;
+    height: 1.8rem;
+  }
+
+  a {
+    display: block;
+    color: #5bd9fe;
+    text-decoration: underline;
+    cursor: pointer;
+    text-align: center;
+  }
+}
+
+.container {
+  :global {
+    .MuiPaper-root {
+      background: transparent;
+      width: auto;
+      max-width: none;
+    }
+  }
+  .dialogTitle {
+    width: 46.67rem;
+    background: #272750;
+    border-radius: 1.67rem 1.67rem 0rem 0rem;
+    font-size: 2rem;
+    font-family: Poppins-SemiBold, Poppins;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 2.67rem;
+    text-align: center;
+    padding: 2rem 0;
+    p {
+      font-size: 2rem;
+      font-family: Poppins-SemiBold, Poppins;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 2.67rem;
+    }
+  }
+  .dialogContent {
+    max-width: 46.67rem;
+    border-radius: 0rem 0rem 1.67rem 1.67rem;
+    background-color: #1a1a46;
+    overflow: hidden;
+    padding: 2rem 3.33rem 2.67rem;
+
+    p,
+    h5 {
+      font-size: 1.33rem;
+      font-family: Poppins-Regular, Poppins;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 2rem;
+    }
+
+    h5 {
+      color: #777e90;
+    }
+
+    h3 {
+      font-size: 1.67rem;
+      font-family: Poppins-SemiBold, Poppins;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 2.33rem;
+    }
+
+    .payBox {
+      & > div {
+        display: flex;
+        justify-content: space-between;
+        & + div {
+          margin-top: 1.33rem;
+        }
+      }
+
+      .rentDayBox {
+        height: 4rem;
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+        border-radius: 1rem;
+        background-color: rgba($color: white, $alpha: 0.1);
+
+        .rentDayInput {
+          height: 4rem;
+          background-color: transparent;
+          flex-grow: 1;
+
+          input {
+            height: 4rem;
+            background-color: transparent;
+            width: 100%;
+            border-radius: 1rem;
+            border: none;
+            padding-left: 1rem;
+            font-size: 1.33rem;
+            font-family: Poppins-Medium, Poppins;
+            font-weight: 500;
+            color: #8590a6;
+            &:focus {
+              border: none !important;
+              outline: none !important;
+            }
+          }
+        }
+        .rentDayType {
+          width: 5rem;
+          text-align: center;
+          line-height: 4rem;
+          font-size: 1.33rem;
+          font-family: Poppins-Medium, Poppins;
+          font-weight: 500;
+          color: #ffffff;
+        }
+      }
+    }
+
+    .totalBox {
+      margin-top: 4.08rem;
+      margin-bottom: 2.67rem;
+      & > div {
+        display: flex;
+        justify-content: space-between;
+        & + div {
+          margin-top: 1.33rem;
+        }
+      }
+    }
+
+    .payListItemP {
+      display: inline-flex;
+      align-items: center;
+      img {
+        width: 1.67rem;
+        height: 1.67rem;
+        margin-right: 0.67rem;
+      }
+    }
+  }
+}
+
+.baseButton {
+  width: 100%;
+  text-align: center;
+}
+
+.disableButton {
+  background: #777e90 !important;
+  cursor: not-allowed !important;
+  font-size: 1.33rem !important;
+  font-family: Poppins-SemiBold, Poppins !important;
+  font-weight: 600 !important;
+  color: #d6d7dc !important;
+  line-height: 2rem !important;
+}
+
+@media screen and (max-width: 600px) {
+  .container {
+    .dialogTitle {
+      width: auto;
+    }
+    .dialogContent {
+      padding: 1.5rem;
+    }
+  }
+  .rentDayType {
+    margin: auto 0.5rem;
+  }
+}

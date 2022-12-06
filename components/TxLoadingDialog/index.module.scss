@@ -1,0 +1,39 @@
+.txDialog {
+  :global {
+    .MuiPaper-root {
+      overflow: hidden;
+      background-color: transparent;
+      border-radius: 1.67rem;
+    }
+  }
+
+  .txDialogBox {
+    width: 30rem;
+    max-width: 30rem;
+    min-height: 15rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: #1a1a46;
+    padding: 2.67rem 2rem;
+    border-radius: 1.67rem;
+    overflow: hidden;
+    p {
+      font-size: 1.17rem;
+      font-family: Poppins-SemiBold, Poppins;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 1.67rem;
+    }
+    .txLink {
+      width: 100%;
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      margin: 0.6rem auto 0;
+      color: #5ADCFE;
+      font-size: 1.17rem;
+    }
+  }
+}

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>facebook_icon</title>
+    <g id="首页-定稿" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home-定-new" transform="translate(-1288.000000, -6414.000000)" fill-rule="nonzero">
+            <g id="Footer" transform="translate(0.000000, 6382.000000)">
+                <g id="编组-2" transform="translate(0.000000, 22.000000)">
+                    <g id="social" transform="translate(1120.000000, 10.000000)">
+                        <g id="facebook_icon" transform="translate(168.000000, 0.000000)">
+                            <path d="M16,0 C7.15768153,0 0,7.1578816 0,16 C0,24.8421184 7.1578816,32 16,32 C24.8423184,32 32,24.8421184 32,16 C32,7.15768153 24.8421184,0 16,0 Z" id="face-book-copy-6" fill="#1877F2"></path>
+                            <g id="Group-35-Copy-2" transform="translate(12.000000, 8.000000)" fill="#FFFFFF">
+                                <path d="M7.94235379,7.99962736 L5.65072465,7.99962736 L5.65072465,16 L2.24650906,16 L2.24650906,7.99962736 L0,8 L0,5.24401913 L2.24650906,5.24364648 L2.24650906,3.56265679 C2.24650906,1.34501001 3.21922461,0 5.92801866,0 L8.8,0 L8.8,2.75598085 L6.82987712,2.75598085 C5.78831262,2.75598085 5.71888598,3.15973142 5.71888598,3.83110514 L5.71888598,5.17600867 L8.8,5.17600867 L8.45281186,7.99973383 L7.94235379,7.99962736 Z" id="face-book"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,377 @@
+.tableSearch {
+  margin-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+
+  .toggleBtnGroup {
+    display: flex;
+    border-radius: 2rem;
+    border: 0.17rem solid rgba($color: #777e91, $alpha: 0.3);
+
+    :global {
+      .MuiChip-root,
+      .MuiButtonBase-root {
+        cursor: pointer;
+        width: 10.67rem;
+        height: 3.33rem;
+        border-radius: 1.67rem;
+        border: none;
+        background: transparent;
+
+        span {
+          display: flex;
+          width: 10.3rem;
+          height: 3rem;
+          justify-content: center;
+          align-items: center;
+          font-size: 1.17rem;
+          font-family: Poppins-Medium, Poppins;
+          font-weight: 500;
+          color: rgba($color: white, $alpha: 0.5);
+          line-height: 1.67rem;
+          border-radius: 2rem;
+          background-color: #000030;
+        }
+      }
+    }
+
+    .activeButton {
+      background: linear-gradient(
+        270deg,
+        rgba(183, 33, 255, 1),
+        rgba(90, 220, 254, 1)
+      );
+      transition: background ease-out 1s;
+      span {
+        color: white;
+      }
+      // span {
+      //   display: block;
+      //   padding: 0.65rem 1.85rem;
+      //   font-size: 1.17rem;
+      //   font-family: Poppins-Medium, Poppins;
+      //   font-weight: 500;
+      //   color: #ffffff;
+      //   line-height: 1.67rem;
+      //   border-radius: 2rem;
+      //   background-color: #000030;
+      // }
+    }
+  }
+  .searchInput {
+    display: flex;
+    justify-content: space-around;
+    width: 28rem;
+    border-radius: 1rem;
+    border: 0.17rem solid rgba($color: #777e91, $alpha: 0.2);
+    background-color: transparent;
+    color: #777e90;
+  }
+}
+
+.returnButton {
+  min-width: 8rem;
+  display: inline-block;
+  background: linear-gradient(270deg, #b721ff 0%, #5adcfe 100%);
+  border-radius: 1rem;
+  color: white;
+  padding: 0.5rem 1.33rem;
+  cursor: pointer;
+  user-select: none;
+  font-size: 1rem;
+  font-family: Poppins-SemiBold, Poppins;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 1.67rem;
+  margin-left: 1rem;
+}
+.returnButton_disable {
+  @extend .returnButton;
+  background: #777e90;
+  color: rgba($color: white, $alpha: 0.7);
+  cursor: not-allowed;
+}
+
+.tableHeader {
+  background-color: #272750;
+  border-radius: 1.67rem 1.67rem 0rem 0rem;
+}
+.recordBoxHeader {
+  @extend .tableHeader;
+  border-radius: 0px !important;
+}
+
+.tableBody {
+  background-color: #1a1a46 !important;
+}
+
+.tableFooter {
+  background: #1a1a46;
+  border-radius: 0 1.67rem 1.67rem 0;
+  padding: 4.67rem;
+  :global {
+    .MuiTableCell-footer {
+      text-align: center;
+      padding: 4rem;
+      & > p {
+        font-size: 1.17rem;
+        color: #777e90;
+        line-height: 1.67rem;
+        margin-top: 1.33rem;
+      }
+    }
+  }
+}
+
+.operationBox {
+  background-color: #1a1a46;
+  margin-top: 3.33rem;
+  border-radius: 1rem;
+
+  .operationHeader {
+    padding: 2rem;
+  }
+
+  .tableTitle {
+    font-size: 1.5rem;
+    font-family: Poppins-SemiBold, Poppins;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 2rem;
+  }
+}
+
+.tableBox {
+  border-radius: 1rem;
+  overflow: hidden;
+  :global {
+    .MuiTableCell-root {
+      border-bottom: 0.04rem solid rgba($color: #979797, $alpha: 0.08) !important;
+      font-size: 1.17rem;
+      font-family: Poppins-Medium, Poppins;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.67rem;
+    }
+    .MuiTableCell-head {
+      font-size: 1.17rem;
+      font-family: Poppins-Medium, Poppins;
+      font-weight: 500;
+      color: #777e90;
+      line-height: 1.67rem;
+    }
+  }
+}
+
+.pagination {
+  :global {
+    .MuiPagination-ul {
+      justify-content: center;
+      margin-top: 3.33rem;
+    }
+  }
+}
+
+.tableTitle {
+  font-size: 2rem;
+  font-family: Poppins-SemiBold, Poppins;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 2.67rem;
+}
+
+.overviewBox {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin-bottom: 2rem;
+
+  & > div {
+    padding: 2rem;
+    height: 6rem;
+    flex-grow: 1;
+    font-size: 1.33rem;
+    font-family: Poppins-Bold, Poppins;
+    font-weight: bold;
+    opacity: 0.8;
+    line-height: 2rem;
+    user-select: none;
+    // background-color: transparent;
+    display: flex;
+    text-align: center;
+    justify-content: space-around;
+    align-items: center;
+  }
+  & > div + div {
+    margin-left: 1rem;
+  }
+}
+
+.nftBoxCell {
+  display: flex;
+  align-items: center;
+
+  .boxImage {
+    position: relative;
+    display: flex;
+    align-items: center;
+    img {
+      width: 3.33rem;
+      height: 3.33rem;
+      border-radius: 0.5rem;
+      margin: auto;
+      object-fit: contain;
+    }
+    .whitelistIcon {
+      position: absolute;
+      bottom: -1rem;
+      left: 0.08rem;
+      display: block;
+      width: 3.17rem;
+      height: 1.5rem;
+      background: url(../../public/whitelist_tag.png);
+    }
+  }
+
+  .nftCollectionName {
+    font-size: 1.17rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 1.67rem;
+  }
+  .nftAddress {
+    font-size: 1rem;
+    font-family: Poppins-Regular, Poppins;
+    font-weight: 400;
+    color: #5adcfe;
+    line-height: 1.33rem;
+  }
+}
+
+.container {
+  :global {
+    .MuiPaper-root {
+      background: transparent;
+      min-width: 46.67rem;
+      width: auto;
+      max-width: none;
+    }
+  }
+  .dialogTitle {
+    width: 100%;
+    background: #272750;
+    border-radius: 1.67rem 1.67rem 0rem 0rem;
+    font-size: 2rem;
+    font-family: Poppins-SemiBold, Poppins;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 2.67rem;
+    text-align: center;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    .emptyBox {
+      width: 24px;
+      height: 24px;
+      visibility: hidden;
+    }
+  }
+  .dialogContent {
+    border-radius: 0rem 0rem 1.67rem 1.67rem;
+    background-color: #1a1a46;
+    overflow: hidden;
+  }
+  .gameModalTitle {
+    @extend .dialogTitle;
+    justify-content: center;
+  }
+}
+
+.baseStatusCol {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  font-family: Poppins-Medium, Poppins;
+  font-weight: 500;
+  line-height: 20px;
+  &::before {
+    display: block;
+    content: '';
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-right: 0.58rem;
+    border-radius: 50%;
+    background-color: inherit;
+  }
+}
+
+.listingStatus {
+  @extend .baseStatusCol;
+  color: #5adcfe;
+  &::before {
+    background-color: #5adcfe;
+  }
+}
+
+.lendingStatus,
+.rentingStatus {
+  @extend .baseStatusCol;
+  color: #a6ff00;
+  &::before {
+    background-color: #a6ff00;
+  }
+}
+
+.removingStatus {
+  @extend .baseStatusCol;
+  color: #e2615c;
+  &::before {
+    background-color: #e2615c;
+  }
+}
+
+.removedStatus {
+  @extend .baseStatusCol;
+  color: #777e90;
+  &::before {
+    background-color: #777e90;
+  }
+}
+
+.returningStatus {
+  @extend .baseStatusCol;
+  color: #f3ae43;
+  &::before {
+    background-color: #f3ae43;
+  }
+}
+
+.payCoinCol {
+  display: flex;
+  img {
+    margin-right: 0.67rem;
+    width: 1.67rem;
+    height: 1.67rem;
+  }
+}
+
+.networkChangeSelect {
+  width: 20rem;
+  outline: none;
+  border: 0.17rem solid rgba(119, 126, 145, 0.3);
+  border-radius: 1rem;
+  font-size: 1.17rem;
+  font-family: Poppins-Medium, Poppins;
+  font-weight: 500;
+  color: white;
+  // color: rgba(255, 255, 255, 0.5);
+  :global {
+    fieldset {
+      border: none;
+    }
+  }
+}

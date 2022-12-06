@@ -1,0 +1,483 @@
+.container {
+  margin: auto;
+  display: flex;
+}
+
+.leftNav {
+  box-sizing: border-box;
+  width: 20rem;
+  flex-shrink: 0;
+  min-height: calc(100vh - 6rem);
+  box-shadow: inset -0.08rem 0rem 0rem 0rem #2b2c40;
+}
+
+.leftGameList {
+  position: fixed;
+  top: 6rem;
+  left: 0;
+  width: 20rem;
+  background: #1b1a46;
+  padding-bottom: 1rem;
+  font-size: 1.17rem;
+  font-family: Poppins-Medium, Poppins;
+  font-weight: 500;
+  color: #777e90;
+  line-height: 2rem;
+
+  .sidebarController {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.67rem;
+  }
+  .sidebarControllerMin {
+    @extend .sidebarController;
+    justify-content: center;
+  }
+  .gameItem {
+    display: flex;
+    align-items: center;
+    height: 3.33rem;
+    padding-left: 1.33rem;
+    cursor: pointer;
+
+    img {
+      width: 2rem;
+      height: 2rem;
+      display: inline-block;
+      border-radius: 0.53rem;
+      margin-right: 0.67rem;
+    }
+
+    & + .gameItem {
+      margin-top: 0.67rem;
+    }
+  }
+  .activeItem {
+    background: #aa3ff8;
+    font-size: 1.17rem;
+    color: #ffffff;
+    line-height: 2rem;
+    p {
+      font-family: Poppins;
+      font-weight: 600;
+    }
+  }
+}
+
+.leftNavMin {
+  @extend .leftNav;
+  width: 5rem;
+  .leftGameList {
+    width: 5rem;
+  } 
+}
+
+.contentBox {
+  width: 100%;
+  min-height: calc(100vh - 6rem);
+}
+
+.topCover {
+  width: 100%;
+
+  border-radius: 1.67rem;
+  position: relative;
+
+  .topCoverImage {
+    width: 100%;
+    height: 26.58rem;
+    object-fit: cover;
+  }
+  
+  .topLogo {
+    position: absolute;
+    top: 21.17rem;
+    left: 3.33rem;
+    width: 11rem;
+    height: 11rem;
+    border-radius: 1.33rem;
+  }
+  .topCoverInfo {
+    padding: 6.92rem 2.67rem;
+    .linkList {
+      display: flex;
+      align-items: center;
+    }
+    .websiteBtn {
+      width: 10.67rem;
+      height: 3.33rem;
+      margin-right: 0.33rem;
+      background: url(../public/color_btn_irregular.svg);
+      border-radius: 1rem;
+      font-size: 1.17rem;
+      font-family: Poppins-SemiBold, Poppins;
+      font-weight: 600;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+
+      &:hover {
+        background: linear-gradient(
+          270deg,
+          rgba(183, 33, 255, 1),
+          rgba(90, 220, 254, 1)
+        );
+        border-top-right-radius: 2.8rem;
+        clip-path: polygon(
+          30% 0%,
+          82% 0%,
+          100% 40%,
+          100% 100%,
+          70% 100%,
+          0 100%,
+          0% 70%,
+          0 0
+        );
+      }
+    }
+
+    .baseLink {
+      display: block;
+      width: 2.67rem;
+      height: 2.67rem;
+      margin-left: 1rem;
+      cursor: pointer;
+    }
+    .discordLink {
+      @extend .baseLink;
+      background: url(../public/discord_logo_w.svg);
+      &:hover {
+        background: url(../public/discord_logo_w_click.svg);
+      }
+    }
+    .twitterLink {
+      @extend .baseLink;
+      background: url(../public/twitter_logo_w.svg);
+      &:hover {
+        background: url(../public/twitter_logo_w_click.svg);
+      }
+    }
+    .telegramLink {
+      @extend .baseLink;
+      background: url(../public/telegram_logo_w.svg);
+      &:hover {
+        background: url(../public/telegram_logo_w_click.svg);
+      }
+    }
+    .facebookLink {
+      @extend .baseLink;
+      background: url(../public/facebook_logo_w.svg);
+      &:hover {
+        background: url(../public/facebook_logo_w_click.svg);
+      }
+    }
+
+    .gameTitle {
+      font-size: 2.5rem;
+      font-family: Poppins-SemiBold, Poppins;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 3.33rem;
+    }
+    .gameDesc {
+      font-size: 1.33rem;
+      font-family: Poppins-Medium, Poppins;
+      font-weight: 500;
+      color: #777e90;
+      line-height: 2rem;
+      margin-top: 2rem;
+    }
+  }
+}
+
+.cardListBox {
+  padding: 0 2.67rem 4rem;
+}
+@media screen and (max-width: 600px) {
+  .cardListBox {
+    padding-left: 10px;
+    padding-right: 10px;
+  }
+}
+
+.listTitleBox {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 2.67rem;
+}
+
+.listTitle {
+  font-size: 2rem;
+  font-family: MonumentExtended-Black, MonumentExtended;
+  font-weight: 900;
+  color: #ffffff;
+  line-height: 3.33rem;
+  display: flex;
+  align-items: center;
+
+  span {
+    display: inline-block;
+    margin-top: 4px;
+    cursor: pointer;
+  }
+}
+
+.nftCardList {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  & > div {
+    width: calc((100% - 6rem) / 6);
+  }
+}
+@media screen and (max-width: 1850px) {
+  .nftCardList > div {
+    width: calc((100% - 6rem) / 5);
+  }
+}
+@media screen and (max-width: 1650px) {
+  .nftCardList > div {
+    width: calc((100% - 4rem) / 4);
+  }
+}
+@media screen and (max-width: 1120px) {
+  .nftCardList > div {
+    width: calc((100% - 4rem) / 3);
+  }
+}
+@media screen and (max-width: 855px) {
+  .nftCardList > div {
+    width: calc((100% - 2rem) / 2);
+  }
+}
+
+.showMore {
+  margin: 1.33rem auto 0;
+  font-size: 1.17rem;
+  font-family: Poppins-SemiBold, Poppins;
+  font-weight: 600;
+  display: flex;
+  justify-content: center;
+
+  span {
+    display: inline-block;
+    width: auto;
+    margin: 0 auto;
+    padding: 0.67rem 2rem;
+    line-height: 2rem;
+    color: #ffffff;
+    cursor: pointer;
+    background: url(../public/color_btn_irregular.svg);
+    border-radius: 1rem;
+  }
+}
+
+.sortList {
+  display: flex;
+  align-items: center;
+
+  .whitelistForUser {
+    font-size: 1.33rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 2rem;
+  }
+  .whitelistNum {
+    display: inline-block;
+    height: 2rem;
+    min-width: 2rem;
+    margin: auto 2.67rem auto 1rem;
+    text-align: center;
+    user-select: none;
+    background: #70eaab;
+    border-radius: 0.5rem;
+    padding: 0.17rem 0.5rem;
+    font-size: 1.17rem;
+    font-family: Poppins-SemiBold, Poppins;
+    font-weight: 600;
+    color: #305948;
+    line-height: 1.67rem;
+  }
+
+  div {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    min-width: 18.67rem;
+    border-radius: 1rem;
+    border: 0.17rem solid rgba($color: #777e91, $alpha: 0.3);
+    padding: 0.83rem 1.33rem;
+    font-size: 1.17rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #777e90;
+    line-height: 1.67rem;
+    & + div {
+      margin-left: 2rem;
+    }
+  }
+}
+
+.trialZone {
+  margin: 6.47rem auto;
+
+  .headerTitle {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+
+    .titleText {
+      font-size: 2rem;
+      font-family: MonumentExtended-Black, MonumentExtended;
+      font-weight: 900;
+      color: #ffffff;
+      line-height: 3.33rem;
+      display: flex;
+      align-items: center;
+      img {
+        margin-left: 1rem;
+        width: 2.4rem;
+        height: 2.4rem;
+        background: url(../public/fire.png);
+      }
+    }
+    .moreLink {
+      font-size: 1.33rem;
+      font-family: Poppins-Medium, Poppins;
+      font-weight: 500;
+      color: #5cd7fe;
+      line-height: 2rem;
+    }
+  }
+  .trialNFTList {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+  }
+}
+
+// @media screen and (max-width: 1500px) {
+//   .leftNav {
+//     display: none;
+//   }
+// }
+
+@media screen and (max-width: 1300px) {
+  .topCover {
+    .topCoverImage {
+      height: 22.56rem;
+      object-fit: cover;
+    }
+    .topLogo {
+      width: 9rem;
+      height: 9rem;
+      left: 2rem;
+      top: 18rem;
+    }
+  }
+}
+@media screen and (max-width: 1100px) {
+  .topCover {
+    .topCoverImage {
+      height: 20.56rem;
+      object-fit: cover;
+    }
+    .topLogo {
+      width: 8rem;
+      height: 8rem;
+      left: 2rem;
+      top: 15.17rem;
+    }
+  }
+}
+@media screen and (max-width: 900px) {
+  .topCover {
+    .topCoverImage {
+      height: 18.56rem;
+      object-fit: cover;
+    }
+    .topLogo {
+      width: 7rem;
+      height: 7rem;
+      left: 2rem;
+      top: 15.17rem;
+    }
+  }
+}
+@media screen and (max-width: 1160px) {
+  .contentBox {
+    // padding: 2.67rem;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .topCover {
+    .topCoverImage {
+      height: 11.16rem;
+      object-fit: cover;
+    }
+    .topLogo {
+      width: 6rem;
+      height: 6rem;
+      left: 2rem;
+      top: 9rem;
+    }
+    .topCoverInfo {
+      padding: 4.5rem 1.67rem 4rem;
+      .gameTitle {
+        font-size: 1.67rem;
+        font-family: Poppins-SemiBold, Poppins;
+        font-weight: 600;
+        color: #ffffff;
+        line-height: 2rem;
+      }
+      .gameDesc {
+        font-size: 1.17rem;
+        font-family: Poppins-Medium, Poppins;
+        font-weight: 500;
+        color: #777e90;
+        line-height: 1.67rem;
+        margin-top: 1rem;
+      }
+    }
+  }
+
+  .listTitleBox {
+    margin-bottom: 1rem;
+    .listTitle {
+      font-size: 1.6rem;
+    }
+  }
+
+  .trialZone {
+    margin: 2rem auto;
+    width: 100%;
+    .headerTitle {
+      margin-bottom: 1rem;
+      // padding: 0 1rem;
+      .titleText {
+        font-size: 1.6rem;
+      }
+    }
+
+    .trialNFTListBox {
+      width: calc(100vw - 2rem);
+      overflow-x: scroll;
+      .trialNFTList {
+        display: flex;
+        justify-content: flex-start;
+        width: calc(200vw - 2.6rem);
+      }
+    }
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .sortList {
+    display: none;
+  }
+}

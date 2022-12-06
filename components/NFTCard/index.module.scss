@@ -1,0 +1,326 @@
+.card {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1.67rem;
+  margin-bottom: 1.33rem !important;
+  position: relative;
+  cursor: pointer;
+  // overflow: hidden;
+  margin: 0 0.5rem;
+}
+
+.card:hover {
+  box-shadow: rgba(123, 171, 217, 0.7) 0px 0px 8px 0px;
+  transition: all 0.1s ease 0s;
+}
+
+.cardTrialBackground {
+  background: linear-gradient(
+    92deg,
+    rgba(#f36a38, 0.15) 0%,
+    rgba(#90aa97, 0.15) 48%,
+    rgba(#26ebf5, 0.15) 100%
+  );
+}
+
+.nftImage {
+  // width: 22.17rem;
+  // width: 21.33rem;
+  width: 100%;
+  padding-bottom: 100%;
+  border-radius: 1.67rem 1.67rem 0 0;
+  overflow: hidden;
+  margin-bottom: 1rem;
+  position: relative;
+
+  img {
+    object-fit: contain;
+  }
+  .imageCover {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 1rem;
+    border-radius: 1.67rem 1.67rem 0 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    .lockCoverInfo {
+      text-align: center;
+      font-size: 1.17rem;
+      font-family: Poppins-Medium, Poppins;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 1.67rem;
+      .lockIcon {
+        width: 4rem !important;
+        height: 4rem !important;
+        min-width: 0 !important;
+        margin-bottom: 0.5rem;
+      }
+      .unlockTime {
+        width: 16.17rem;
+        height: 2.67rem;
+        margin-top: 2rem;
+        text-align: center;
+        background: rgba(42, 234, 134, 0.15);
+        border-radius: 0.67rem;
+        border: 0.13rem solid #2aea86;
+        font-size: 1rem;
+        font-family: Poppins-Medium, Poppins;
+        font-weight: 500;
+        color: #2aea86;
+        line-height: 2.67rem;
+      }
+    }
+  }
+
+  .attrItem {
+    display: inline-flex;
+    font-size: 1.17rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+    line-height: 1.67rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    & + .attrItem {
+      margin-top: 1rem;
+    }
+    .attrItemValue {
+      flex-grow: 1;
+      flex-shrink: 1;
+      color: #c4cad2;
+      margin-left: 1rem;
+    }
+  }
+}
+
+.cardTitle,
+.baseCardLine {
+  margin: 0 1.33rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.nftName {
+  font-size: 1.17rem;
+  font-family: Poppins-Medium, Poppins;
+  font-weight: 500;
+  color: rgba($color: white, $alpha: 0.5);
+  line-height: 2rem;
+}
+.nftNumber {
+  font-size: 1.17rem;
+  font-family: Poppins-Medium, Poppins;
+  font-weight: 500;
+  color: #777e90;
+  line-height: 1.67rem;
+}
+
+.rentMode {
+  @extend .baseCardLine;
+  margin: 1.3rem 1.33rem 0.67rem;
+
+  div {
+    font-size: 1.33rem;
+    font-family: Poppins-SemiBold, Poppins;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 2rem;
+  }
+}
+
+.rentInfo {
+  @extend .baseCardLine;
+  margin-bottom: 1.33rem;
+  img {
+    width: 1.67rem;
+    height: 1.67rem;
+    margin-right: 0.67rem;
+  }
+  div {
+    font-size: 1.17rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: rgba($color: white, $alpha: 0.5);
+    line-height: 1.67rem;
+  }
+}
+
+.skeletonCard {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1.67rem;
+  padding-bottom: 1.33rem;
+  cursor: pointer;
+  margin-bottom: 1.33rem !important;
+  margin: 0 0.5rem;
+  .nftImage {
+    width: 100%;
+    padding-bottom: 100%;
+  }
+  .nftLogo {
+    width: 2.67rem;
+    height: 2.67rem;
+    border-radius: 0.59rem;
+  }
+}
+
+.tagList {
+  position: absolute;
+  display: flex;
+  bottom: 8px;
+  left: 8px;
+  justify-content: left;
+  font-size: 1rem;
+  font-family: Poppins-Medium, Poppins;
+  font-weight: 500;
+  line-height: 1.33rem;
+  span {
+    display: inline-block;
+  }
+  span + span {
+    margin-left: 0.67rem;
+  }
+}
+
+.rentedTag {
+  background: #ae34ff;
+  border-radius: 0.5rem;
+  padding: 0.17rem 0.67rem;
+  color: #ffffff;
+}
+
+.whitelistTag {
+  background: #70eaab;
+  border-radius: 0.5rem;
+  padding: 0.17rem 0.67rem;
+  color: #305948;
+}
+
+.trialDayTag {
+  display: inline-block;
+  margin: 1.33rem;
+  padding: 0.33rem 0.67rem;
+  background: linear-gradient(92deg, #f36a38 0%, #90aa97 48%, #26ecf5 100%);
+  border-radius: 0.67rem;
+  font-size: 1rem;
+  font-family: Poppins-Bold, Poppins;
+  font-weight: bold;
+  color: #ffffff;
+  line-height: 1.67rem;
+}
+
+.card {
+  .rentButtonBox {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3.33rem;
+    overflow: hidden;
+  }
+  .rentButton {
+    display: none;
+  }
+
+  @keyframes slide-top {
+    0% {
+      bottom: -3.33rem;
+    }
+    100% {
+      bottom: 0rem;
+    }
+  }
+
+  &:hover .rentButton {
+    display: block;
+    animation: slide-top 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94) both;
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 3.33rem;
+    text-align: center;
+    background: #aa3ff8;
+    border-radius: 0rem 0rem 1.67rem 1.67rem;
+    font-size: 1.33rem;
+    font-family: Poppins-SemiBold, Poppins;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 3.33rem;
+    user-select: none;
+  }
+
+  .imageCoverAttr {
+    display: none;
+    text-align: left;
+  }
+
+  &:hover .imageCoverAttr {
+    display: block;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    height: 100%;
+    width: 100%;
+    padding: 1.67rem;
+    background: rgba(0, 0, 0, 0.8);
+    border-radius: 1rem;
+    border-radius: 1.67rem 1.67rem 0 0;
+    overflow-y: hidden;
+    text-overflow: ellipsis;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .card {
+    // width: auto;
+    margin-bottom: 1rem !important;
+    // overflow: hidden;
+
+    &:hover .rentButtonBox {
+      height: 3rem;
+    }
+
+    &:hover .rentButton {
+      height: 3rem !important;
+      line-height: 3rem !important;
+    }
+  }
+
+  .nftImage {
+    // width: calc(50vw - 1.8rem);
+    // height: 0px;
+    padding-bottom: 100%;
+    margin-bottom: 0.5rem;
+  }
+
+  .imageCoverAttr {
+    display: none !important;
+    &:hover {
+      display: none !important;
+    }
+  }
+  .cardTitle {
+    margin: 0px 1rem;
+  }
+  .rentInfo {
+    margin: 0px 1rem;
+    margin-bottom: 1.33rem;
+    img {
+      width: 1.2rem;
+      height: 1.2rem;
+      margin-right: 0.4rem;
+    }
+  }
+  .rentMode {
+    // margin-top: 0.67rem !important;
+    margin: 0px 1rem;
+  }
+  .unlockTime {
+    width: 12rem !important;
+  }
+}

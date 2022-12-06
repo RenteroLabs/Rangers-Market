@@ -1,0 +1,1003 @@
+.baseButton {
+  width: 20rem;
+  height: 4.17rem;
+  border-radius: 12px;
+  border-top-right-radius: 24px;
+  font-size: 1.5rem;
+  font-family: Agrandir-GrandHeavy, Agrandir;
+  font-weight: normal;
+  color: #ffffff;
+  line-height: 4.17rem;
+  text-align: center;
+  user-select: none;
+  cursor: pointer;
+  clip-path: polygon(
+    30% 0%,
+    93% 0%,
+    100% 40%,
+    100% 100%,
+    70% 100%,
+    0 100%,
+    0% 70%,
+    0 0
+  );
+}
+
+.defaultButton {
+  @extend .baseButton;
+  clip-path: polygon(
+    30% 0%,
+    95% 0%,
+    100% 45%,
+    100% 100%,
+    70% 100%,
+    0 100%,
+    0% 70%,
+    0 0
+  );
+  border-top-right-radius: 28px;
+  border: 0.17rem solid rgba($color: white, $alpha: 0.2);
+}
+
+.primaryButton {
+  @extend .baseButton;
+  background: linear-gradient(270deg, #b721ff 0%, #5adcfe 100%);
+}
+
+.primaryButton_disable {
+  @extend .primaryButton;
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.selectedMessage {
+  font-size: 1.33rem;
+  font-family: Poppins-Regular, Poppins;
+  font-weight: 400;
+  color: #dedede;
+  line-height: 2rem;
+  text-align: center;
+  margin-top: 1.33rem;
+}
+
+.lendStep {
+  // padding: 2.67rem;
+  // padding: 1rem;
+
+  span {
+    font-size: 1.33rem;
+  }
+}
+
+.container {
+  :global {
+    .MuiPaper-root {
+      background: transparent;
+      min-width: 46.67rem;
+      width: auto;
+      max-width: none;
+    }
+  }
+  .dialogTitle {
+    width: 100%;
+    background: #272750;
+    border-radius: 1.67rem 1.67rem 0rem 0rem;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    p {
+      font-size: 2rem;
+      font-family: Poppins-SemiBold, Poppins;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 2.67rem;
+      text-align: center;
+      max-width: 25rem;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+    
+    .titleBack {
+      display: flex;
+      align-items: center;
+      margin-right: 1rem;
+      font-size: 1.33rem;
+      font-family: Poppins-Medium, Poppins;
+      font-weight: 500;
+      color: #5adcfe;
+      line-height: 2rem;
+      cursor: pointer;
+    }
+    .hiddenTitleBack {
+      visibility: hidden;
+    }
+  }
+  .dialogContent {
+    border-radius: 0rem 0rem 1.67rem 1.67rem;
+    background-color: #1a1a46;
+    overflow: hidden;
+  }
+  .gameModalTitle {
+    @extend .dialogTitle;
+    justify-content: center;
+  }
+}
+
+.lendSuccess {
+  text-align: center;
+  overflow: hidden;
+  img {
+    width: 64px;
+    height: 64px;
+  }
+  h3 {
+    font-size: 1.67rem;
+    font-family: Poppins-Bold, Poppins;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 2.33rem;
+    margin-top: 1rem;
+  }
+  & > span {
+    font-size: 1.33rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #777e90;
+    line-height: 2rem;
+    margin-top: 1rem;
+  }
+  .linkStyle {
+    cursor: pointer;
+    font-size: 1.33rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #5adcfe;
+    line-height: 2rem;
+    margin-left: 1rem;
+  }
+}
+
+.stepButton {
+  display: inline-block;
+  text-align: center;
+  padding: 0.67rem 2rem;
+  min-width: 10rem;
+  font-size: 1.33rem;
+  font-family: Poppins-SemiBold, Poppins;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 2rem;
+  background: linear-gradient(270deg, #b721ff 0%, #5adcfe 100%);
+  border-radius: 1rem;
+  cursor: pointer;
+}
+
+.openInExplorer {
+  margin-left: 2rem;
+  a {
+    display: flex;
+    align-items: center;
+    font-size: 1.17rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #5adcfe;
+    line-height: 1.67rem;
+  }
+}
+
+.stepContent {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+
+.emptyBoxContent {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  justify-content: center;
+}
+
+.stepConfig {
+  padding: 2.67rem auto;
+  text-align: center;
+  .formItems {
+    & > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+      p > span {
+        color: rgb(221, 71, 71);
+      }
+    }
+    .formLabel {
+      font-size: 1.33rem;
+      font-family: Poppins-Regular, Poppins;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 2rem;
+      width: 16rem;
+      text-align: left;
+    }
+    .formItem {
+      background-color: rgba($color: white, $alpha: 0.1);
+      border-radius: 1rem;
+      height: 4rem;
+      font-size: 1.33rem;
+      font-family: Poppins-Medium, Poppins;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 2rem;
+      padding: 1rem 1.33rem;
+      text-align: left;
+      input {
+        font-size: 1.33rem;
+        font-family: Poppins-Medium, Poppins;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 2rem;
+      }
+    }
+    .tipInfo {
+      text-align: left;
+      width: 41.67rem;
+      font-size: 1rem;
+      font-family: Poppins-Regular, Poppins;
+      font-weight: 400;
+      color: #777e90;
+      line-height: 1.67rem;
+    }
+    .errorFormat {
+      display: flex;
+      align-items: center;
+      width: 41.67rem;
+      text-align: left;
+      font-size: 1.33rem;
+      font-family: Poppins-Regular, Poppins;
+      font-weight: 400;
+      color: rgb(205, 78, 78);
+      line-height: 1.67rem;
+    }
+
+    :global {
+      .Mui-selected {
+        border: 0.17rem solid #5adcfe !important;
+      }
+
+      .rc-input-number {
+        display: inline-block;
+        height: 4rem;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+        line-height: 4rem;
+        vertical-align: middle;
+        // border: 1px solid #d9d9d9;
+        // border-radius: 4px;
+        transition: all 0.3s;
+        border: none;
+
+        &-focused {
+          // border-color: #1890ff;
+          // box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+        &-out-of-range {
+          input {
+            color: red;
+          }
+        }
+
+        &-handler {
+          display: block;
+          height: 2rem;
+          overflow: hidden;
+          line-height: 1rem;
+          text-align: center;
+          touch-action: none;
+          border: none;
+
+          &-active {
+            background: transparent;
+          }
+        }
+
+        &-handler-up-inner,
+        &-handler-down-inner {
+          color: #666666;
+          -webkit-user-select: none;
+          user-select: none;
+          border: none;
+        }
+
+        &:hover {
+          // border-color: #1890ff;
+
+          .rc-input-number-handler-up,
+          .rc-input-number-handler-wrap {
+            // border-color: #1890ff;
+            border: none;
+          }
+        }
+
+        &-disabled:hover {
+          border-color: #d9d9d9;
+
+          .rc-input-number-handler-up,
+          .rc-input-number-handler-wrap {
+            border-color: #d9d9d9;
+            border: none;
+          }
+        }
+
+        &-input-wrap {
+          height: 100%;
+          overflow: hidden;
+        }
+
+        &-input {
+          width: 100%;
+          height: 100%;
+          padding: 0;
+          color: #666666;
+          line-height: 26px;
+          text-align: center;
+          border: 0;
+          border-radius: 4px;
+          outline: none;
+          transition: all 0.3s ease;
+          transition: all 0.3s;
+          -moz-appearance: textfield;
+          background-color: transparent;
+          font-size: 1.33rem;
+          font-family: Poppins-Medium, Poppins;
+          font-weight: 500;
+          color: #ffffff;
+          line-height: 2rem;
+        }
+
+        &-handler-wrap {
+          float: right;
+          width: 20px;
+          height: 100%;
+          transition: all 0.3s;
+          border: none;
+        }
+
+        &-handler-up {
+          padding-top: 0.8rem;
+          transition: all 0.3s;
+
+          &-inner {
+            &:after {
+              content: '+';
+            }
+          }
+        }
+
+        &-handler-down {
+          transition: all 0.3s;
+          margin-top: -0.3rem;
+
+          &-inner {
+            &:after {
+              content: '-';
+            }
+          }
+        }
+
+        &-handler-down-disabled,
+        &-handler-up-disabled {
+          opacity: 0.3;
+          &:hover {
+            color: #999;
+            border-color: #d9d9d9;
+          }
+        }
+
+        &-disabled {
+          .rc-input-number-input {
+            background-color: #f3f3f3;
+            cursor: not-allowed;
+            opacity: 0.72;
+          }
+          .rc-input-number-handler {
+            opacity: 0.3;
+            &:hover {
+              color: #999;
+              border-color: #d9d9d9;
+            }
+          }
+        }
+      }
+    }
+
+    .ratioButton {
+      width: 8rem;
+      height: 4rem;
+      background: rgba($color: white, $alpha: 0.1);
+      border-radius: 1rem;
+      border-width: 0.17rem;
+      border-color: transparent;
+      font-size: 1.33rem;
+      font-family: Poppins-Medium, Poppins;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 2rem;
+
+      & + .ratioButton {
+        margin-left: 1rem;
+      }
+
+      .customRatio {
+        width: 14.67rem;
+      }
+    }
+  }
+}
+
+.securityInput {
+  width: 85%;
+  height: 2rem;
+  :global {
+    .rc-input-number-handler-wrap {
+      display: none;
+    }
+    .rc-input-number-input-wrap .rc-input-number-input {
+      text-align: left;
+    }
+  }
+}
+
+.noDoneButton {
+  margin: 2.67rem auto 1rem;
+  background: #777e90 !important;
+  padding: 1.08rem 5rem !important;
+  cursor: not-allowed !important;
+  user-select: none;
+}
+
+.DoneButton {
+  margin: 2.67rem auto 1rem;
+  padding: 1.08rem 5rem !important;
+}
+
+// .lendStepTwoBox {
+//   overflow: hidden;
+//   :global {
+//     .MuiStepper-root {
+//       padding-left: 25%;
+//       margin: auto;
+//       text-align: center;
+//       margin-top: 2rem;
+//     }
+//   }
+// }
+
+.lendTypeBox {
+  border-bottom: 0.16rem solid rgba($color: #979797, $alpha: 0.08);
+  :global {
+    .MuiTabs-flexContainer {
+      width: 28.67rem;
+      height: 4rem;
+      background: #141436;
+      border-radius: 1rem;
+      margin: 1.33rem auto;
+    }
+    .MuiTabs-indicator {
+      display: none;
+    }
+    button {
+      // 取消按钮组件强制英文转成大写风格
+      text-transform: none;
+      font-size: 1.17rem;
+      font-family: Poppins-Medium, Poppins;
+      font-weight: 500;
+      color: rgba($color: white, $alpha: 0.25);
+      line-height: 1.67rem;
+    }
+    .Mui-selected {
+      margin: auto 0;
+      height: 2.67rem;
+      min-height: min-content;
+      padding: 0.5rem 1rem;
+      background: #5adcfe;
+      box-shadow: 0rem 0.08rem 0.17rem 0rem rgba(0, 0, 0, 0.09);
+      border-radius: 0.67rem;
+      font-size: 1.17rem;
+      font-family: Poppins-SemiBold, Poppins;
+      font-weight: 600;
+      color: #141436;
+      line-height: 1.67rem;
+    }
+  }
+}
+
+// Trial mode lend config css
+.trialModeBox {
+  padding: 2.67rem auto;
+  text-align: center;
+  .formItems {
+    & > div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 2rem;
+      p > span {
+        color: rgb(221, 71, 71);
+      }
+    }
+    .formLabel {
+      font-size: 1.33rem;
+      font-family: Poppins-Regular, Poppins;
+      font-weight: 400;
+      color: #ffffff;
+      line-height: 2rem;
+      width: 16rem;
+      text-align: left;
+    }
+    .formItem {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: rgba($color: white, $alpha: 0.1);
+      border-radius: 1rem;
+      height: 4rem;
+      font-size: 1.33rem;
+      font-family: Poppins-Medium, Poppins;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 2rem;
+      padding: 1rem 1.33rem;
+      text-align: left;
+      input {
+        font-size: 1.33rem;
+        font-family: Poppins-Medium, Poppins;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 2rem;
+      }
+    }
+
+    .lendingTime {
+      width: 41.67rem;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    .tipInfo {
+      text-align: left;
+      width: 41.67rem;
+      font-size: 1rem;
+      font-family: Poppins-Regular, Poppins;
+      font-weight: 400;
+      color: #777e90;
+      line-height: 1.67rem;
+    }
+    .errorFormat {
+      display: flex;
+      align-items: center;
+      width: 41.67rem;
+      text-align: left;
+      font-size: 1.33rem;
+      font-family: Poppins-Regular, Poppins;
+      font-weight: 400;
+      color: rgb(205, 78, 78);
+      line-height: 1.67rem;
+    }
+
+    :global {
+      .Mui-selected {
+        border: 0.17rem solid #5adcfe !important;
+      }
+
+      .rc-input-number {
+        display: inline-block;
+        height: 4rem;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+        font-size: 12px;
+        line-height: 4rem;
+        vertical-align: middle;
+        // border: 1px solid #d9d9d9;
+        // border-radius: 4px;
+        transition: all 0.3s;
+        border: none;
+
+        &-focused {
+          // border-color: #1890ff;
+          // box-shadow: 0 0 0 2px rgba(24, 144, 255, 0.2);
+        }
+        &-out-of-range {
+          input {
+            color: red;
+          }
+        }
+
+        &-handler {
+          display: block;
+          height: 2rem;
+          overflow: hidden;
+          line-height: 1rem;
+          text-align: center;
+          touch-action: none;
+          border: none;
+
+          &-active {
+            background: transparent;
+          }
+        }
+
+        &-handler-up-inner,
+        &-handler-down-inner {
+          color: #666666;
+          -webkit-user-select: none;
+          user-select: none;
+          border: none;
+        }
+
+        &:hover {
+          // border-color: #1890ff;
+
+          .rc-input-number-handler-up,
+          .rc-input-number-handler-wrap {
+            // border-color: #1890ff;
+            border: none;
+          }
+        }
+
+        &-disabled:hover {
+          border-color: #d9d9d9;
+
+          .rc-input-number-handler-up,
+          .rc-input-number-handler-wrap {
+            border-color: #d9d9d9;
+            border: none;
+          }
+        }
+
+        &-input-wrap {
+          height: 100%;
+          overflow: hidden;
+        }
+
+        &-input {
+          width: 100%;
+          height: 100%;
+          padding: 0;
+          color: #666666;
+          line-height: 26px;
+          text-align: center;
+          border: 0;
+          border-radius: 4px;
+          outline: none;
+          transition: all 0.3s ease;
+          transition: all 0.3s;
+          -moz-appearance: textfield;
+          background-color: transparent;
+          font-size: 1.33rem;
+          font-family: Poppins-Medium, Poppins;
+          font-weight: 500;
+          color: #ffffff;
+          line-height: 2rem;
+        }
+
+        &-handler-wrap {
+          float: right;
+          width: 20px;
+          height: 100%;
+          transition: all 0.3s;
+          border: none;
+        }
+
+        &-handler-up {
+          padding-top: 0.8rem;
+          transition: all 0.3s;
+
+          &-inner {
+            &:after {
+              content: '+';
+            }
+          }
+        }
+
+        &-handler-down {
+          transition: all 0.3s;
+          margin-top: -0.3rem;
+
+          &-inner {
+            &:after {
+              content: '-';
+            }
+          }
+        }
+
+        &-handler-down-disabled,
+        &-handler-up-disabled {
+          opacity: 0.3;
+          &:hover {
+            color: #999;
+            border-color: #d9d9d9;
+          }
+        }
+
+        &-disabled {
+          .rc-input-number-input {
+            background-color: #f3f3f3;
+            cursor: not-allowed;
+            opacity: 0.72;
+          }
+          .rc-input-number-handler {
+            opacity: 0.3;
+            &:hover {
+              color: #999;
+              border-color: #d9d9d9;
+            }
+          }
+        }
+      }
+    }
+
+    .ratioButton {
+      width: 8rem;
+      height: 4rem;
+      background: rgba($color: white, $alpha: 0.1);
+      border-radius: 1rem;
+      border-width: 0.17rem;
+      border-color: transparent;
+      font-size: 1.33rem;
+      font-family: Poppins-Medium, Poppins;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 2rem;
+
+      & + .ratioButton {
+        margin-left: 1rem;
+      }
+
+      .customRatio {
+        width: 14.67rem;
+      }
+    }
+  }
+}
+
+.installmentBox {
+  .lendForm {
+    padding: 2rem 3.33rem;
+    max-height: 42rem;
+    overflow-y: scroll;
+
+    .lendFormItem {
+      & + .lendFormItem {
+        margin-top: 2rem;
+      }
+      p {
+        font-size: 1.17rem;
+        font-family: Poppins-Regular, Poppins;
+        font-weight: 400;
+        color: #ffffff;
+        line-height: 1.67rem;
+        margin-bottom: 0.67rem;
+      }
+
+      & > div {
+        height: 3.33rem;
+      }
+      .errorFormat {
+        display: flex;
+        align-items: center;
+        text-align: left;
+        font-size: 1rem;
+        margin-top: 0.5rem;
+        font-family: Poppins-Regular, Poppins;
+        font-weight: 400;
+        line-height: 1.67rem;
+        color: #d32f2f;
+      }
+    }
+
+    .formValueBox {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: rgba($color: white, $alpha: 0.1);
+      border-radius: 1rem;
+      font-size: 1.33rem;
+      font-family: Poppins-Medium, Poppins;
+      font-weight: 500;
+      color: #ffffff;
+      line-height: 3.33rem;
+      padding: 0rem 1.33rem;
+      text-align: left;
+      p {
+        margin-bottom: 0;
+      }
+      input {
+        font-size: 1.33rem;
+        font-family: Poppins-Medium, Poppins;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 3.33rem;
+        background-color: transparent;
+        border: none;
+        outline: none;
+      }
+    }
+
+    .durationValueBox {
+      @extend .formValueBox;
+      p {
+        margin-right: 1rem;
+      }
+      input {
+        text-align: right;
+        width: 13.5rem;
+      }
+    }
+
+    .lendFormItemBox {
+      @extend .lendFormItem;
+      & > div {
+        @extend .formValueBox;
+      }
+    }
+
+    .serviceFee {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 2rem;
+      p {
+        font-size: 1.33rem;
+        font-family: Poppins-Regular, Poppins;
+        font-weight: 400;
+        color: #777e90;
+        line-height: 2rem;
+      }
+      h5 {
+        font-size: 1.33rem;
+        font-family: Poppins-Medium, Poppins;
+        font-weight: 500;
+        color: #ffffff;
+        line-height: 2rem;
+      }
+    }
+
+    .billingCycle {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      p {
+        line-height: 1.33rem;
+        margin-bottom: 0;
+        margin-left: 1rem;
+        font-size: 1.33rem;
+        font-family: Poppins-Medium, Poppins;
+        font-weight: 500;
+        color: #ffffff;
+      }
+    }
+    .rentDailyPrice {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 40rem;
+
+      .rentFormValueBox {
+        @extend .formValueBox;
+        flex-grow: 1;
+        input {
+          width: 24rem;
+        }
+      }
+
+      .payCoinType {
+        width: 11.5rem;
+        height: 3.33rem;
+
+        & > div {
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
+          font-size: 1.33rem;
+          font-family: Poppins-Medium, Poppins;
+          font-weight: 500;
+          color: #ffffff;
+          line-height: 2rem;
+          overflow: visible;
+        }
+        fieldset {
+          border: none;
+        }
+        img {
+          width: 1.67rem;
+          height: 1.67rem;
+          margin-right: 1rem;
+        }
+      }
+    }
+    .renetDeposit {
+      margin-top: 2rem;
+      p {
+        font-size: 1.17rem;
+        font-family: Poppins-Regular, Poppins;
+        font-weight: 400;
+        color: #ffffff;
+        line-height: 1.67rem;
+        margin-bottom: 1.33rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      div {
+        max-width: 40rem;
+        border-radius: 1rem;
+        background-color: rgba(#ffb90a, 0.08);
+        font-size: 1.17rem;
+        font-family: Poppins-Regular, Poppins;
+        font-weight: 400;
+        color: #ffb90a;
+        line-height: 1.67rem;
+        padding: 1rem;
+      }
+    }
+    .moreOptions {
+      text-align: right;
+      margin-top: 1.33rem;
+      font-size: 1.33rem;
+      font-family: Poppins-Regular, Poppins;
+      font-weight: 500;
+      color: #5adcfe;
+      line-height: 2rem;
+      span {
+        width: auto;
+        cursor: pointer;
+        display: inline-flex;
+        align-items: center;
+        justify-content: flex-end;
+      }
+    }
+  }
+
+  .buttonAsset {
+    border-top: 1px solid rgba(white, 0.15);
+    padding: 1.67rem 3.33rem 2rem;
+    .baseContractButton {
+      width: 100%;
+      text-align: center;
+    }
+
+    .disableButton {
+      background: #777e90 !important;
+      cursor: not-allowed !important;
+      font-size: 1.33rem !important;
+      font-family: Poppins-SemiBold, Poppins !important;
+      font-weight: 600 !important;
+      color: #d6d7dc !important;
+      line-height: 2rem !important;
+    }
+  }
+}
+
+.coinTypeItem {
+  width: 11.5rem;
+  font-size: 1.33rem;
+  font-family: Poppins-Medium, Poppins;
+  font-weight: 500;
+  color: #ffffff;
+  line-height: 2rem;
+  & + .coinTypeItem {
+    margin-top: 1rem;
+  }
+  img {
+    width: 1.67rem;
+    height: 1.67rem;
+    margin-right: 1rem;
+  }
+}

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="128px" height="40px" viewBox="0 0 128 40" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>base_btn</title>
+    <defs>
+        <linearGradient x1="100%" y1="50%" x2="-1.70349845e-13%" y2="50%" id="linearGradient-1">
+            <stop stop-color="#B721FF" offset="0%"></stop>
+            <stop stop-color="#5ADCFE" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Market+Lend" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Market-1" transform="translate(-296.000000, -679.000000)" stroke="url(#linearGradient-1)" stroke-width="2">
+            <g id="编组" transform="translate(272.000000, 104.000000)">
+                <g id="Text" transform="translate(24.000000, 407.000000)">
+                    <g id="base-btn" transform="translate(0.000000, 168.000000)">
+                        <path d="M102.98412,1 C105.160126,1 107.287247,1.64538262 109.096397,2.8545055 L109.096397,2.8545055 L122.112277,11.5535062 C125.166357,13.5946627 127,17.0256199 127,20.6990007 L127,20.6990007 L127,28 C127,31.0375661 125.768783,33.7875661 123.778175,35.7781746 C121.787566,37.7687831 119.037566,39 116,39 L116,39 L12,39 C8.96243388,39 6.21243388,37.7687831 4.22182541,35.7781746 C2.23121694,33.7875661 1,31.0375661 1,28 L1,28 L1,12 C1,8.96243388 2.23121694,6.21243388 4.22182541,4.22182541 C6.21243388,2.23121694 8.96243388,1 12,1 L12,1 Z"></path>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

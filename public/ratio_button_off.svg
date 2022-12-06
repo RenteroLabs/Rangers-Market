@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>ratio_button_off</title>
+    <defs>
+        <rect id="path-1" x="0" y="0" width="32" height="32" rx="16"></rect>
+        <mask id="mask-2" maskContentUnits="userSpaceOnUse" maskUnits="objectBoundingBox" x="0" y="0" width="32" height="32" fill="white">
+            <use xlink:href="#path-1"></use>
+        </mask>
+    </defs>
+    <g id="Market+Lend" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd" stroke-dasharray="0,0">
+        <g id="Lend-NFTs-3" transform="translate(-466.000000, -296.000000)" fill="#1A182E" stroke="#FFFFFF" stroke-width="4">
+            <g id="弹窗" transform="translate(150.000000, 96.000000)">
+                <g id="cards" transform="translate(40.000000, 176.000000)">
+                    <g id="0" transform="translate(16.000000, 16.000000)">
+                        <g id="ratio-button-off" transform="translate(260.000000, 8.000000)">
+                            <use mask="url(#mask-2)" xlink:href="#path-1"></use>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

@@ -1,0 +1,292 @@
+.header {
+  width: 100%;
+  height: 6rem;
+  padding: 1.5rem 4rem;
+  backdrop-filter: blur(10px);
+
+  display: flex;
+  justify-content: space-between;
+
+  position: fixed;
+  z-index: 1500;
+  background-color: #000032;
+
+  border-bottom: 0.08rem solid rgba(255, 255, 255, 0.2);
+}
+
+.menuText {
+  display: inline-block;
+  margin-left: 1rem;
+}
+
+.logo {
+  width: 10.5rem;
+  height: 3rem;
+  display: inline-block;
+  width: 10.5rem;
+  height: 3rem;
+  img {
+    width: 100%;
+    height: 100%;
+  }
+}
+
+.navList {
+  display: flex;
+  align-items: center;
+
+  .supportNav {
+    cursor: not-allowed;
+  }
+
+  .activeNavItem {
+    font-size: 1.33rem;
+    font-family: Poppins-Bold, Poppins;
+    font-weight: bold;
+    color: #ffffff;
+    line-height: 2rem;
+    opacity: 1;
+    position: relative;
+
+    &:after {
+      display: inline-block;
+      content: '';
+      position: absolute;
+      top: 2.7rem;
+      left: calc(50% - 1.67rem);
+      width: 3.33rem;
+      height: 0.25rem;
+      background: #5adcfe;
+      border-radius: 8.33rem;
+    }
+  }
+}
+
+.navList a {
+  font-family: Poppins-Regular, Poppins;
+  font-weight: 400;
+  color: #ffffff;
+  opacity: 0.4;
+  font-size: 1.33rem;
+  &:hover {
+    opacity: 1;
+  }
+}
+
+.navList a:not(:first-child) {
+  margin-left: 5.33rem;
+}
+
+.connectButton {
+  background: linear-gradient(270deg, #b721ff 0%, #21d4fd 100%);
+  border-radius: 1.67rem;
+  cursor: pointer;
+  font-size: 1rem;
+  font-family: Agrandir-GrandHeavy, Agrandir;
+  font-weight: normal;
+  color: #ffffff;
+  line-height: 1.67rem;
+  display: block;
+  padding: 0.83rem 1.67rem;
+  margin: 1.33rem auto;
+}
+
+.connectButtonInner {
+  width: 100%;
+  background: linear-gradient(270deg, #b721ff 0%, #21d4fd 100%);
+  border-radius: 1rem;
+  cursor: pointer;
+  // margin: 1rem 2rem !important;
+  justify-content: center;
+}
+
+.accountBox {
+  margin: auto 0;
+
+  .addressOrEns {
+    display: flex;
+    align-items: center;
+    font-size: 1.17rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 1.67rem;
+  }
+
+  .downIcon {
+    font-size: 2rem;
+    color: #777e90;
+    margin-left: 1.33rem;
+  }
+}
+
+.networkList {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  font-family: Poppins;
+  font-weight: 400;
+  font-size: 1.1428571428571428rem;
+  line-height: 1.5;
+  min-width: 10rem;
+}
+
+.drawerNetworkList {
+  @extend .networkList;
+  padding: 1.5rem 1rem;
+  background-color: #1a1a46;
+  border-radius: 1rem;
+  &:hover {
+    background-color: #36365c;
+  }
+}
+
+.networkListTitle {
+  font-size: 1rem;
+}
+.networkListItem {
+  display: flex;
+  justify-content: space-between;
+
+  & > span {
+    flex-grow: 1;
+    text-align: left;
+    margin-right: 1rem;
+  }
+  :global {
+    .MuiBox-root {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+    }
+  }
+  .currentNetwork {
+    background: #55ab68;
+  }
+}
+
+.drawerMenuIcon {
+  display: none;
+  margin-left: 1rem;
+  font-weight: bolder;
+}
+
+.drawer {
+  :global {
+    .MuiPaper-root {
+      background-color: #272750;
+      background-image: none;
+    }
+  }
+}
+
+.drawerBox {
+  margin-top: 6rem;
+  width: 34rem;
+  padding: 1.5rem 0;
+  .drawerMenuList {
+    div {
+      height: 4rem;
+      padding: 0 2rem;
+      display: flex;
+      align-items: center;
+
+      font-size: 1.33rem;
+      font-family: Poppins-SemiBold, Poppins;
+      font-weight: 600;
+      color: #ffffff;
+      line-height: 2rem;
+
+      user-select: none;
+
+      svg {
+        margin-right: 1rem;
+      }
+    }
+
+    :global {
+      .MuiBox-root {
+        &:hover {
+          background-color: #1a1a46;
+        }
+      }
+    }
+  }
+}
+
+.drawerHeader {
+  display: none;
+  justify-content: flex-start;
+  margin-bottom: 1rem;
+  padding-bottom: 2rem;
+  border-bottom: 1px solid rgba($color: gray, $alpha: 0.2);
+}
+
+.drawerAccountBox {
+  display: flex;
+  justify-content: flex-start;
+  padding: 1.5rem 1rem;
+  width: auto;
+  text-align: left;
+  background-color: #1a1a46;
+  border-radius: 1rem;
+
+  .addressOrEns {
+    display: flex;
+    align-items: center;
+    font-size: 1.17rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 1.67rem;
+  }
+
+  &:hover {
+    background-color: #36365c;
+  }
+}
+
+@media screen and (max-width: 1160px) {
+  .header {
+    padding: 1.5rem;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .navList {
+    display: none;
+  }
+  .drawerMenuIcon {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+  .connectButton {
+    display: none;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    margin-right: 1rem;
+  }
+}
+
+@media screen and (max-width: 750px) {
+  .drawerHeader {
+    display: flex;
+  }
+  .networkList {
+    display: none;
+  }
+  .drawerNetworkList {
+    display: flex;
+  }
+  .accountBox {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .drawerBox {
+    width: 100vw;
+  }
+
+}

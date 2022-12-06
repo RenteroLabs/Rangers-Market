@@ -1,0 +1,12 @@
+@media screen and (min-width: 1440px) {
+  .layout {
+    width: 1440px;
+    margin: 0px auto;
+  }
+}
+
+.container {
+  padding-top: 6rem;
+  min-height: calc(100vh - 17.75rem);
+  overflow: hidden;
+}

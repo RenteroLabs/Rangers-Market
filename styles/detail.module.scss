@@ -1,0 +1,447 @@
+.navBox {
+  margin: auto;
+  height: 5.67rem;
+  padding: 0 calc(50vw - 47.33rem);
+
+  background: rgba(255, 255, 255, 0);
+  border-bottom: 0.08rem solid rgba($color: #fff, $alpha: 0.2);
+  line-height: 5.67rem;
+
+  :global {
+    .MuiBreadcrumbs-li {
+      line-height: 5.67rem;
+    }
+  }
+
+  & p {
+    font-size: 1.17rem;
+    font-family: Poppins-SemiBold, Poppins;
+    font-weight: 600;
+    color: #fcfcfd;
+    line-height: 1.67rem;
+  }
+  & a {
+    font-size: 1.17rem;
+    font-family: Poppins-Regular, Poppins;
+    font-weight: 400;
+    color: #777e90;
+    line-height: 1.67rem;
+  }
+}
+@media screen and (max-width: 1160px) {
+  .navBox {
+    padding: 0 1.5rem;
+  }
+}
+
+.itemCover {
+  width: 33.33rem;
+  height: 33.33rem;
+  border-radius: 1.85rem;
+  background-color: transparent;
+  overflow: hidden;
+  position: relative;
+  margin: auto;
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+  span {
+    display: block;
+    position: absolute;
+    top: 1.33rem;
+    right: 1.33rem;
+    background: #ae34ff;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 1.33rem;
+    padding: 0.17rem 0.67rem;
+  }
+}
+
+.itemCoverMobile {
+  @extend .itemCover;
+  display: none;
+}
+
+.rentButton {
+  display: flex;
+  width: 100%;
+  justify-content: center !important;
+  height: 4.17rem;
+  font-size: 1.5rem !important;
+  font-family: Poppins-SemiBold, Poppins !important;
+  font-weight: 600 !important;
+  color: #ffffff;
+  line-height: 2.17rem;
+  cursor: pointer;
+  user-select: none;
+  background: linear-gradient(270deg, #b721ff 0%, #5adcfe 100%);
+  border-radius: 1rem;
+}
+
+.rentedButton {
+  @extend .rentButton;
+  background: #777e90;
+  color: #d6d7dc;
+  cursor: not-allowed;
+}
+
+.rentTrialButton {
+  @extend .rentButton;
+  background: linear-gradient(92deg, #f36a38 0%, #c88661 48%, #26ecf5 100%);
+}
+
+.rentedTrialButton {
+  background: linear-gradient(270deg, #083059 0%, #311634 100%);
+}
+
+.whitelistButtonTip {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  font-family: Poppins-Regular, Poppins;
+  font-weight: 400;
+  color: #777e90;
+}
+
+.detailCardBox {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1.67rem;
+
+  .cardTitle {
+    padding: 1.67rem 2rem;
+    font-size: 1.67rem;
+    font-family: Poppins-SemiBold, Poppins;
+    font-weight: 600;
+    color: #ffffff;
+    line-height: 2.33rem;
+    border-bottom: 0.16rem solid rgba($color: #979797, $alpha: 0.08);
+  }
+  .cardContent {
+    padding: 1.67rem 2rem;
+  }
+}
+
+.rentNFTinfo {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 1.67rem;
+  padding: 1.67rem 2rem;
+  font-size: 1.33rem;
+  font-family: Poppins-Medium, Poppins;
+  font-weight: 500;
+  color: #777e90;
+  line-height: 2rem;
+  .nftCollectionName {
+    display: inline-block;
+    font-size: 1.33rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #5bd9fe;
+    line-height: 2rem;
+  }
+
+  h2 {
+    font-size: 3.33rem;
+    font-family: Poppins-SemiBold, Poppins;
+    font-weight: 600;
+    color: #fcfcfd;
+    line-height: 3.33rem;
+    margin: 1rem 0;
+  }
+
+  .addressInfo {
+    p {
+      font-family: Poppins-Medium, Poppins;
+      font-weight: 500;
+      font-size: 1.33rem;
+    }
+  }
+  .ownerAddress {
+    font-size: 1.33rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #5bd9fe;
+    text-decoration: underline;
+    line-height: 2rem;
+    margin-left: 0.5rem;
+  }
+  .deployedChainType {
+    font-size: 1.33rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 2rem;
+    opacity: 0.9;
+    display: flex;
+    margin-left: 0.67rem;
+  }
+}
+
+.detailList {
+  & > div {
+    display: flex;
+    justify-content: space-between;
+    color: rgba($color: #fff, $alpha: 0.6);
+    font-size: 1.17rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #777e90;
+    line-height: 2.4rem;
+  }
+}
+
+.cardSubtitle {
+  font-size: 1.33rem;
+  font-family: Poppins-SemiBold, Poppins;
+  font-weight: 600;
+  color: #ffffff;
+  line-height: 2rem;
+  margin-bottom: 1rem;
+}
+
+.statusAttrList {
+  & > div {
+    display: flex;
+    justify-content: space-between;
+
+    font-size: 1.33rem;
+    font-family: Poppins-Regular, Poppins;
+    font-weight: 400;
+    color: #777e90;
+    line-height: 2rem;
+
+    .attrValue {
+      color: white;
+    }
+  }
+}
+
+.moreNFTtitle {
+  display: flex;
+  justify-content: space-between;
+  align-content: center;
+  margin-bottom: 2.6rem;
+  h3 {
+    font-size: 2rem;
+    font-family: MonumentExtended-Black, MonumentExtended;
+    font-weight: 900;
+    color: #ffffff;
+    line-height: 2.67rem;
+  }
+  p {
+    display: flex;
+    align-items: center;
+    font-size: 1.33rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #5cd7fe;
+    line-height: 2rem;
+    cursor: pointer;
+  }
+}
+
+.linkAddress {
+  color: #5bd9fe;
+  text-decoration: underline;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+}
+
+.tagList {
+  display: flex;
+  font-size: 1rem;
+  font-family: Poppins-Medium, Poppins;
+  font-weight: 500;
+  line-height: 1.33rem;
+  span {
+    display: inline-block;
+  }
+  span + span {
+    margin-left: 0.67rem;
+  }
+  .rentedTag {
+    background: #ae34ff;
+    border-radius: 0.5rem;
+    padding: 0.17rem 0.67rem;
+    color: #ffffff;
+  }
+
+  .whitelistTag {
+    background: #70eaab;
+    border-radius: 0.5rem;
+    padding: 0.17rem 0.67rem;
+    color: #305948;
+  }
+}
+
+.rightBox {
+  width: 58rem;
+  margin-left: 3.33rem;
+}
+
+.cardList {
+  justify-content: space-around;
+  padding-right: 1rem;
+  padding-top: 2px;
+  justify-content: flex-start;
+  & > div {
+    width: 25%;
+  }
+}
+@media screen and (max-width: 1100px) {
+  .cardList {
+    width: 110vw;
+  }
+}
+@media screen and (max-width: 1000px) {
+  .cardList {
+    width: 120vw;
+  }
+}
+@media screen and (max-width: 900px) {
+  .cardList {
+    width: 133vw;
+  }
+}
+@media screen and (max-width: 800px) {
+  .cardList {
+    width: 160vw;
+  }
+}
+@media screen and (max-width: 700px) {
+  .cardList {
+    width: 180vw;
+  }
+}
+@media screen and (max-width: 600px) {
+  .cardList {
+    width: calc(200vw - 3rem);
+  }
+}
+
+@media screen and (max-width: 1160px) {
+  .rightBox {
+    width: 40rem;
+    margin-left: 1.67rem;
+  }
+  .itemCover {
+    // width: 25rem;
+    // height: 25rem;
+    width: 100%;
+    text-align: center;
+  }
+  .moreNFTtitle {
+    margin-right: 1rem;
+    margin-left: 1rem;
+  }
+}
+
+.rentInfoList {
+  div {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 1.33rem;
+    font-family: Poppins-Medium, Poppins;
+    font-weight: 500;
+    color: #ffffff;
+    line-height: 2rem;
+  }
+  img {
+    width: 1.67rem;
+    height: 1.67rem;
+    margin-right: 0.67rem;
+  }
+}
+
+.mainContentBox {
+  display: flex;
+  justify-content: center;
+  margin-top: 4rem;
+}
+.leftBox {
+  .nftDesc {
+    max-width: 29.33rem;
+    word-break: keep-all;
+    font-size: 1.33rem;
+    font-family: Poppins-Regular, Poppins;
+    font-weight: 400;
+    color: #777e90;
+    line-height: 2rem;
+    a {
+      color: #5bd9fe;
+      margin-left: 1rem;
+    }
+  }
+}
+
+.moreNFTCards {
+  width: 94.66rem;
+  margin: auto;
+  margin: 8.33rem auto 2.67rem;
+}
+
+@media screen and (max-width: 1160px) {
+  .moreNFTCards {
+    width: 100%;
+    margin-top: 6rem;
+    .cardList {
+      // overflow-x: scroll;
+      margin: auto 1rem;
+    }
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .mainContentBox {
+    width: 600px;
+    margin: 2rem auto;
+    flex-flow: column-reverse;
+  }
+  .itemCover {
+    display: none;
+  }
+  .itemCoverMobile {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .rightBox {
+    margin-left: 0;
+    width: 100%;
+    margin-top: 1.67rem;
+  }
+  .rentNFTinfo {
+    h2 {
+      font-size: 2rem;
+      line-height: 2rem;
+    }
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .mainContentBox {
+    width: 100%;
+    padding: 0 1rem;
+  }
+  .itemCover {
+    width: 100%;
+    height: 100%;
+  }
+  .moreNFTCards {
+    margin-top: 4rem;
+    margin-bottom: 1rem;
+  }
+  .moreNFTtitle {
+    margin-bottom: 1rem;
+    h3 {
+      font-size: 1.6rem;
+    }
+  }
+}

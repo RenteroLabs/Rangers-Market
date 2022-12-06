@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="32px" height="32px" viewBox="0 0 32 32" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>telegram</title>
+    <defs>
+        <linearGradient x1="66.7%" y1="16.7%" x2="41.7%" y2="75%" id="linearGradient-1">
+            <stop stop-color="#37AEE2" offset="0%"></stop>
+            <stop stop-color="#1E96C8" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="66.0001655%" y1="45.5676953%" x2="80.3511367%" y2="72.9931702%" id="linearGradient-2">
+            <stop stop-color="#EFF7FC" offset="0%"></stop>
+            <stop stop-color="#FFFFFF" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="首页-定稿" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Home-定-new" transform="translate(-1232.000000, -6414.000000)" fill-rule="nonzero">
+            <g id="Footer" transform="translate(0.000000, 6382.000000)">
+                <g id="编组-2" transform="translate(0.000000, 22.000000)">
+                    <g id="social" transform="translate(1120.000000, 10.000000)">
+                        <g id="telegram" transform="translate(112.000000, 0.000000)">
+                            <path d="M16,32 C24.8365333,32 32,24.8365333 32,16 C32,7.16344 24.8365333,0 16,0 C7.16344,0 0,7.16344 0,16 C0,24.8365333 7.16344,32 16,32 Z" id="路径" fill="url(#linearGradient-1)"></path>
+                            <path d="M13.0666,23.3333333 C12.5482,23.3333333 12.6363333,23.1376 12.4575333,22.644 L10.9332667,17.6276 L22.6666667,10.6666667" id="路径" fill="#C8DAEA"></path>
+                            <path d="M13.0667333,23.3333333 C13.4666667,23.3333333 13.6433333,23.1504 13.8666667,22.9333333 L16,20.8589333 L13.3389333,19.2542667" id="路径" fill="#A9C9DD"></path>
+                            <path d="M13.3386667,19.2546667 L19.7866667,24.0185333 C20.5225333,24.4245333 21.0534667,24.2142667 21.2368,23.3354667 L23.8614667,10.9670533 C24.1301333,9.88972 23.4508,9.40092 22.7468,9.72052 L7.33477333,15.6633333 C6.28277333,16.0853333 6.28904,16.6722667 7.14304,16.9337333 L11.0981067,18.1682667 L20.2545333,12.3915867 C20.6868,12.1294533 21.0836,12.2702533 20.758,12.55932" id="路径" fill="url(#linearGradient-2)"></path>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>

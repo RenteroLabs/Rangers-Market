@@ -1,0 +1,68 @@
+.footer {
+  width: 100vw;
+  height: 11.75rem;
+  position: absolute;
+  left: 0;
+  background: linear-gradient(180deg, #030305 0%, #150523 100%);
+}
+
+.context {
+  margin: 0px auto;
+  padding: 0px 10rem;
+}
+
+.iconList {
+  padding: 1.83rem 0rem;
+  margin: auto;
+  border-bottom: 0.08rem solid rgba(255, 255, 255, 0.05);
+  display: flex;
+  justify-content: space-between;
+  img {
+    width: 126px;
+    height: 36px;
+  }
+}
+.communityList a {
+  opacity: 0.8;
+}
+
+.communityList a + a {
+  margin-left: 2rem;
+}
+
+.communityList a:hover {
+  opacity: 1;
+}
+
+.communityList a img {
+  width: 32px;
+  height: 32px;
+}
+
+.copywrite {
+  margin: 1.3rem 0rem 2rem;
+  text-align: left;
+  font-size: 1rem;
+  font-family: Poppins-Regular, Poppins;
+  font-weight: 400;
+  color: #ffffff;
+  line-height: 1.67rem;
+  opacity: 0.4;
+}
+
+@media screen and (min-width: 1440px) {
+  .context {
+    width: 1440px;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  .context {
+    padding: 0px 4rem;
+  }
+}
+@media screen and (max-width: 680px) {
+  .context {
+    padding: 0px 2rem;
+  }
+}

@@ -1,0 +1,55 @@
+.mainBox {
+  width: 120rem;
+  max-width: none;
+  padding: 0;
+  overflow: hidden;
+  display: flex;
+}
+
+.leftNav {
+  width: 20rem;
+  min-height: calc(100vh - 6rem);
+  box-shadow: inset -0.08rem 0rem 0rem 0rem #2b2c40;
+  padding: 2rem 1.33rem;
+  user-select: none;
+  
+  :global {
+    .MuiBox-root {
+      display: flex;
+      align-items: center;
+      font-size: 1.17rem;
+      font-family: Poppins-Medium, Poppins;
+      font-weight: 500;
+      color: #777e90;
+      line-height: 2rem;
+      padding: 0.67rem 1.5rem;
+      cursor: pointer;
+    }
+    svg {
+      margin-right: 1.08rem;
+    }
+    .activeNavItem {
+      background: #aa3ff8;
+      border-radius: 1rem;
+      font-family: Poppins-SemiBold, Poppins;
+      color: white;
+      transition-property: background-color;
+      transition-timing-function: ease-in;
+      transition-duration: 0.3s;
+    }
+  }
+
+  .activeNavItem {
+    background: #aa3ff8;
+    border-radius: 1rem;
+    font-family: Poppins-SemiBold, Poppins;
+    color: white;
+  }
+}
+
+.contentBox {
+  width: 100rem;
+  min-height: calc(100vh - 6rem);
+  padding: 2.67rem;
+  margin: auto;
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="278px" height="60px" viewBox="0 0 278 60" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>overview_2</title>
+    <defs>
+        <radialGradient cx="50%" cy="0%" fx="50%" fy="0%" r="214.029958%" gradientTransform="translate(0.500000,0.000000),scale(0.253623,1.000000),rotate(90.000906),translate(-0.500000,-0.000000)" id="radialGradient-1">
+            <stop stop-color="#AF30FF" offset="0%"></stop>
+            <stop stop-color="#5ADCFE" offset="66.341201%"></stop>
+            <stop stop-color="#5BDCFE" stop-opacity="0" offset="100%"></stop>
+        </radialGradient>
+    </defs>
+    <g id="Market+Lend" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Lend-NFTs-1" transform="translate(-427.000000, -807.000000)" stroke="url(#radialGradient-1)" stroke-width="2">
+            <g id="Part-2" transform="translate(0.000000, 568.000000)">
+                <g id="编组-2" transform="translate(120.000000, 120.000000)">
+                    <g id="编组-3" transform="translate(0.000000, 120.000000)">
+                        <g id="card-2" transform="translate(308.000000, 0.000000)">
+                            <g id="Overview-2" transform="translate(-1.000000, -1.000000)">
+                                <path d="M1,71 L1,21 C1,9.954305 9.954305,1 21,1 L257,1 C268.045695,1 277,9.954305 277,21 L277,71 L277,71"></path>
+                            </g>
+                        </g>
+                    </g>
+                </g>
+            </g>
+        </g>
+    </g>
+</svg>
