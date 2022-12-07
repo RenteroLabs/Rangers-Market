@@ -26,7 +26,7 @@ import { useRouter } from 'next/router';
 import { bsctestGraph, goerliGraph, rangersTestGraph } from '../services/graphql'
 import useUrlState from '@ahooksjs/use-url-state';
 // import useQueryString from 'use-query-string';
-import {useQueryParam, StringParam, withDefault} from 'use-query-params';
+import { useQueryParam, StringParam, withDefault } from 'use-query-params';
 
 const cx = classNames.bind(styles)
 
@@ -38,7 +38,7 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
   const router = useRouter()
 
   const [graphService, setGraphService] = useState<any>(goerliGraph)
-  const [gameContracts, setGameContracts] = useState<string[]>(GAME_CONTRACTS[0])
+  const [gameContracts, setGameContracts] = useState<string[]>(GAME_CONTRACTS[2])
 
   const chainTypeRef = useRef<HTMLElement>()
   const sortTypeRef = useRef<HTMLElement>()
@@ -60,17 +60,17 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
   const [name, setName] = useQueryParam('game', withDefault(StringParam, 'all'));
 
   const currentGameInfo = useMemo(() => {
-    return gamesInfo[currentGame] || {}
+    return gamesInfo[0] || {}
   }, [currentGame, gamesInfo])
 
   // 识别页面初始选中游戏
   useEffect(() => {
     switch (router.query?.game) {
-      case GAME_NAMES.METALINE:
-        setCurrentGame(1);
-        break;
+      // case GAME_NAMES.METALINE:
+      //   setCurrentGame(1);
+      //   break;
       case GAME_NAMES.DEHERO:
-        setCurrentGame(2);
+        setCurrentGame(0);
         break
       default:
         setCurrentGame(0);
@@ -117,24 +117,28 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
     setCurrentPage(1)
     setLeasesList([])
     switch (currentGame) {
+      // case 0:
+      //   setGraphService(goerliGraph);
+      //   reloadTotal();
+      //   break;
+      // case 1:
+      //   setGraphService(bsctestGraph);
+      //   setGameContracts(GAME_CONTRACTS[1]);
+      //   getGameLeaseCount();
+      //   setName(GAME_NAMES.METALINE)
+      //   break;
       case 0:
-        setGraphService(goerliGraph);
-        reloadTotal();
-        break;
-      case 1:
-        setGraphService(bsctestGraph);
-        setGameContracts(GAME_CONTRACTS[1]);
-        getGameLeaseCount();
-        setName(GAME_NAMES.METALINE)
-        break;
-      case 2:
         setGraphService(rangersTestGraph)
         setGameContracts(GAME_CONTRACTS[2])
-        getGameLeaseCount(); 
+        getGameLeaseCount();
         setName(GAME_NAMES.DEHERO)
         break;
       default:
-        setGraphService(goerliGraph); break;
+        setGraphService(rangersTestGraph)
+        setGameContracts(GAME_CONTRACTS[2])
+        getGameLeaseCount();
+        setName(GAME_NAMES.DEHERO)
+        break;
     }
     getLeasesList();
 
@@ -201,31 +205,31 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
             </IconButton>
           </Box>
           {/* <Link href={{ pathname: '/' }} > */}
-          <Box
+          {/* <Box
             className={cx({ 'gameItem': true, 'activeItem': currentGame == 0 })}
             onClick={() => setCurrentGame(0)}
           >
             <img src={GAME_LOGOS['0']} alt='rentero' />
             {showLeftBar && <Typography>All Game</Typography>}
-          </Box>
+          </Box> */}
           {/* </Link> */}
           {/* <Link href={{
             pathname: '/',
             query: { game: GAME_NAMES.METALINE }
           }} > */}
-          <Box
+          {/* <Box
             className={cx({ 'gameItem': true, 'activeItem': currentGame == 1 })}
             onClick={() => setCurrentGame(1)}
           >
             <img src={GAME_LOGOS['1']} alt={GAME_NAMES.METALINE} />
             {showLeftBar && <Typography>Metaline</Typography>}
-          </Box>
+          </Box> */}
           {/* </Link> */}
           <Box className={cx({
             'gameItem': true,
-            'activeItem': currentGame == 2
+            'activeItem': currentGame == 0
           })}
-            onClick={() => setCurrentGame(2)}
+            onClick={() => setCurrentGame(0)}
           >
             <img src={GAME_LOGOS['2']} alt={GAME_NAMES.DEHERO} />
             {showLeftBar && <Typography>DeHero</Typography>}
@@ -392,10 +396,25 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
 
 // SSG 在构建 build 时获取各游戏介绍信息
 export async function getStaticProps() {
-  const data = await getGameInfos()
+  const result = await getGameInfos()
+  // console.log(data)
+  const data = [
+    {
+      gameId: 2,
+      backUrl: 'https://tva1.sinaimg.cn/large/008vxvgGly1h7hlkympepj311f0a241z.jpg',
+      gameName: 'DeHero',
+      gameDesc: 'Decentralized GameFi application. Card-collecting blockchain game that focuses on NFT+DeFi gameplay. ',
+      releaseTime: 1668542400000,
+      gameHomeUrl: 'https://dehero.co/',
+      twitterUrl: 'https://twitter.com/dehero_official',
+      discordUrl: 'https://discord.gg/TrNZbaY3AT',
+      telegramUrl: '',
+      facebookUrl: ''
+    }
+  ]
   return {
     props: {
-      gamesInfo: data.data || {}
+      gamesInfo: data || {}
     }
   }
 }

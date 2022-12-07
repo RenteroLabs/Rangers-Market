@@ -18,6 +18,8 @@
     "@mui/icons-material": "^5.8.2",
     "@mui/lab": "^5.0.0-alpha.86",
     "@mui/material": "^5.8.1",
+    "@unipasswallet/popup-sdk": "^0.0.9",
+    "@unipasswallet/popup-types": "^0.0.3",
     "ahooks": "^3.4.1",
     "classnames": "^2.3.1",
     "ethers": "^5.6.8",

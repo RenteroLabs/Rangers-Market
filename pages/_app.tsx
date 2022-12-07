@@ -11,7 +11,8 @@ import { infuraProvider } from 'wagmi/providers/infura'
 import { publicProvider } from 'wagmi/providers/public'
 import { MetaMaskConnector } from 'wagmi/connectors/metaMask'
 import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
-import { SUPPORT_CHAINS } from '../constants'
+import { UnipassConnector } from '../lib/UnipassConnector'
+import { RANGERS_CHAIN, RANGERS_TEST_CHAIN, SUPPORT_CHAINS } from '../constants'
 import { NextPage } from 'next/types'
 import type { ReactElement, ReactNode } from 'react'
 import Layout2 from '../components/layout2'
@@ -20,6 +21,7 @@ import { goerliGraph } from '../services/graphql'
 
 import { NextAdapter } from 'next-query-params';
 import { QueryParamProvider } from 'use-query-params';
+
 
 const infuraId = process.env.NEXT_PUBLIC_INFURA_ID
 
@@ -31,6 +33,20 @@ const { chains, provider, webSocketProvider } = configureChains(SUPPORT_CHAINS, 
 const client = createClient({
   autoConnect: true,
   connectors: [
+    new UnipassConnector({
+      chains: [
+        RANGERS_CHAIN,
+        RANGERS_TEST_CHAIN
+      ],
+      options: {
+        env: 'test',
+        chainType: 'rangers',
+        appSettings: {
+          appName: "UniPass Wallet Demo",
+          appIcon: "",
+        },
+      }
+    }),
     new MetaMaskConnector({
       chains,
     }),
@@ -39,7 +55,7 @@ const client = createClient({
       options: {
         qrcode: true
       }
-    })
+    }),
   ],
   provider,
   webSocketProvider

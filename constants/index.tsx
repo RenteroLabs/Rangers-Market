@@ -54,7 +54,7 @@ const BSC_TEST: Chain = {
   }
 }
 
-const RANGERS_TEST_CHAIN: Chain = {
+export const RANGERS_TEST_CHAIN: Chain = {
   id: 9527,
   name: 'RangersTest',
   network: "Rangers Robin testnet",
@@ -75,7 +75,7 @@ const RANGERS_TEST_CHAIN: Chain = {
   testnet: true
 }
 
-const RANGERS_CHAIN: Chain = {
+export const RANGERS_CHAIN: Chain = {
   id: 2025,
   name: 'Rangers',
   network: "Rangers Protocol",
@@ -113,7 +113,7 @@ const ALL_NETWORK: Chain[] = [
   // chain.goerli,
   // BSC_CHAIN,
   // BSC_TEST,
-  RANGERS_CHAIN,
+  // RANGERS_CHAIN,
   RANGERS_TEST_CHAIN
 ]
 
@@ -364,3 +364,8 @@ export const GameList: GameItem[] = [
 
 
 export const MORALIS_SUPPORT_CHAINS: number[] = [1, 5, 11155111, 137, 80001, 56, 97, 43114, 43113, 250, 25, 338]
+
+
+
+
+export const UNIPASS_CONNECTOR = 'Unipass'
