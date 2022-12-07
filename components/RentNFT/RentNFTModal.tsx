@@ -1,12 +1,12 @@
 import { Box, Stack, Typography, Alert, Dialog, DialogTitle, IconButton } from '@mui/material'
 import React, { useEffect, useMemo, useState } from 'react'
 import styles from './rentModal.module.scss'
-import { erc20ABI, useAccount, useContract, useNetwork, useSigner, useSwitchNetwork, useWaitForTransaction } from 'wagmi';
+import { erc20ABI, useAccount, useConnect, useContract, useNetwork, useSigner, useSwitchNetwork, useWaitForTransaction } from 'wagmi';
 import { INSTALLMENT_MARKET, INSTALLMENT_MARKET_ABI } from '../../constants/contractABI';
 import CloseIcon from '@mui/icons-material/Close';
 import DefaultButton from '../Buttons/DefaultButton';
 import InputNumber from 'rc-input-number'
-import { ADDRESS_TOKEN_MAP, CHAIN_ID_MAP } from '../../constants';
+import { ADDRESS_TOKEN_MAP, CHAIN_ID_MAP, UNIPASS_CONNECTOR } from '../../constants';
 import { ethers, BigNumber, utils } from 'ethers';
 import classNames from "classnames/bind"
 import { LeaseItem } from '../../types';
@@ -29,9 +29,10 @@ const RentNFTModal: React.FC<RentNFTModalProps> = (props) => {
 
   const [txError, setTxError] = useState<string>('')
   const [buttonLoading, setButtonLoading] = useState<boolean>(false)
-  const { address } = useAccount()
+  const { address, connector: activeConnector } = useAccount()
   const { chain } = useNetwork()
   const { data: signer } = useSigner()
+  const { connectors: [UnipassConnector] } = useConnect()
 
   const [rentDay, setRentDay] = useState<number>()
   const [isApproved, setIsApproved] = useState<boolean>(false)
@@ -168,6 +169,61 @@ const RentNFTModal: React.FC<RentNFTModalProps> = (props) => {
     }
   }
 
+  const unipassApproveERC20 = async () => {
+    setTxError('')
+    await setButtonLoading(true)
+
+    try {
+      const txData = new utils.Interface(erc20ABI).encodeFunctionData('approve', [INSTALLMENT_MARKET[CHAIN_ID_MAP[rentInfo.chain]], ethers.constants.MaxUint256])
+
+      const tx = {
+        from: address,
+        to: rentInfo.erc20Address,
+        value: '0x0',
+        data: txData
+      }
+      // @ts-ignore
+      const txHash = await UnipassConnector?.unipass?.sendTransaction(tx)
+      console.log(txHash)
+
+      await setButtonLoading(false)
+      await setIsApproved(true)
+    } catch (err: any) {
+      setTxError(err?.error?.message || err.message)
+      setButtonLoading(false)
+    }
+  }
+
+  const unipassRentNFT = async () => {
+    // 用户不能租借自己出租的 NFT
+    if (rentInfo?.lender === address?.toLowerCase()) {
+      setTxError('Users cannot rent NFTs they own')
+      return
+    }
+
+    setTxError('')
+    await setButtonLoading(true)
+
+    try {
+      const txData = new utils.Interface(INSTALLMENT_MARKET_ABI).encodeFunctionData('rent', [rentInfo?.nftAddress, rentInfo?.tokenId, rentDay])
+
+      const tx = {
+        from: address,
+        to: INSTALLMENT_MARKET[CHAIN_ID_MAP[rentInfo.chain]],
+        value: "0x0",
+        data: txData
+      }
+      // @ts-ignore
+      const txHash = await UnipassConnector?.unipass?.sendTransaction(tx)
+
+      await reloadInfo()
+      await setButtonLoading(false)
+    } catch (err: any) {
+      setTxError(err?.error?.message || err.message)
+      setButtonLoading(false)
+    }
+  }
+
   return <Box>
     <SwitchNetwork
       showDialog={showSwitchNetwork}
@@ -290,7 +346,11 @@ const RentNFTModal: React.FC<RentNFTModalProps> = (props) => {
                 className={cx({ 'baseButton': true, 'disableButton': isApproved })}
                 loading={buttonLoading && !isApproved}
                 onClick={() => {
-                  handleApproveERC20()
+                  if (activeConnector?.id === UNIPASS_CONNECTOR) {
+                    unipassApproveERC20()
+                  } else {
+                    handleApproveERC20()
+                  }
                 }}
               >
                 {isApproved ? 'Approved' : 'Approve'}
@@ -300,7 +360,11 @@ const RentNFTModal: React.FC<RentNFTModalProps> = (props) => {
                 loading={buttonLoading && (isApproved || alreadyApproved)}
                 onClick={() => {
                   if (isApproved || alreadyApproved) {
-                    handleRentNFT()
+                    if (activeConnector?.id === UNIPASS_CONNECTOR) {
+                      unipassRentNFT()
+                    } else {
+                      handleRentNFT()
+                    }
                   }
                 }}
               >

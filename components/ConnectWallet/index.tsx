@@ -33,14 +33,17 @@ const ConnectWallet: React.FC<ConnectWalletProps> = (props) => {
     }
   })
 
-  const [MetaMaskConnector, WalletConnectConnector] = connectors
+  const [UnipassConnector, MetaMaskConnector, WalletConnectConnector] = connectors
 
-  const [MetaMaskConnecting, WalletConnectConnecting] = useMemo(() => {
+  // console.log(UnipassConnector?.unipass, UnipassConnector?.id)
+
+  const [MetaMaskConnecting, WalletConnectConnecting, UniPassConnecting] = useMemo(() => {
     if (!isLoading) return [false, false]
 
     return [
       MetaMaskConnector.id === pendingConnector?.id,
-      WalletConnectConnector.id === pendingConnector?.id
+      WalletConnectConnector.id === pendingConnector?.id,
+      UnipassConnector.id === pendingConnector?.id
     ]
   }, [isLoading, pendingConnector])
 
@@ -75,6 +78,16 @@ const ConnectWallet: React.FC<ConnectWalletProps> = (props) => {
             <Alert severity="error" sx={{ display: 'flex', alignItems: 'center' }}>
               {error.message}
             </Alert>}
+
+          <Box className={styles.walletItem}>
+            <div
+              onClick={() => handleConnect(UnipassConnector)}>
+              <span className={styles.itemUnipassLogo}></span>
+              <p>UniPass</p>
+              {UniPassConnecting ? <CircularProgress /> : <ArrowRightAltRoundedIcon />}
+            </div>
+          </Box>
+
           <Box className={styles.walletItem}>
             <div
               onClick={() => handleConnect(connectors[0])}>
@@ -83,7 +96,7 @@ const ConnectWallet: React.FC<ConnectWalletProps> = (props) => {
               {MetaMaskConnecting ? <CircularProgress /> : <ArrowRightAltRoundedIcon />}
             </div>
           </Box>
-
+{/* 
           <Box className={styles.walletItem}>
             <div
               onClick={() => handleConnect(WalletConnectConnector)}>
@@ -91,7 +104,8 @@ const ConnectWallet: React.FC<ConnectWalletProps> = (props) => {
               <p>WalletConnect</p>
               {WalletConnectConnecting ? <CircularProgress /> : <ArrowRightAltRoundedIcon />}
             </div>
-          </Box>
+          </Box> */}
+
         </Box>
       </div>
     </Dialog>
