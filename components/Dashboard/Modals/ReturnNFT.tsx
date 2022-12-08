@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { Alert, Box, Typography, Stack } from '@mui/material'
-import { useSigner, useContract, useWaitForTransaction, useNetwork } from 'wagmi'
+import { useSigner, useContract, useWaitForTransaction, useNetwork, useConnect, useAccount } from 'wagmi'
 import { INSTALLMENT_MARKET, INSTALLMENT_MARKET_ABI } from '../../../constants/contractABI'
 import AppDialog from '../../Dialog'
 import TxLoadingDialog from '../../TxLoadingDialog'
 import DefaultButton from '../../Buttons/DefaultButton'
 import styles from './modal.module.scss'
-import { CHAIN_ID_MAP } from '../../../constants'
+import { CHAIN_ID_MAP, UNIPASS_CONNECTOR } from '../../../constants'
 import SwitchNetwork from '../../SwitchNetwork'
 import { formatTokenId } from '../../../utils/format'
-import { BigNumber } from 'ethers'
+import { BigNumber, utils } from 'ethers'
 
 interface ReturnNFTModalProps {
   trigger: React.ReactElement,
@@ -31,6 +31,9 @@ const ReturnNFTModal: React.FC<ReturnNFTModalProps> = (props) => {
 
   const { data: signer } = useSigner()
   const { chain: currentChain } = useNetwork()
+  const { address, connector: activeConnector } = useAccount()
+  const { connectors: [UnipassConnector] } = useConnect()
+
 
   useEffect(() => {
     if (!showDialog && currentChain?.id != CHAIN_ID_MAP[chain]) {
@@ -74,6 +77,30 @@ const ReturnNFTModal: React.FC<ReturnNFTModalProps> = (props) => {
     }
   }
 
+  const unipassReturnNFT = async () => {
+    setTxError('')
+    await setIsLoading(true)
+
+    try {
+      const txData = new utils.Interface(INSTALLMENT_MARKET_ABI).encodeFunctionData('abort', [nftAddress, BigNumber.from(tokenId)])
+
+      const tx = {
+        from: address,
+        to: INSTALLMENT_MARKET[CHAIN_ID_MAP[chain]],
+        value: "0x0",
+        data: txData
+      }
+      // @ts-ignore
+      const txHash = await UnipassConnector?.unipass?.sendTransaction(tx)
+
+      await setAbortTxHash(txHash)
+
+    } catch (err: any) {
+      setTxError(err?.error?.message || err.message)
+      setIsLoading(false)
+    }
+  }
+
   return <AppDialog
     title={`Return NFT #${formatTokenId(tokenId)}`}
     trigger={trigger}
@@ -96,7 +123,13 @@ const ReturnNFTModal: React.FC<ReturnNFTModalProps> = (props) => {
         <DefaultButton
           className={styles.defaultButton}
           loading={isLoading}
-          onClick={returnBorrowerNFT}
+          onClick={() => {
+            if (activeConnector?.id === UNIPASS_CONNECTOR) {
+              unipassReturnNFT()
+            } else {
+              returnBorrowerNFT()
+            }
+          }}
         >
           Confirm
         </DefaultButton>

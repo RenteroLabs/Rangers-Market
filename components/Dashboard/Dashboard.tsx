@@ -255,6 +255,7 @@ const Dashboard: React.FC<DashboardProps> = () => {
                   <WithdrawNFTModal
                     trigger={<span className={cx({ "returnButton": true, })} >Redeem</span>}
                     rentInfo={item}
+                    chain={item.chain}
                     reloadTable={refetchLending}
                   />}
               </TableCell>

@@ -1,6 +1,6 @@
 import { Alert, Box, Stack, Typography } from '@mui/material'
 import React, { useEffect, useMemo, useState } from 'react'
-import { erc20ABI, useAccount, useContract, useNetwork, useSigner, useWaitForTransaction } from 'wagmi'
+import { erc20ABI, useAccount, useConnect, useContract, useNetwork, useSigner, useWaitForTransaction } from 'wagmi'
 import classNames from 'classnames/bind';
 import { INSTALLMENT_MARKET, INSTALLMENT_MARKET_ABI } from '../../../constants/contractABI'
 import AppDialog from '../../Dialog'
@@ -9,7 +9,7 @@ import DefaultButton from '../../Buttons/DefaultButton';
 import { LeaseItem } from '../../../types';
 import { BigNumber, ethers, utils } from 'ethers';
 import TxLoadingDialog from '../../TxLoadingDialog';
-import { ADDRESS_TOKEN_MAP, CHAIN_ID_MAP, ONEDAY, ZERO_ADDRESS } from '../../../constants';
+import { ADDRESS_TOKEN_MAP, CHAIN_ID_MAP, ONEDAY, UNIPASS_CONNECTOR, ZERO_ADDRESS } from '../../../constants';
 import { dateFormat, formatTokenId } from '../../../utils/format';
 import SwitchNetwork from '../../SwitchNetwork';
 
@@ -17,24 +17,27 @@ const cx = classNames.bind(styles)
 interface WithdrawNFTModalProps {
   trigger: React.ReactElement,
   rentInfo: LeaseItem;
+  chain: string
   reloadTable: () => any;
 }
 
 const WithdrawNFTModal: React.FC<WithdrawNFTModalProps> = (props) => {
-  const { trigger, rentInfo, reloadTable } = props
+  const { trigger, rentInfo, reloadTable, chain: ChainType } = props
   const [hiddenDialog, setHiddenDialog] = useState<boolean>(false)
   const [txError, setTxError] = useState<string | undefined>()
   const [buttonLoading, setButtonLoading] = useState<boolean>(false)
   const [showSwitchNetworkDialog, setShowSwitchNetworkDialog] = useState<boolean>(false)
 
-  const { address } = useAccount()
+  const { address, connector: activeConnector } = useAccount()
+  const { connectors: [UnipassConnector] } = useConnect()
   const { chain } = useNetwork()
+  const { data: signer } = useSigner()
+
   const [isApproved, setIsApproved] = useState<boolean>(false)
   const [alreadyApproved, setAlreadyApproved] = useState<boolean>(false)
 
   const [showTxDialog, setShowTxDialog] = useState<boolean>(false)
 
-  const { data: signer } = useSigner()
 
   useEffect(() => {
     if (!hiddenDialog && chain?.id != CHAIN_ID_MAP[rentInfo.chain]) {
@@ -132,6 +135,30 @@ const WithdrawNFTModal: React.FC<WithdrawNFTModalProps> = (props) => {
     }
   }
 
+  const unipassApproveERC20 = async () => {
+    await setTxError('')
+    await setButtonLoading(true)
+    try {
+      const txData = await new utils.Interface(erc20ABI).encodeFunctionData('approve', [INSTALLMENT_MARKET[CHAIN_ID_MAP[rentInfo.chain]], totalReturn])
+
+      const tx = {
+        from: address,
+        to: rentInfo.erc20Address,
+        value: "0x0",
+        data: txData
+      }
+
+      // @ts-ignore
+      const txHash = await UnipassConnector?.unipass?.sendTransaction(tx)
+
+      await setApproveTxHash(txHash)
+
+    } catch (err: any) {
+      setTxError(err?.error?.message || err.message)
+      setButtonLoading(false)
+    }
+  }
+
   const redeemNFT = async () => {
     if (buttonLoading) return
     setButtonLoading(true)
@@ -144,6 +171,32 @@ const WithdrawNFTModal: React.FC<WithdrawNFTModalProps> = (props) => {
       setTxError(err?.error?.message || err.message)
       setButtonLoading(false)
       setShowTxDialog(false)
+    }
+  }
+
+  const unipassRedeemNFT = async () => {
+    if (buttonLoading) return
+    await setButtonLoading(true)
+    await setTxError('')
+
+    try {
+      const txData = new utils.Interface(INSTALLMENT_MARKET_ABI).encodeFunctionData('reclaim', [rentInfo.nftAddress, BigNumber.from(rentInfo.tokenId)])
+
+      const tx = {
+        from: address,
+        to: INSTALLMENT_MARKET[CHAIN_ID_MAP[rentInfo.chain]],
+        value: "0x0",
+        data: txData
+      }
+
+      // @ts-ignore
+      const txHash = await UnipassConnector?.unipass?.sendTransaction(tx)
+
+      await setRedeemTxHash(txHash)
+
+    } catch (err: any) {
+      setTxError(err?.error?.message || err.message)
+      setButtonLoading(false)
     }
   }
 
@@ -166,7 +219,13 @@ const WithdrawNFTModal: React.FC<WithdrawNFTModalProps> = (props) => {
             >{txError}</Alert>}
           <Stack>
             <DefaultButton
-              onClick={() => redeemNFT()}
+              onClick={() => {
+                if (activeConnector?.id === UNIPASS_CONNECTOR) {
+                  unipassRedeemNFT()
+                } else {
+                  redeemNFT()
+                }
+              }}
               loading={buttonLoading}
               className={styles.baseButton} >
               Redeem
@@ -223,7 +282,13 @@ const WithdrawNFTModal: React.FC<WithdrawNFTModalProps> = (props) => {
             {!alreadyApproved && <DefaultButton
               className={cx({ 'baseButton': true, 'disableButton': isApproved })}
               loading={buttonLoading && !isApproved}
-              onClick={() => handleApproveERC20()}
+              onClick={() => {
+                if (activeConnector?.id === UNIPASS_CONNECTOR) {
+                  unipassApproveERC20()
+                } else {
+                  handleApproveERC20()
+                }
+              }}
             >
               {isApproved ? 'Approved' : 'Approve'}
             </DefaultButton>}
@@ -232,7 +297,11 @@ const WithdrawNFTModal: React.FC<WithdrawNFTModalProps> = (props) => {
               loading={buttonLoading && (isApproved || alreadyApproved)}
               onClick={() => {
                 if (isApproved || alreadyApproved) {
-                  redeemNFT()
+                  if (activeConnector?.id === UNIPASS_CONNECTOR) {
+                    unipassRedeemNFT()
+                  } else {
+                    redeemNFT()
+                  }
                 }
               }}
             >

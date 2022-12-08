@@ -170,7 +170,7 @@ const RentNFTModal: React.FC<RentNFTModalProps> = (props) => {
   }
 
   const unipassApproveERC20 = async () => {
-    setTxError('')
+    await setTxError('')
     await setButtonLoading(true)
 
     try {
@@ -184,10 +184,10 @@ const RentNFTModal: React.FC<RentNFTModalProps> = (props) => {
       }
       // @ts-ignore
       const txHash = await UnipassConnector?.unipass?.sendTransaction(tx)
-      console.log(txHash)
+      await setApproveTxHash(txHash)
 
-      await setButtonLoading(false)
-      await setIsApproved(true)
+      // await setButtonLoading(false)
+      // await setIsApproved(true)
     } catch (err: any) {
       setTxError(err?.error?.message || err.message)
       setButtonLoading(false)
@@ -197,11 +197,11 @@ const RentNFTModal: React.FC<RentNFTModalProps> = (props) => {
   const unipassRentNFT = async () => {
     // 用户不能租借自己出租的 NFT
     if (rentInfo?.lender === address?.toLowerCase()) {
-      setTxError('Users cannot rent NFTs they own')
+      await setTxError('Users cannot rent NFTs they own')
       return
     }
 
-    setTxError('')
+    await setTxError('')
     await setButtonLoading(true)
 
     try {
@@ -216,8 +216,10 @@ const RentNFTModal: React.FC<RentNFTModalProps> = (props) => {
       // @ts-ignore
       const txHash = await UnipassConnector?.unipass?.sendTransaction(tx)
 
-      await reloadInfo()
-      await setButtonLoading(false)
+      await setRentTxHash(txHash)
+
+      // await reloadInfo()
+      // await setButtonLoading(false)
     } catch (err: any) {
       setTxError(err?.error?.message || err.message)
       setButtonLoading(false)

@@ -8,9 +8,9 @@ import styles from './style.module.scss'
 import DefaultButton from '../Buttons/DefaultButton';
 import { UserLendConfigInfo } from './ChooseNFTModal';
 import classNames from 'classnames/bind'
-import { erc721ABI, useAccount, useContract, useSigner, useWaitForTransaction } from 'wagmi';
+import { erc721ABI, useAccount, useConnect, useContract, useSigner, useWaitForTransaction } from 'wagmi';
 import { INSTALLMENT_MARKET, INSTALLMENT_MARKET_ABI } from '../../constants/contractABI';
-import { ADDRESS_TOKEN_MAP, CHAIN_ID_MAP, DEPOSIT_DAYS, MAX_RENTABLE_DAYS, MIN_RENTABLE_DAYS, SUPPORT_CHAINS, SUPPORT_TOKENS, TOKEN_LIST, ZERO_ADDRESS } from '../../constants';
+import { ADDRESS_TOKEN_MAP, CHAIN_ID_MAP, DEPOSIT_DAYS, MAX_RENTABLE_DAYS, MIN_RENTABLE_DAYS, SUPPORT_CHAINS, SUPPORT_TOKENS, TOKEN_LIST, UNIPASS_CONNECTOR, ZERO_ADDRESS } from '../../constants';
 import { BigNumber, ethers, utils } from 'ethers';
 import TxLoadingDialog from '../TxLoadingDialog';
 import { LeaseItem } from '../../types';
@@ -45,7 +45,8 @@ const InstallmentLendConfig: React.FC<LendConfigProps> = (props) => {
   const [isShowMoreOptions, setShowMoreOption] = useState<boolean>(false)
 
   const { data: signer } = useSigner()
-  const { address } = useAccount()
+  const { address, connector: activeConnector } = useAccount()
+  const { connectors: [UnipassConnector] } = useConnect()
 
   const [isApproved, setIsApproved] = useState<boolean>(false)
   const [alreadyApproved, setAlreadyApproved] = useState<boolean>(false)
@@ -175,6 +176,46 @@ const InstallmentLendConfig: React.FC<LendConfigProps> = (props) => {
     }
   }
 
+  const unipassLendNFT = async () => {
+    if (!lendDailyPrice) {
+      await setShowDailyPriceError(true)
+      return
+    }
+    if (isLoading || (!isApproved && !alreadyApproved) || !isReady) return
+    await setErrorMessage('')
+    await setIsLoading(true)
+
+    const rentDailyPrice = utils.parseUnits(lendDailyPrice?.toString() || '', TOKEN_LIST[paymentCoinType].decimal)
+
+    try {
+      const txData = new utils.Interface(INSTALLMENT_MARKET_ABI).encodeFunctionData('lend', [
+        nftInfo.nftAddress,
+        nftInfo.tokenId,
+        TOKEN_LIST[paymentCoinType].address, // pay token address
+        whitelist || ZERO_ADDRESS, // whitelist address
+        isNeedDeposit ? rentDailyPrice.mul(DEPOSIT_DAYS) : 0, // deposit
+        rentDailyPrice, // daily rent price
+        payPeriod, // pay period
+        minDuration, // min rent day
+        maxDuration
+      ])
+
+      const tx = {
+        from: address,
+        to: INSTALLMENT_MARKET[CHAIN_ID_MAP[nftInfo.chain]],
+        value: "0x0",
+        data: txData
+      }
+      // @ts-ignore
+      const txHash = await UnipassConnector?.unipass?.sendTransaction(tx)
+
+      await setListMarketTxHash(txHash)
+    } catch (err: any) {
+      setErrorMessage(err?.error?.message || err?.message)
+      setIsLoading(false)
+    }
+  }
+
   // 更新出借 NFT 订单信息
   const handleUpdateOrder = async () => {
     if (!lendDailyPrice) {
@@ -208,6 +249,46 @@ const InstallmentLendConfig: React.FC<LendConfigProps> = (props) => {
     }
   }
 
+  const unipassUpdateOrder = async () => {
+    if (!lendDailyPrice) {
+      await setShowDailyPriceError(true)
+      return
+    }
+    if (isLoading || (!isApproved && !alreadyApproved) || !isReady) return
+    await setErrorMessage('')
+    await setIsLoading(true)
+
+    const rentDailyPrice = utils.parseUnits(lendDailyPrice?.toString() || '', TOKEN_LIST[paymentCoinType].decimal)
+
+    try {
+      const txData = new utils.Interface(INSTALLMENT_MARKET_ABI).encodeFunctionData('reLend', [
+        nftInfo.nftAddress,
+        nftInfo.tokenId,
+        TOKEN_LIST[paymentCoinType].address, // pay token address
+        whitelist || ZERO_ADDRESS, // whitelist address
+        isNeedDeposit ? rentDailyPrice.mul(DEPOSIT_DAYS) : 0, // deposit
+        rentDailyPrice, // daily rent price
+        payPeriod, // pay period
+        minDuration, // min rent day
+        maxDuration
+      ])
+
+      const tx = {
+        from: address,
+        to: INSTALLMENT_MARKET[CHAIN_ID_MAP[nftInfo.chain]],
+        value: "0x0",
+        data: txData
+      }
+      // @ts-ignore
+      const txHash = await UnipassConnector?.unipass?.sendTransaction(tx)
+
+      await setUpdateOrderTxHash(txHash)
+    } catch (err: any) {
+      setErrorMessage(err?.error?.message || err?.message)
+      setIsLoading(false)
+    }
+  }
+
   // 授权指定 ERC721 NFT
   const handleApproveErc721 = async () => {
     if (isLoading) return
@@ -222,6 +303,32 @@ const InstallmentLendConfig: React.FC<LendConfigProps> = (props) => {
       setErrorMessage(err?.error?.message || err?.message)
       setIsLoading(false)
       setShowTxDialog(false)
+    }
+  }
+
+  const unipassApproveERC721 = async () => {
+    if (isLoading) return
+    await setErrorMessage('')
+    await setIsLoading(true)
+
+    try {
+      const txData = new utils.Interface(erc721ABI).encodeFunctionData('setApprovalForAll', [INSTALLMENT_MARKET[CHAIN_ID_MAP[nftInfo.chain]], true])
+
+      const tx = {
+        from: address,
+        to: nftInfo.nftAddress,
+        value: "0x0",
+        data: txData
+      }
+
+      // @ts-ignore
+      const txHash = await UnipassConnector?.unipass?.sendTransaction(tx)
+
+      await setApproveTxHash(txHash)
+
+    } catch (err: any) {
+      setErrorMessage(err?.error?.message || err?.message)
+      setIsLoading(false)
     }
   }
 
@@ -382,19 +489,40 @@ const InstallmentLendConfig: React.FC<LendConfigProps> = (props) => {
                   baseContractButton: true,
                   disableButton: isApproved
                 })}
-                onClick={handleApproveErc721}
+                loading={!isApproved && isLoading}
+                onClick={() => {
+                  if (activeConnector?.id === UNIPASS_CONNECTOR) {
+                    unipassApproveERC721()
+                  } else {
+                    handleApproveErc721()
+                  }
+                }}
               >Approve</DefaultButton>}
               <DefaultButton
                 className={cx({
                   baseContractButton: true,
                   disableButton: !isApproved && !alreadyApproved
                 })}
-                onClick={handleLendNFT}
+                loading={(isApproved || alreadyApproved) && isLoading}
+                onClick={() => {
+                  if (activeConnector?.id === UNIPASS_CONNECTOR) {
+                    unipassLendNFT()
+                  } else {
+                    handleLendNFT()
+                  }
+                }}
               >Lend</DefaultButton>
             </> :
             <DefaultButton
               className={cx({ baseContractButton: true })}
-              onClick={handleUpdateOrder}
+              loading={isLoading}
+              onClick={() => {
+                if (activeConnector?.id === UNIPASS_CONNECTOR) {
+                  unipassUpdateOrder()
+                } else {
+                  handleUpdateOrder()
+                }
+              }}
             >Update</DefaultButton>
         }
       </Stack>

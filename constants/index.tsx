@@ -118,7 +118,7 @@ const ALL_NETWORK: Chain[] = [
 ]
 
 export const SUPPORT_CHAINS =
-  process.env.NEXT_PUBLIC_ENV === 'TEST' ?
+  process.env.NEXT_PUBLIC_ENV === 'PROD' ?
     MAIN_NETWORK : ALL_NETWORK
 
 
@@ -154,7 +154,7 @@ export const ALCHEMY_RINKEBY_URL = `https://eth-rinkeby.alchemyapi.io/nft/v2/${p
 // backend api service
 const DEV_BASEAPI = 'https://devapi.rentero.io'
 const TEST_BASEAPI = 'https://api.rentero.io' // production api
-export const BaseURL = process.env.NEXT_PUBLIC_ENV === 'TEST' ? TEST_BASEAPI : DEV_BASEAPI
+export const BaseURL = process.env.NEXT_PUBLIC_ENV === 'PROD' ? TEST_BASEAPI : DEV_BASEAPI
 
 
 export const ZERO_ADDRESS: string = '0x0000000000000000000000000000000000000000'
