@@ -14,7 +14,7 @@ import { WalletConnectConnector } from 'wagmi/connectors/walletConnect'
 import { UnipassConnector } from '../lib/UnipassConnector'
 import { RANGERS_CHAIN, RANGERS_TEST_CHAIN, SUPPORT_CHAINS } from '../constants'
 import { NextPage } from 'next/types'
-import type { ReactElement, ReactNode } from 'react'
+import { ReactElement, ReactNode, useMemo } from 'react'
 import Layout2 from '../components/layout2'
 import { ApolloProvider } from '@apollo/client'
 import { goerliGraph } from '../services/graphql'
@@ -40,6 +40,12 @@ const unipassOption: PopupSDKOption = {
   },
 }
 
+// const unipassInstance = useMemo(() => {
+//   return new UniPassPopupSDK(unipassOption)
+// }, [])
+
+const unipassInstance = new UniPassPopupSDK(unipassOption) 
+
 const client = createClient({
   autoConnect: true,
   connectors: [
@@ -49,7 +55,7 @@ const client = createClient({
         RANGERS_TEST_CHAIN
       ],
       options: unipassOption,
-      unipass: new UniPassPopupSDK(unipassOption)
+      unipass: unipassInstance
     }),
     new MetaMaskConnector({
       chains,

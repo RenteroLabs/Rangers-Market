@@ -16,12 +16,14 @@ export class UnipassConnector extends Connector {
     super(config)
     // this.unipass = new UniPassPopupSDK(this.options)
     this.unipass = config.unipass
-    console.log("construct")
+    console.log("construct", config.unipass)
   }
 
   async connect(config?: { chainId?: number | undefined } | undefined): Promise<Required<ConnectorData<any>>> {
     console.log("connect")
     const chainId = config?.chainId
+    const wagmiStore = window.localStorage['wagmi.store']
+    console.log(wagmiStore)
 
     try {
       // this.emit('message', {
@@ -48,6 +50,9 @@ export class UnipassConnector extends Connector {
         // unsupported = this.isChainUnsupported(id);
       }
       this.isConnected = true
+
+
+
       return {
         account: address,
         chain: {
@@ -73,7 +78,8 @@ export class UnipassConnector extends Connector {
   }
 
   async isAuthorized(): Promise<boolean> {
-    console.log("isAuthorized")
+    console.log("isAuthorized", this.isConnected)
+    return true
     return this.isConnected
     try {
       const account = await this.unipass.getAddress();
