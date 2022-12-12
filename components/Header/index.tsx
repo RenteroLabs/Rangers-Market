@@ -31,6 +31,10 @@ export default function Header() {
     defaultValue: ''
   })
   const { address, isConnected } = useAccount()
+  // useEffect(() => {
+  //   console.log(isConnected, address, connector)
+  // }, [address, isConnected])
+
   const [showDrawer, setShowDrawer] = useState<boolean>(false)
   const isMenuDrawer = useMediaQuery("(max-width: 900px)")
   const isOperateSize = useMediaQuery("(max-width: 750px)")

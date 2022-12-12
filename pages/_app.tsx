@@ -21,6 +21,7 @@ import { goerliGraph } from '../services/graphql'
 
 import { NextAdapter } from 'next-query-params';
 import { QueryParamProvider } from 'use-query-params';
+import { PopupSDKOption, UniPassPopupSDK } from '@unipasswallet/popup-sdk'
 
 
 const infuraId = process.env.NEXT_PUBLIC_INFURA_ID
@@ -30,6 +31,15 @@ const { chains, provider, webSocketProvider } = configureChains(SUPPORT_CHAINS, 
   publicProvider()
 ])
 
+const unipassOption: PopupSDKOption = {
+  env: 'test',
+  chainType: 'rangers',
+  appSettings: {
+    appName: "UniPass Wallet Demo",
+    appIcon: "https://tva1.sinaimg.cn/large/008vxvgGly1h8xeyjk26rj303o03oglg.jpg",
+  },
+}
+
 const client = createClient({
   autoConnect: true,
   connectors: [
@@ -38,14 +48,8 @@ const client = createClient({
         RANGERS_CHAIN,
         RANGERS_TEST_CHAIN
       ],
-      options: {
-        env: 'test',
-        chainType: 'rangers',
-        appSettings: {
-          appName: "UniPass Wallet Demo",
-          appIcon: "",
-        },
-      }
+      options: unipassOption,
+      unipass: new UniPassPopupSDK(unipassOption)
     }),
     new MetaMaskConnector({
       chains,
