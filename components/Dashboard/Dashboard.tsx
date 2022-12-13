@@ -9,7 +9,7 @@ import { useEffect, useMemo, useState } from "react"
 import ReturnNFTModal from "./Modals/ReturnNFT"
 import WithdrawNFTModal from "./Modals/WithdrawNFT"
 import { dateFormat, formatAddress, formatTokenId } from "../../utils/format"
-import { useAccount, useContract, useSigner } from "wagmi"
+import { erc721ABI, useAccount, useContract, useContractRead, useSigner } from "wagmi"
 import TakeOffNFTModal from "./Modals/TakeOffNFT"
 import LendConfig from "../LendNFT/SliptModeLendConfig"
 import CloseIcon from '@mui/icons-material/Close'
@@ -20,6 +20,8 @@ import { LeaseItem } from "../../types"
 import { getNFTInfo } from "../../services/market"
 import { BigNumber, ethers } from "ethers"
 import { bsctestGraph, goerliGraph, rangersTestGraph } from '../../services/graphql'
+import { AXE_RANGERS_NFT } from "../../constants/contractABI"
+import { getNFTsMetadata, META_CHAIN_NAME } from "../../services/metadata"
 
 const cx = classNames.bind(styles)
 
@@ -28,6 +30,7 @@ export interface DashboardProps { }
 const Dashboard: React.FC<DashboardProps> = () => {
   const isMounted = useIsMounted()
   const { address } = useAccount()
+  const { data: signer } = useSigner()
   const [tableType, setTableType] = useState<"RENT" | "LEND">('RENT')
 
   const [targetChain, setTargetChainId] = useState<number>(SUPPORT_CHAINS[0].id)
@@ -44,22 +47,30 @@ const Dashboard: React.FC<DashboardProps> = () => {
     return (new Date().getTime() / 1000).toFixed()
   }, [])
 
-  const batchRequestMetas = (list: LeaseItem[], listType: 'renting' | 'lending') => {
-    const requestList = list.map((item: { tokenId: any; nftAddress: any }) => {
-      return getNFTInfo({ tokenId: item.tokenId, contractAddress: item.nftAddress })
+  const contract721_DeHero = useContract({
+    addressOrName: AXE_RANGERS_NFT,
+    contractInterface: [...erc721ABI],
+    signerOrProvider: signer,
+  })
+
+  const batchRequestMetas = async (list: LeaseItem[], listType: 'renting' | 'lending') => {
+    const nfts = list.map((item: LeaseItem) => ({ contract: item.nftAddress, token_id: item.tokenId }))
+    const { data = [] } = await getNFTsMetadata({
+      chainId: targetChain,
+      nfts,
     })
-    Promise.all(requestList).then(results => {
-      let metadata: Record<string, any> = {}
-      results.forEach(({ data }) => {
-        metadata[`${data.contractAddress.toLowerCase()}-${data.tokenId}`] = data
-      })
-      if (listType === 'renting') {
-        setRentingMetas(metadata)
-      }
-      if (listType === 'lending') {
-        setLendingMetas(metadata)
-      }
+    console.log(data)
+    let metadata: Record<string, any> = {}
+    data.forEach((item: Record<string, any>) => {
+      metadata[`${item?.contract.toLowerCase()}-${item?.token_id}`] = item?.metadata
     })
+
+    if (listType === 'renting') {
+      setRentingMetas(metadata)
+    }
+    if (listType === 'lending') {
+      setLendingMetas(metadata)
+    }
   }
 
   const [refetchRenting, { loading: rentLoading }] = useLazyQuery(GET_MY_RENTING, {
@@ -190,8 +201,8 @@ const Dashboard: React.FC<DashboardProps> = () => {
             const nftStats = (item?.expires || 0) > timestamp ? 'renting' : 'lending'
             let metadata
             try {
-              if (metaList[[item.nftAddress, item.tokenId].join('-')]?.metadata) {
-                metadata = JSON.parse(metaList[[item.nftAddress, item.tokenId].join('-')]?.metadata)
+              if (metaList[[item.nftAddress, item.tokenId].join('-')]) {
+                metadata = metaList[[item.nftAddress, item.tokenId].join('-')]
               }
             } catch (err) {
               console.error(err)
@@ -200,7 +211,7 @@ const Dashboard: React.FC<DashboardProps> = () => {
               <TableCell>
                 <Box className={styles.nftBoxCell}>
                   <Box className={styles.boxImage}>
-                    <img src={metaList[[item.nftAddress, item.tokenId].join('-')]?.imageUrl} />
+                    <img src={metadata?.image} />
                     {item.whitelist !== ZERO_ADDRESS && <span className={styles.whitelistIcon}></span>}
                   </Box>
                   <Stack sx={{ margin: 'auto 1rem' }}>

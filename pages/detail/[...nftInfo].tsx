@@ -180,7 +180,7 @@ const Detail: NextPageWithLayout = () => {
     getLeaseInfo()
     getMoreLease()
     if (nftAddress && tokenId) {
-      fetchNFTInfo({ tokenId: parseInt(tokenId), contractAddress: nftAddress })
+      fetchNFTInfo({ tokenId: tokenId, contractAddress: nftAddress })
     }
   }, [nftAddress, tokenId])
 

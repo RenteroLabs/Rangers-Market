@@ -23,6 +23,8 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { BigNumber, ethers, utils } from 'ethers'
 import { RANGERS_DEV_TOKEN } from '../../constants/index'
 import { DEV_20TOKEN_ABI } from '../../constants/abi'
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import LeftNavContent from '../LeftNavContent'
 
 export default function Header() {
   const router = useRouter()
@@ -36,6 +38,8 @@ export default function Header() {
   }, [address, isConnected])
 
   const [showDrawer, setShowDrawer] = useState<boolean>(false)
+  const [showGameDrawer, setShowGameDrawer] = useState<boolean>(false)
+
   const isMenuDrawer = useMediaQuery("(max-width: 900px)")
   const isOperateSize = useMediaQuery("(max-width: 750px)")
 
@@ -164,6 +168,13 @@ export default function Header() {
           trigger={<span className={styles.connectButton}>Connect Wallet</span>}
         />
       }
+      {isOperateSize && router.pathname === '/' &&
+        <Box
+          onClick={() => setShowGameDrawer(!showGameDrawer)}
+          className={styles.drawerGameFilter}
+        >
+          <FilterAltIcon sx={{ fontSize: '2rem' }} />
+        </Box>}
       <Box
         className={styles.drawerMenuIcon}
         onClick={() => setShowDrawer(!showDrawer)}>
@@ -226,6 +237,25 @@ export default function Header() {
                 >Connect Wallet</Box>} />
           }
         </Stack>
+      </Box>
+    </Drawer>
+
+
+    {/* 选择游戏抽屉 */}
+    <Drawer
+      anchor='right'
+      open={showGameDrawer}
+      className={styles.gameDrawer}
+      onClose={() => setShowGameDrawer(false)}
+      key="game_drawer"
+    >
+      <Box className={styles.gameDrawerBox}>
+        <LeftNavContent
+          key="game_filter_drawer"
+          isLeftNav={false}
+          showLeftBar={true}
+          callback={() => setShowGameDrawer(false)}
+        />
       </Box>
     </Drawer>
 

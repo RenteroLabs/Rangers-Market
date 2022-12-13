@@ -151,6 +151,9 @@ export const ALCHEMY_ROPSTEN_URL = `https://eth-ropsten.alchemyapi.io/nft/v2/${p
 export const ALCHEMY_RINKEBY_URL = `https://eth-rinkeby.alchemyapi.io/nft/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`
 
 
+// 后端 metadata 服务地址
+export const METADATA_SERVICE = "https://metadata.rentero.io"
+
 // backend api service
 const DEV_BASEAPI = 'https://devapi.rentero.io'
 const TEST_BASEAPI = 'https://api.rentero.io' // production api

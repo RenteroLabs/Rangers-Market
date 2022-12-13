@@ -165,19 +165,36 @@
   }
 }
 
+.drawerGameFilter {
+  // display: none;
+  margin-left: 1rem;
+  font-weight: bolder;
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+}
+
 .drawerMenuIcon {
   display: none;
   margin-left: 1rem;
   font-weight: bolder;
 }
 
-.drawer {
+.drawer,
+.gameDrawer {
   :global {
     .MuiPaper-root {
       background-color: #272750;
       background-image: none;
     }
   }
+}
+
+.gameDrawerBox {
+  width: 34rem;
+  margin-top: 6rem;
+  padding: 1.5rem 0 0.5rem;
+  background: #1b1a46;
 }
 
 .drawerBox {
@@ -285,8 +302,8 @@
 }
 
 @media screen and (max-width: 600px) {
-  .drawerBox {
+  .drawerBox,
+  .gameDrawerBox {
     width: 100vw;
   }
-
 }

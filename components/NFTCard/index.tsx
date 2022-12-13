@@ -94,7 +94,7 @@ const NFTCard: React.FC<NFTCardProps> = (props) => {
   })
 
   useEffect(() => {
-    fetchNFTInfo({ tokenId: parseInt(nftInfo.tokenId), contractAddress: nftInfo.nftAddress })
+    fetchNFTInfo({ tokenId: nftInfo.tokenId, contractAddress: nftInfo.nftAddress })
   }, [nftInfo])
 
   const handleRentNow = (e: React.MouseEvent) => {
