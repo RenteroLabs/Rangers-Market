@@ -21,7 +21,7 @@ import { getNFTInfo } from "../../services/market"
 import { BigNumber, ethers } from "ethers"
 import { bsctestGraph, goerliGraph, rangersTestGraph } from '../../services/graphql'
 import { AXE_RANGERS_NFT } from "../../constants/contractABI"
-import { getNFTsMetadata, META_CHAIN_NAME } from "../../services/metadata"
+import { getNFTsMetadata, META_CHAIN_NAME, refreshNFTMetadata } from "../../services/metadata"
 
 const cx = classNames.bind(styles)
 
@@ -60,6 +60,19 @@ const Dashboard: React.FC<DashboardProps> = () => {
       nfts,
     })
     console.log(data)
+
+    if (data.length < list.length) {
+      // refresh metadata
+      list.forEach((item: LeaseItem) => {
+        refreshNFTMetadata({
+          contract: item.nftAddress,
+          token_id: item.tokenId,
+          // @ts-ignore
+          chain: META_CHAIN_NAME[targetChain]
+        })
+      })
+    }
+
     let metadata: Record<string, any> = {}
     data.forEach((item: Record<string, any>) => {
       metadata[`${item?.contract.toLowerCase()}-${item?.token_id}`] = item?.metadata

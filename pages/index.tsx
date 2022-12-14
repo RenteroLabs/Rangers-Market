@@ -81,15 +81,15 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
     }
   }, [router])
 
-  const { refetch: reloadTotal } = useQuery(GET_TOTAL_LEASES, {
-    variables: { id: "all" },
-    fetchPolicy: 'no-cache',
-    nextFetchPolicy: 'network-only',
-    onCompleted({ summary }) {
-      console.log(summary)
-      setNFTTotal(summary?.leaseCount || 0)
-    }
-  })
+  // const { refetch: reloadTotal } = useQuery(GET_TOTAL_LEASES, {
+  //   variables: { id: "all" },
+  //   fetchPolicy: 'no-cache',
+  //   nextFetchPolicy: 'network-only',
+  //   onCompleted({ summary }) {
+  //     console.log(summary)
+  //     setNFTTotal(summary?.leaseCount || 0)
+  //   }
+  // })
 
   const [getGameLeaseCount] = useLazyQuery(GET_GAME_LEASES_COUNT, {
     variables: { contractAddresses: gameContracts.map(item => item.toLowerCase()) },
