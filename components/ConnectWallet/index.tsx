@@ -81,28 +81,28 @@ const ConnectWallet: React.FC<ConnectWalletProps> = (props) => {
 
           <Box className={styles.walletItem}>
             <div
-              onClick={() => handleConnect(UnipassConnector)}>
-              <span className={styles.itemUnipassLogo}></span>
-              <p>UniPass</p>
-              {UniPassConnecting ? <CircularProgress /> : <ArrowRightAltRoundedIcon />}
-            </div>
-          </Box>
-
-          <Box className={styles.walletItem}>
-            <div
               onClick={() => handleConnect(MetaMaskConnector)}>
               <span className={styles.itemMetamaskLogo}></span>
               <p>MetaMask</p>
               {MetaMaskConnecting ? <CircularProgress /> : <ArrowRightAltRoundedIcon />}
             </div>
           </Box>
-          
+
           <Box className={styles.walletItem}>
             <div
               onClick={() => handleConnect(WalletConnectConnector)}>
               <span className={styles.itemWalletConnectLogo}></span>
               <p>WalletConnect</p>
               {WalletConnectConnecting ? <CircularProgress /> : <ArrowRightAltRoundedIcon />}
+            </div>
+          </Box>
+
+          <Box className={styles.walletItem}>
+            <div
+              onClick={() => handleConnect(UnipassConnector)}>
+              <span className={styles.itemUnipassLogo}></span>
+              <p>UniPass</p>
+              {UniPassConnecting ? <CircularProgress /> : <ArrowRightAltRoundedIcon />}
             </div>
           </Box>
 

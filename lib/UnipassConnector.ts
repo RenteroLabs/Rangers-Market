@@ -17,6 +17,11 @@ export class UnipassConnector extends Connector {
     // this.unipass = new UniPassPopupSDK(this.options)
     this.unipass = config.unipass
     console.log("construct", config.unipass)
+    // @ts-ignore
+    // if (window && window.sessionStorage['UP-A']) {
+    //   this.isConnected = true
+    //   console.log("window")
+    // }
   }
 
   async connect(config?: { chainId?: number | undefined } | undefined): Promise<Required<ConnectorData<any>>> {
@@ -79,8 +84,9 @@ export class UnipassConnector extends Connector {
 
   async isAuthorized(): Promise<boolean> {
     console.log("isAuthorized", this.isConnected)
-    return true
+    return window && window.sessionStorage['UP-A']
     return this.isConnected
+    // return this.isConnected
     try {
       const account = await this.unipass.getAddress();
       return !!account;
