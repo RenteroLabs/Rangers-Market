@@ -203,8 +203,8 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
             showLeftBar={(showLeftBar && !minLeftNav)}
             setShowLeftBar={setShowLeftBar}
             currentGame={currentGame}
-            setCurrentGame={setCurrentGame} 
-            />
+            setCurrentGame={setCurrentGame}
+          />
         </div>}
       <div className={styles.contentBox}>
         <section className={styles.topCover}>
@@ -371,7 +371,7 @@ export async function getStaticProps() {
   const data = [
     {
       gameId: 2,
-      backUrl: 'https://tva1.sinaimg.cn/large/008vxvgGly1h7hlkympepj311f0a241z.jpg',
+      backUrl: '/DeHero_Cover.png',
       gameName: 'DeHero',
       gameDesc: 'Decentralized GameFi application. Card-collecting blockchain game that focuses on NFT+DeFi gameplay. ',
       releaseTime: 1668542400000,

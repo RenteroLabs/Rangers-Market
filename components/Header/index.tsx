@@ -82,11 +82,11 @@ export default function Header() {
     signerOrProvider: signer,
   })
 
-  const mintRangersTentToken = async () => {
-    // console.log(utils.parseEther('1000'))
-    // const r = await contract20.totalSupply()
-    const r = await contract20.mint("0x2595C561B52B95aE4baCB5bc4Ad28C810607f88F", utils.parseEther('1000'))
-  }
+  // const mintRangersTentToken = async () => {
+  //   // console.log(utils.parseEther('1000'))
+  //   // const r = await contract20.totalSupply()
+  //   const r = await contract20.mint("0x0161f3181aebeb124ede8af3bca8d6bf3cbef6b8", utils.parseEther('1000'))
+  // }
 
   // const redeem = async () => {
   //   const d = await contractMarket.reclaim("0x6fe2BD1C050F439705EcBf98130D7C9C784bbFd6", 224)
