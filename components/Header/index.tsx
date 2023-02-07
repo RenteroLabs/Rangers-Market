@@ -23,6 +23,8 @@ import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import { BigNumber, ethers, utils } from 'ethers'
 import { RANGERS_DEV_TOKEN } from '../../constants/index'
 import { DEV_20TOKEN_ABI } from '../../constants/abi'
+import FilterAltIcon from '@mui/icons-material/FilterAlt';
+import LeftNavContent from '../LeftNavContent'
 
 export default function Header() {
   const router = useRouter()
@@ -31,7 +33,13 @@ export default function Header() {
     defaultValue: ''
   })
   const { address, isConnected } = useAccount()
+  useEffect(() => {
+    console.log(isConnected, address)
+  }, [address, isConnected])
+
   const [showDrawer, setShowDrawer] = useState<boolean>(false)
+  const [showGameDrawer, setShowGameDrawer] = useState<boolean>(false)
+
   const isMenuDrawer = useMediaQuery("(max-width: 900px)")
   const isOperateSize = useMediaQuery("(max-width: 750px)")
 
@@ -74,11 +82,11 @@ export default function Header() {
     signerOrProvider: signer,
   })
 
-  const mintRangersTentToken = async () => {
-    // console.log(utils.parseEther('1000'))
-    // const r = await contract20.totalSupply()
-    const r = await contract20.mint("0x2595C561B52B95aE4baCB5bc4Ad28C810607f88F", utils.parseEther('1000'))
-  }
+  // const mintRangersTentToken = async () => {
+  //   // console.log(utils.parseEther('1000'))
+  //   // const r = await contract20.totalSupply()
+  //   const r = await contract20.mint("0x0161f3181aebeb124ede8af3bca8d6bf3cbef6b8", utils.parseEther('1000'))
+  // }
 
   // const redeem = async () => {
   //   const d = await contractMarket.reclaim("0x6fe2BD1C050F439705EcBf98130D7C9C784bbFd6", 224)
@@ -160,6 +168,13 @@ export default function Header() {
           trigger={<span className={styles.connectButton}>Connect Wallet</span>}
         />
       }
+      {isOperateSize && router.pathname === '/' &&
+        <Box
+          onClick={() => setShowGameDrawer(!showGameDrawer)}
+          className={styles.drawerGameFilter}
+        >
+          <FilterAltIcon sx={{ fontSize: '2rem' }} />
+        </Box>}
       <Box
         className={styles.drawerMenuIcon}
         onClick={() => setShowDrawer(!showDrawer)}>
@@ -222,6 +237,25 @@ export default function Header() {
                 >Connect Wallet</Box>} />
           }
         </Stack>
+      </Box>
+    </Drawer>
+
+
+    {/* 选择游戏抽屉 */}
+    <Drawer
+      anchor='right'
+      open={showGameDrawer}
+      className={styles.gameDrawer}
+      onClose={() => setShowGameDrawer(false)}
+      key="game_drawer"
+    >
+      <Box className={styles.gameDrawerBox}>
+        <LeftNavContent
+          key="game_filter_drawer"
+          isLeftNav={false}
+          showLeftBar={true}
+          callback={() => setShowGameDrawer(false)}
+        />
       </Box>
     </Drawer>
 

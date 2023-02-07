@@ -1,0 +1,113 @@
+.leftGameList {
+  position: fixed;
+  top: 6rem;
+  left: 0;
+  width: 20rem;
+  background: #1b1a46;
+  padding-bottom: 1rem;
+  font-size: 1.17rem;
+  font-family: Poppins-Medium, Poppins;
+  font-weight: 500;
+  color: #777e90;
+  line-height: 2rem;
+
+  .sidebarController {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.67rem;
+  }
+  .sidebarControllerMin {
+    @extend .sidebarController;
+    justify-content: center;
+  }
+  .gameItem {
+    display: flex;
+    align-items: center;
+    height: 3.33rem;
+    padding-left: 1.33rem;
+    cursor: pointer;
+
+    img {
+      width: 2rem;
+      height: 2rem;
+      display: inline-block;
+      border-radius: 0.53rem;
+      margin-right: 0.67rem;
+    }
+
+    & + .gameItem {
+      margin-top: 0.67rem;
+    }
+  }
+  .activeItem {
+    background: #aa3ff8;
+    font-size: 1.17rem;
+    color: #ffffff;
+    line-height: 2rem;
+    p {
+      font-family: Poppins;
+      font-weight: 600;
+    }
+  }
+}
+
+// .leftNavMin {
+//   @extend .leftNav;
+//   width: 5rem;
+//   .leftGameList {
+//     width: 5rem;
+//   }
+// }
+
+.minLeftGameList {
+  width: 5rem;
+}
+
+.headerGameFilter {
+  background: #1b1a46;
+  padding-bottom: 1rem;
+  font-size: 1.17rem;
+  font-family: Poppins-Medium, Poppins;
+  font-weight: 500;
+  color: #777e90;
+  line-height: 2rem;
+
+  .sidebarController {
+    display: flex;
+    justify-content: flex-end;
+    padding: 0.67rem;
+  }
+  .sidebarControllerMin {
+    @extend .sidebarController;
+    justify-content: center;
+  }
+  .gameItem {
+    display: flex;
+    align-items: center;
+    height: 3.33rem;
+    padding-left: 1.33rem;
+    cursor: pointer;
+
+    img {
+      width: 2rem;
+      height: 2rem;
+      display: inline-block;
+      border-radius: 0.53rem;
+      margin-right: 0.67rem;
+    }
+
+    & + .gameItem {
+      margin-top: 0.67rem;
+    }
+  }
+  .activeItem {
+    background: #aa3ff8;
+    font-size: 1.17rem;
+    color: #ffffff;
+    line-height: 2rem;
+    p {
+      font-family: Poppins;
+      font-weight: 600;
+    }
+  }
+}

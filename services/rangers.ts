@@ -1,7 +1,7 @@
 const testApi = 'https://robin-api.rangersprotocol.com'
 const proApi = 'https://mainnet.rangersprotocol.com/api'
 
-const baseApi = process.env.NEXT_PUBLIC_ENV === 'TEST' ? proApi : testApi
+const baseApi = process.env.NEXT_PUBLIC_ENV === 'PROD' ? proApi : testApi
 
 interface getNFTsParasm {
   account: string,

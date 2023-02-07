@@ -34,13 +34,15 @@ export const GET_GAME_LEASES_COUNT = gql`
 `
 
 export const GET_LEASES_BY_GAME = gql`
-  query($skip: Int!, $pageSize: Int!, $collections: [String]!) {
+  query($skip: Int!, $pageSize: Int!, $nftAddress: [String!]) {
     leases(
       skip: $skip, 
       first: $pageSize, 
       orderDirection: asc, 
       orderBy: expires,
-      nftAddress_in: $collections
+      where: {
+        nftAddress_in: $nftAddress
+      }
       ) {
         deposit
         daysPerPeriod

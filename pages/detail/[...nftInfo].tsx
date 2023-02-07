@@ -89,6 +89,7 @@ const Detail: NextPageWithLayout = () => {
   const [chainId, nftAddress, tokenId] = router.query.nftInfo as string[] || []
 
   const { isConnected, address } = useAccount()
+  console.log(address)
   const isMounted = useIsMounted()
   const minMobileWidth = useMediaQuery("(max-width: 600px)")
 
@@ -179,7 +180,7 @@ const Detail: NextPageWithLayout = () => {
     getLeaseInfo()
     getMoreLease()
     if (nftAddress && tokenId) {
-      fetchNFTInfo({ tokenId: parseInt(tokenId), contractAddress: nftAddress })
+      fetchNFTInfo({ tokenId: tokenId, contractAddress: nftAddress })
     }
   }, [nftAddress, tokenId])
 

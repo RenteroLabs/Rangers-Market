@@ -71,7 +71,7 @@ const ChooseNFTModal: React.FC<ChooseNFTModalProps> = (props) => {
 
   const contract721_New = useContract({
     addressOrName: gameNFTCollection[0],
-    contractInterface: erc721ABI,
+    contractInterface: [...erc721ABI, 'function tokensOf(address owner, uint256 startIndex, uint256 endIndex) view returns (uint256[])'],
     signerOrProvider: signer,
   })
 
@@ -102,21 +102,27 @@ const ChooseNFTModal: React.FC<ChooseNFTModalProps> = (props) => {
       }
     } else {
       try {
-        const { result } = await getNFTsByAddressFromRangers({
-          account: address as string,
-          contractAddress: gameNFTCollection[0],
-        })
-        console.log(result)
+        // const { result } = await getNFTsByAddressFromRangers({
+        //   account: address as string,
+        //   contractAddress: gameNFTCollection[0],
+        // })
+        // console.log(result)
+
+        // 通过 DeHero 合约获取地址持有 NFT 数据信息
+        const tokens = await contract721_New.tokensOf(address, 0, 0)
+        console.log(tokens)
 
         let metaList: Record<string, any>[] = []
-        const tokenList: any[] = result?.data || []
+
+        const tokenList: any[] = tokens || []
         for (let i = 0; i < tokenList.length; i++) {
           const baseurl = await contract721_New.tokenURI(BigNumber.from(tokenList[i]))
+          console.log(baseurl)
           const metadata = await fetch(baseurl)
           const metaJson = await metadata.json()
           metaList.push({ ...metaJson, tokenId: tokenList[i] })
         }
-
+        // console.log(metaList)
         setNFTList(rangersData2NFTdata(metaList, gameNFTCollection[0]))
       } catch (err) {
         console.error(err)

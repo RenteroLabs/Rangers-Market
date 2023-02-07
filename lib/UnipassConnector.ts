@@ -9,21 +9,31 @@ export class UnipassConnector extends Connector {
   readonly name = "Unipass Wallet"
   readonly ready = true
 
-  private unipass
+  private unipass: UniPassPopupSDK
+  private isConnected: boolean = false
 
-  constructor(config: { chains?: Chain[], options: PopupSDKOption }) {
+  constructor(config: { chains?: Chain[], options: PopupSDKOption, unipass: UniPassPopupSDK }) {
     super(config)
-    this.unipass = new UniPassPopupSDK(this.options)
+    // this.unipass = new UniPassPopupSDK(this.options)
+    this.unipass = config.unipass
+    console.log("construct", config.unipass)
+    // @ts-ignore
+    // if (window && window.sessionStorage['UP-A']) {
+    //   this.isConnected = true
+    //   console.log("window")
+    // }
   }
 
   async connect(config?: { chainId?: number | undefined } | undefined): Promise<Required<ConnectorData<any>>> {
-
+    console.log("connect")
     const chainId = config?.chainId
+    const wagmiStore = window.localStorage['wagmi.store']
+    console.log(wagmiStore)
 
     try {
-      this.emit('message', {
-        type: 'connecting'
-      });
+      // this.emit('message', {
+      //   type: 'connecting'
+      // });
       const account = await this.unipass.login({
         email: true,
         connectType: 'both',
@@ -44,6 +54,9 @@ export class UnipassConnector extends Connector {
         // id = chain.id;
         // unsupported = this.isChainUnsupported(id);
       }
+      this.isConnected = true
+
+
 
       return {
         account: address,
@@ -59,16 +72,23 @@ export class UnipassConnector extends Connector {
   }
 
   async getAccount(): Promise<string> {
+    console.log("getAccount")
     return await this.unipass.getAddress()
   }
 
   async disconnect(): Promise<void> {
+    this.isConnected = false
+    console.log("disconnected")
     return await this.unipass.logout()
   }
 
   async isAuthorized(): Promise<boolean> {
+    console.log("isAuthorized", this.isConnected)
+    return window && window.sessionStorage['UP-A']
+    return this.isConnected
+    // return this.isConnected
     try {
-      const account = await this.getAccount();
+      const account = await this.unipass.getAddress();
       return !!account;
     } catch {
       return false;
@@ -77,31 +97,35 @@ export class UnipassConnector extends Connector {
 
   async getChainId(): Promise<number> {
     const provider = await this.getProvider() as JsonRpcProvider
+    console.log("getChainId")
     return (await provider.getNetwork()).chainId
   }
 
   async getProvider(config?: { chainId?: number | undefined } | undefined): Promise<any> {
+    console.log("getProvider")
     return await this.unipass.getProvider()
   }
 
   async getSigner(config?: { chainId?: number | undefined } | undefined): Promise<Signer> {
     const [provider, account] = await Promise.all([this.getProvider(), this.getAccount()]);
+    console.log("getSigner")
     return provider.getSigner(account)
   }
 
   async sendTransaction(_tx: any): Promise<string> {
+    console.log("sendTransaction")
     return this.unipass.sendTransaction(_tx)
   }
 
   protected async onDisconnect(error: Error) {
-
+    console.log("onDisconnect")
   }
 
   protected async onAccountsChanged(accounts: string[]) {
-
+    console.log("onAccountsChanged")
   }
 
   protected async onChainChanged(chain: string | number) {
-
+    console.log("onChainChanged")
   }
 }

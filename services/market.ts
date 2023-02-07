@@ -27,7 +27,7 @@ export const getMarketNFTList = async (params: NFTListParams) => {
 
 
 interface NFTInfoParams {
-  tokenId: number,
+  tokenId: string,
   contractAddress: string
 }
 export const getNFTInfo = async (params: NFTInfoParams) => {

@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import { LeaseItem } from '../../types'
+import { formatTokenId } from '../../utils/format'
 import AppDialog from '../Dialog'
 import InstallmentLendConfig from '../LendNFT/InstallmentLendConfig'
 
@@ -15,7 +16,7 @@ const UpdateNFTModal: React.FC<UpdateNFTProps> = (props) => {
 
   return <AppDialog
     trigger={trigger}
-    title={`Edit Lend Order #${rentInfo.tokenId}`}
+    title={`Edit Lend Order #${formatTokenId(rentInfo.tokenId)}`}
     hiddenDialog={hiddenDialog}
   >
     <InstallmentLendConfig

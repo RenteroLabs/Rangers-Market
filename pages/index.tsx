@@ -16,7 +16,7 @@ import { useIsMounted } from '../hooks'
 import SkeletonNFTCard from '../components/NFTCard/SkeletonNFTCard'
 import Link from 'next/link';
 import Layout2 from '../components/layout2';
-import { GET_GAME_LEASES_COUNT, GET_LEASES, GET_TOTAL_LEASES } from '../constants/documentNode';
+import { GET_GAME_LEASES_COUNT, GET_LEASES, GET_LEASES_BY_GAME, GET_TOTAL_LEASES } from '../constants/documentNode';
 import { LeaseItem } from '../types';
 import WestIcon from '@mui/icons-material/West';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
@@ -27,6 +27,7 @@ import { bsctestGraph, goerliGraph, rangersTestGraph } from '../services/graphql
 import useUrlState from '@ahooksjs/use-url-state';
 // import useQueryString from 'use-query-string';
 import { useQueryParam, StringParam, withDefault } from 'use-query-params';
+import LeftNavContent from '../components/LeftNavContent';
 
 const cx = classNames.bind(styles)
 
@@ -34,6 +35,8 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
   const isMounted = useIsMounted()
   const [currentGame, setCurrentGame] = useState<number>(0)
   const minMobileWidth = useMediaQuery("(max-width: 600px)")
+  const minLeftNav = useMediaQuery("(max-width: 1240px)")
+  const width750 = useMediaQuery("(max-width: 750px)")
   const [showLeftBar, setShowLeftBar] = useState<boolean>(true)
   const router = useRouter()
 
@@ -78,15 +81,15 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
     }
   }, [router])
 
-  const { refetch: reloadTotal } = useQuery(GET_TOTAL_LEASES, {
-    variables: { id: "all" },
-    fetchPolicy: 'no-cache',
-    nextFetchPolicy: 'network-only',
-    onCompleted({ summary }) {
-      console.log(summary)
-      setNFTTotal(summary?.leaseCount || 0)
-    }
-  })
+  // const { refetch: reloadTotal } = useQuery(GET_TOTAL_LEASES, {
+  //   variables: { id: "all" },
+  //   fetchPolicy: 'no-cache',
+  //   nextFetchPolicy: 'network-only',
+  //   onCompleted({ summary }) {
+  //     console.log(summary)
+  //     setNFTTotal(summary?.leaseCount || 0)
+  //   }
+  // })
 
   const [getGameLeaseCount] = useLazyQuery(GET_GAME_LEASES_COUNT, {
     variables: { contractAddresses: gameContracts.map(item => item.toLowerCase()) },
@@ -99,10 +102,11 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
     }
   })
 
-  const [getLeasesList, { loading: isLeasesLoading }] = useLazyQuery(GET_LEASES, {
+  const [getLeasesList, { loading: isLeasesLoading }] = useLazyQuery(GET_LEASES_BY_GAME, {
     variables: {
+      nftAddress: gameContracts.map(item => item.toLowerCase()),
       pageSize: pageSize,
-      skip: (currentPage - 1) * pageSize
+      skip: (currentPage - 1) * pageSize,
     },
     fetchPolicy: 'no-cache',
     nextFetchPolicy: 'network-only',
@@ -193,49 +197,16 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <div className={showLeftBar ? styles.leftNav : styles.leftNavMin}>
-        <Stack className={styles.leftGameList}>
-          <Box className={showLeftBar ? styles.sidebarController : styles.sidebarControllerMin}>
-            <IconButton onClick={() => setShowLeftBar(!showLeftBar)}>
-              {
-                showLeftBar ?
-                  <WestIcon fontSize="inherit" /> :
-                  <FilterAltIcon fontSize="large" />
-              }
-            </IconButton>
-          </Box>
-          {/* <Link href={{ pathname: '/' }} > */}
-          {/* <Box
-            className={cx({ 'gameItem': true, 'activeItem': currentGame == 0 })}
-            onClick={() => setCurrentGame(0)}
-          >
-            <img src={GAME_LOGOS['0']} alt='rentero' />
-            {showLeftBar && <Typography>All Game</Typography>}
-          </Box> */}
-          {/* </Link> */}
-          {/* <Link href={{
-            pathname: '/',
-            query: { game: GAME_NAMES.METALINE }
-          }} > */}
-          {/* <Box
-            className={cx({ 'gameItem': true, 'activeItem': currentGame == 1 })}
-            onClick={() => setCurrentGame(1)}
-          >
-            <img src={GAME_LOGOS['1']} alt={GAME_NAMES.METALINE} />
-            {showLeftBar && <Typography>Metaline</Typography>}
-          </Box> */}
-          {/* </Link> */}
-          <Box className={cx({
-            'gameItem': true,
-            'activeItem': currentGame == 0
-          })}
-            onClick={() => setCurrentGame(0)}
-          >
-            <img src={GAME_LOGOS['2']} alt={GAME_NAMES.DEHERO} />
-            {showLeftBar && <Typography>DeHero</Typography>}
-          </Box>
-        </Stack>
-      </div>
+      {!width750 &&
+        <div className={(showLeftBar && !minLeftNav) ? styles.leftNav : styles.leftNavMin}>
+          <LeftNavContent
+            key="left_nav"
+            showLeftBar={(showLeftBar && !minLeftNav)}
+            setShowLeftBar={setShowLeftBar}
+            currentGame={currentGame}
+            setCurrentGame={setCurrentGame}
+          />
+        </div>}
       <div className={styles.contentBox}>
         <section className={styles.topCover}>
           <img src={currentGameInfo.backUrl || "./rentero_top_banner.png"} className={styles.topCoverImage} />
@@ -396,12 +367,12 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
 
 // SSG 在构建 build 时获取各游戏介绍信息
 export async function getStaticProps() {
-  const result = await getGameInfos()
+  // const result = await getGameInfos()
   // console.log(data)
   const data = [
     {
       gameId: 2,
-      backUrl: 'https://tva1.sinaimg.cn/large/008vxvgGly1h7hlkympepj311f0a241z.jpg',
+      backUrl: '/DeHero_Cover.png',
       gameName: 'DeHero',
       gameDesc: 'Decentralized GameFi application. Card-collecting blockchain game that focuses on NFT+DeFi gameplay. ',
       releaseTime: 1668542400000,
