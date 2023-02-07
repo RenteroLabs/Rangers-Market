@@ -16,7 +16,7 @@ import { useIsMounted } from '../hooks'
 import SkeletonNFTCard from '../components/NFTCard/SkeletonNFTCard'
 import Link from 'next/link';
 import Layout2 from '../components/layout2';
-import { GET_GAME_LEASES_COUNT, GET_LEASES, GET_TOTAL_LEASES } from '../constants/documentNode';
+import { GET_GAME_LEASES_COUNT, GET_LEASES, GET_LEASES_BY_GAME, GET_TOTAL_LEASES } from '../constants/documentNode';
 import { LeaseItem } from '../types';
 import WestIcon from '@mui/icons-material/West';
 import FilterAltIcon from '@mui/icons-material/FilterAlt';
@@ -102,10 +102,11 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
     }
   })
 
-  const [getLeasesList, { loading: isLeasesLoading }] = useLazyQuery(GET_LEASES, {
+  const [getLeasesList, { loading: isLeasesLoading }] = useLazyQuery(GET_LEASES_BY_GAME, {
     variables: {
+      nftAddress: gameContracts.map(item => item.toLowerCase()),
       pageSize: pageSize,
-      skip: (currentPage - 1) * pageSize
+      skip: (currentPage - 1) * pageSize,
     },
     fetchPolicy: 'no-cache',
     nextFetchPolicy: 'network-only',
@@ -366,7 +367,7 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
 
 // SSG 在构建 build 时获取各游戏介绍信息
 export async function getStaticProps() {
-  const result = await getGameInfos()
+  // const result = await getGameInfos()
   // console.log(data)
   const data = [
     {
