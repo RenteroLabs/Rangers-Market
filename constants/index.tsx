@@ -185,6 +185,8 @@ const BSC_DEV_TOKEN = '0x304af20ef7a8497aeed4a4a6ba4601988d5b11f6'
 
 export const RANGERS_DEV_TOKEN = "0x55b4c4ee5e4c2db29177cb919572e5127a302963"
 
+const RANGERS_DEV_MIX_TOKEN = "0xb895607bee24aa62ca090ce0445a1893e70ee5a0"
+
 export const TOKEN_LIST: Record<string, TokenInfo> = {
   'ETH-USDT': {
     name: 'ETH-USDT',
@@ -245,6 +247,12 @@ export const TOKEN_LIST: Record<string, TokenInfo> = {
     address: RANGERS_DEV_TOKEN,
     logo: SUPPORT_TOKEN_ICONS["WETH"],
     decimal: 18,
+  },
+  "RPG-DEVMIX": {
+    name: "RPG-DEVMIX",
+    address: RANGERS_DEV_MIX_TOKEN,
+    logo: SUPPORT_TOKEN_ICONS['MIX'],
+    decimal: 18
   }
 }
 
@@ -270,7 +278,8 @@ export const SUPPORT_TOKENS: Record<number, TokenInfo[]> = {
     TOKEN_LIST['BSC-DEV'],
   ],
   9527: [
-    TOKEN_LIST['RPG-DEV']
+    TOKEN_LIST['RPG-DEV'],
+    TOKEN_LIST['RPG-DEVMIX']
   ]
 }
 
@@ -284,7 +293,8 @@ export const ADDRESS_TOKEN_MAP: Record<string, TokenInfo> = {
   [BSC_BUSD]: TOKEN_LIST['BSC-BUSD'],
   [BSC_DAI]: TOKEN_LIST['BSC-DAI'],
   [BSC_DEV_TOKEN]: TOKEN_LIST['BSC-DEV'],
-  [RANGERS_DEV_TOKEN]: TOKEN_LIST['RPG-DEV']
+  [RANGERS_DEV_TOKEN]: TOKEN_LIST['RPG-DEV'],
+  [RANGERS_DEV_MIX_TOKEN]: TOKEN_LIST["RPG-DEVMIX"]
 }
 
 export const DEPOSIT_DAYS = 1

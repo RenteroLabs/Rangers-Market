@@ -902,9 +902,11 @@
         height: 3.33rem;
 
         & > div {
+          padding-left: 0px;
           display: flex;
           align-items: center;
-          justify-content: flex-end;
+          // justify-content: flex-end;
+          justify-content: flex-start;
           font-size: 1.33rem;
           font-family: Poppins-Medium, Poppins;
           font-weight: 500;
@@ -918,7 +920,7 @@
         img {
           width: 1.67rem;
           height: 1.67rem;
-          margin-right: 1rem;
+          margin-right: 8px;
         }
       }
     }
