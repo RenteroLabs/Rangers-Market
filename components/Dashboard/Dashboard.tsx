@@ -220,6 +220,8 @@ const Dashboard: React.FC<DashboardProps> = () => {
             } catch (err) {
               console.error(err)
             }
+
+
             return <TableRow key={index}>
               <TableCell>
                 <Box className={styles.nftBoxCell}>
@@ -276,12 +278,22 @@ const Dashboard: React.FC<DashboardProps> = () => {
                     reloadTable={refetchRenting}
                   />}
                 {tableType === 'LEND' &&
-                  <WithdrawNFTModal
-                    trigger={<span className={cx({ "returnButton": true, })} >Redeem</span>}
-                    rentInfo={item}
-                    chain={item.chain}
-                    reloadTable={refetchLending}
-                  />}
+                  (
+                    // 关闭强制赎回功能
+                    nftStats === 'renting' ?
+                      <span className={cx({
+                        "returnButton": true,
+                        "returnButton_disable": true
+                      })} >Redeem</span>
+                      :
+                      <WithdrawNFTModal
+                        trigger={<span className={cx({ "returnButton": true, })} >Redeem</span>}
+                        rentInfo={item}
+                        chain={item.chain}
+                        reloadTable={refetchLending}
+                      />
+                  )
+                }
               </TableCell>
             </TableRow>
           })
