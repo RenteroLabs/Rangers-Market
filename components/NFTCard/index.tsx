@@ -34,7 +34,6 @@ const NFTCard: React.FC<NFTCardProps> = (props) => {
     return nftInfo.expires > current ? 'renting' : 'lending'
   }, [nftInfo])
 
-
   const { data: baseurl } = useContractRead({
     addressOrName: nftInfo.nftAddress,
     contractInterface: erc721ABI,
@@ -44,57 +43,88 @@ const NFTCard: React.FC<NFTCardProps> = (props) => {
     enabled: nftInfo.chain === "rpg-testnet"
   })
 
-  const { run: fetchNFTInfo } = useRequest(getNFTInfo, {
-    manual: true,
-    onSuccess: async ({ data, code }) => {
+  const fetchNFTInfo = async () => {
+    // TODO: 处理 Rangers 正式链环境逻辑
+    if (nftInfo.chain === 'rpg-testnet' && baseurl) {
+      // 获取 JSON
+      const metadata = await fetch(baseurl as unknown as string)
+      const metaJson = await metadata.json()
+      setMetaInfo({ ...metaJson, imageUrl: metaJson.image })
+      setAttrList(metaJson.attributes)
 
-      setMetaInfo(data)
+    } else {
+      // 通过第三方 Moralis 服务获取 NFT metadata 数据
+      const res = await getNFTInfoByMoralis({
+        tokenId: parseInt(nftInfo.tokenId),
+        contractAddress: nftInfo.nftAddress,
+        chainId: nftInfo.chain
+      })
+
       let attrs = []
       try {
-        if (data?.metadata) {
-          attrs = JSON.parse(data.metadata)?.attributes || []
+        if (res?.metadata) {
+          const metaJson = JSON.parse(res.metadata)
+          attrs = metaJson?.attributes || []
+          setMetaInfo({ imageUrl: metaJson.image })
         }
       } catch (err) {
         console.error(err)
       }
       setAttrList(attrs)
-
-      // 中心化存储接口请求失败后逻辑
-      if (code !== 200) {
-
-        if (nftInfo.chain === 'rpg-testnet' && baseurl) {
-          // 获取 JSON
-          const metadata = await fetch(baseurl as unknown as string )
-          const metaJson = await metadata.json()
-          setMetaInfo({...metaJson, imageUrl: metaJson.image})
-          setAttrList(metaJson.attributes)
-
-        } else {
-          // 通过第三方 Moralis 服务获取 NFT metadata 数据
-          const res = await getNFTInfoByMoralis({
-            tokenId: parseInt(nftInfo.tokenId),
-            contractAddress: nftInfo.nftAddress,
-            chainId: nftInfo.chain
-          })
-
-          let attrs = []
-          try {
-            if (res?.metadata) {
-              const metaJson = JSON.parse(res.metadata)
-              attrs = metaJson?.attributes || []
-              setMetaInfo({ ...data, imageUrl: metaJson.image })
-            }
-          } catch (err) {
-            console.error(err)
-          }
-          setAttrList(attrs)
-        }
-      }
     }
-  })
+  }
+
+  // const { run: fetchNFTInfo } = useRequest(getNFTInfo, {
+  //   manual: true,
+  //   onSuccess: async ({ data, code }) => {
+  //     setMetaInfo(data)
+  //     let attrs = []
+  //     try {
+  //       if (data?.metadata) {
+  //         attrs = JSON.parse(data.metadata)?.attributes || []
+  //       }
+  //     } catch (err) {
+  //       console.error(err)
+  //     }
+  //     setAttrList(attrs)
+
+  //     // // 中心化存储接口请求失败后逻辑
+  //     // if (code !== 200) {
+
+  //     //   if (nftInfo.chain === 'rpg-testnet' && baseurl) {
+  //     //     // 获取 JSON
+  //     //     const metadata = await fetch(baseurl as unknown as string )
+  //     //     const metaJson = await metadata.json()
+  //     //     setMetaInfo({...metaJson, imageUrl: metaJson.image})
+  //     //     setAttrList(metaJson.attributes)
+
+  //     //   } else {
+  //     //     // 通过第三方 Moralis 服务获取 NFT metadata 数据
+  //     //     const res = await getNFTInfoByMoralis({
+  //     //       tokenId: parseInt(nftInfo.tokenId),
+  //     //       contractAddress: nftInfo.nftAddress,
+  //     //       chainId: nftInfo.chain
+  //     //     })
+
+  //     //     let attrs = []
+  //     //     try {
+  //     //       if (res?.metadata) {
+  //     //         const metaJson = JSON.parse(res.metadata)
+  //     //         attrs = metaJson?.attributes || []
+  //     //         setMetaInfo({ ...data, imageUrl: metaJson.image })
+  //     //       }
+  //     //     } catch (err) {
+  //     //       console.error(err)
+  //     //     }
+  //     //     setAttrList(attrs)
+  //     //   }
+  //     // }
+  //   }
+  // })
 
   useEffect(() => {
-    fetchNFTInfo({ tokenId: nftInfo.tokenId, contractAddress: nftInfo.nftAddress })
+    // fetchNFTInfo({ tokenId: nftInfo.tokenId, contractAddress: nftInfo.nftAddress })
+    fetchNFTInfo()
   }, [nftInfo])
 
   const handleRentNow = (e: React.MouseEvent) => {

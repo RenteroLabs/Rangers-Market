@@ -17,7 +17,7 @@ import { ADDRESS_TOKEN_MAP, SUPPORT_CHAINS, ZERO_ADDRESS } from "../../constants
 import { GET_MY_LENDING, GET_MY_RENTING } from "../../constants/documentNode"
 import { useLazyQuery, useQuery } from "@apollo/client"
 import { LeaseItem } from "../../types"
-import { getNFTInfo } from "../../services/market"
+// import { getNFTInfo } from "../../services/market"
 import { BigNumber, ethers } from "ethers"
 import { bsctestGraph, goerliGraph, rangersTestGraph } from '../../services/graphql'
 import { AXE_RANGERS_NFT } from "../../constants/contractABI"
@@ -55,10 +55,11 @@ const Dashboard: React.FC<DashboardProps> = () => {
 
   const batchRequestMetas = async (list: LeaseItem[], listType: 'renting' | 'lending') => {
     const nfts = list.map((item: LeaseItem) => ({ contract: item.nftAddress, token_id: item.tokenId }))
-    const { data = [] } = await getNFTsMetadata({
+    let { data = [] } = await getNFTsMetadata({
       chainId: targetChain,
       nfts,
     })
+    data = data || []
     console.log(data)
 
     if (data.length < list.length) {

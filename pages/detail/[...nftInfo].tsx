@@ -144,43 +144,69 @@ const Detail: NextPageWithLayout = () => {
     enabled: chainId === "9527"
   })
 
-  const { run: fetchNFTInfo } = useRequest(getNFTInfo, {
-    manual: true,
-    onSuccess: async ({ data, code }) => {
-      setMetaInfo(data)
-
-      // 中心化存储接口请求失败后逻辑
-      if (code !== 200) {
-        // 从 Ranger 测试网络获取
-        if (chainId === '9527') {
-          const metadata = await fetch(baseurl as unknown as string)
-          const metaJson = await metadata.json()
-          setMetaInfo({ ...metaJson, imageUrl: metaJson.image, metadata: JSON.stringify(metaJson) })
-        } else {
-          // 从第三方服务获取
-          const res = await getNFTInfoByMoralis({
-            tokenId: parseInt(tokenId),
-            contractAddress: nftAddress,
-            chainId: "0x" + Number(chainId).toString(16)
-          })
-          try {
-            if (res?.metadata) {
-              const metaJson = JSON.parse(res.metadata)
-              setMetaInfo({ ...res, imageUrl: metaJson.image })
-            }
-          } catch (err) {
-            console.error(err)
-          }
+  const fetchNFTInfo = async () => {
+    // TODO: 处理 Rangers 正式链逻辑
+    // 从 Ranger 测试网络获取
+    if (chainId === '9527') {
+      const metadata = await fetch(baseurl as unknown as string)
+      const metaJson = await metadata.json()
+      setMetaInfo({ ...metaJson, imageUrl: metaJson.image, metadata: JSON.stringify(metaJson) })
+    } else {
+      // 从第三方服务获取
+      const res = await getNFTInfoByMoralis({
+        tokenId: parseInt(tokenId),
+        contractAddress: nftAddress,
+        chainId: "0x" + Number(chainId).toString(16)
+      })
+      try {
+        if (res?.metadata) {
+          const metaJson = JSON.parse(res.metadata)
+          setMetaInfo({ ...res, imageUrl: metaJson.image })
         }
+      } catch (err) {
+        console.error(err)
       }
     }
-  })
+  }
+
+  // const { run: fetchNFTInfo } = useRequest(getNFTInfo, {
+  //   manual: true,
+  //   onSuccess: async ({ data, code }) => {
+  //     setMetaInfo(data)
+
+  //     // 中心化存储接口请求失败后逻辑
+  //     if (code !== 200) {
+  //       // 从 Ranger 测试网络获取
+  //       if (chainId === '9527') {
+  //         const metadata = await fetch(baseurl as unknown as string)
+  //         const metaJson = await metadata.json()
+  //         setMetaInfo({ ...metaJson, imageUrl: metaJson.image, metadata: JSON.stringify(metaJson) })
+  //       } else {
+  //         // 从第三方服务获取
+  //         const res = await getNFTInfoByMoralis({
+  //           tokenId: parseInt(tokenId),
+  //           contractAddress: nftAddress,
+  //           chainId: "0x" + Number(chainId).toString(16)
+  //         })
+  //         try {
+  //           if (res?.metadata) {
+  //             const metaJson = JSON.parse(res.metadata)
+  //             setMetaInfo({ ...res, imageUrl: metaJson.image })
+  //           }
+  //         } catch (err) {
+  //           console.error(err)
+  //         }
+  //       }
+  //     }
+  //   }
+  // })
 
   useEffect(() => {
     getLeaseInfo()
     getMoreLease()
     if (nftAddress && tokenId) {
-      fetchNFTInfo({ tokenId: tokenId, contractAddress: nftAddress })
+      // fetchNFTInfo({ tokenId: tokenId, contractAddress: nftAddress })
+      fetchNFTInfo()
     }
   }, [nftAddress, tokenId])
 
