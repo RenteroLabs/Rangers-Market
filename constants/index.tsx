@@ -317,7 +317,7 @@ export const NFT_COLLECTIONS: Record<string, string> = {
 export const GAME_LOGOS: Record<string, string> = {
   '0': '/rentero_logo_big.png',
   "1": '/metaline_logo.png',
-  "2": "/dehero-logo.png"
+  "2": "https://rentero-resource.s3.ap-east-1.amazonaws.com/dehero_logo.png"
 }
 
 
@@ -364,8 +364,8 @@ export const GameList: GameItem[] = [
   {
     gameName: 'DeHero',
     gameDesc: "Probably the most profitable NFT project",
-    gameCover: "https://tva1.sinaimg.cn/large/008vxvgGly1h7g7sqmmbsj30p00dw40h.jpg",
-    gameLogo: "https://tva1.sinaimg.cn/large/008vxvgGly1h7g7qpht5kj30b40b4jrq.jpg",
+    gameCover: "https://rentero-resource.s3.ap-east-1.amazonaws.com/dehero_cover.png",
+    gameLogo: "https://rentero-resource.s3.ap-east-1.amazonaws.com/dehero_logo.png",
     gameStatus: 0,
     gameNFTCollection: GAME_CONTRACTS[2],
     chainId: 9527
