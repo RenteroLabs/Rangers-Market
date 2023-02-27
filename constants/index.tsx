@@ -323,7 +323,7 @@ export const GAME_LOGOS: Record<string, string> = {
 
 export const GAME_NAMES: Record<string, string> = {
   METALINE: 'Metaline',
-  DEHERO: "DeHero"
+  DEHERO: "DeHeroGame"
 }
 
 
@@ -362,7 +362,7 @@ export const GameList: GameItem[] = [
   //   chainId: 97
   // },
   {
-    gameName: 'DeHero',
+    gameName: 'DeHeroGame',
     gameDesc: "Probably the most profitable NFT project",
     gameCover: "https://rentero-resource.s3.ap-east-1.amazonaws.com/dehero_cover.png",
     gameLogo: "https://rentero-resource.s3.ap-east-1.amazonaws.com/dehero_logo.png",

@@ -373,7 +373,7 @@ export async function getStaticProps() {
     {
       gameId: 2,
       backUrl: 'https://rentero-resource.s3.ap-east-1.amazonaws.com/dehero_cover.png',
-      gameName: 'DeHero',
+      gameName: 'DeHeroGame',
       gameDesc: 'Decentralized GameFi application. Card-collecting blockchain game that focuses on NFT+DeFi gameplay. ',
       releaseTime: 1668542400000,
       gameHomeUrl: 'https://dehero.co/',

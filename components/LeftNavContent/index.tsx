@@ -94,7 +94,7 @@ const LeftNavContent: React.FC<LeftNavContentProps> = (props) => {
       }}
     >
       <img src={GAME_LOGOS['2']} alt={GAME_NAMES.DEHERO} />
-      {showLeftBar && <Typography>DeHero</Typography>}
+      {showLeftBar && <Typography>DeHeroGame</Typography>}
     </Box>
   </Stack>
 }
