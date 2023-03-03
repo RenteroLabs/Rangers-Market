@@ -23,7 +23,7 @@ import FilterAltIcon from '@mui/icons-material/FilterAlt';
 import classNames from 'classnames/bind';
 import { GAME_CONTRACTS, GAME_LOGOS, GAME_NAMES } from '../constants';
 import { useRouter } from 'next/router';
-import { bsctestGraph, goerliGraph, rangersTestGraph } from '../services/graphql'
+import { RangersGraph } from '../services/graphql'
 import useUrlState from '@ahooksjs/use-url-state';
 // import useQueryString from 'use-query-string';
 import { useQueryParam, StringParam, withDefault } from 'use-query-params';
@@ -40,7 +40,7 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
   const [showLeftBar, setShowLeftBar] = useState<boolean>(true)
   const router = useRouter()
 
-  const [graphService, setGraphService] = useState<any>(goerliGraph)
+  const [graphService, setGraphService] = useState<any>(RangersGraph)
   const [gameContracts, setGameContracts] = useState<string[]>(GAME_CONTRACTS[2])
 
   const chainTypeRef = useRef<HTMLElement>()
@@ -132,13 +132,13 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
       //   setName(GAME_NAMES.METALINE)
       //   break;
       case 0:
-        setGraphService(rangersTestGraph)
+        setGraphService(RangersGraph)
         setGameContracts(GAME_CONTRACTS[2])
         getGameLeaseCount();
         setName(GAME_NAMES.DEHERO)
         break;
       default:
-        setGraphService(rangersTestGraph)
+        setGraphService(RangersGraph)
         setGameContracts(GAME_CONTRACTS[2])
         getGameLeaseCount();
         setName(GAME_NAMES.DEHERO)

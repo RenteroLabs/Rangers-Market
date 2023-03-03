@@ -34,18 +34,19 @@ const NFTCard: React.FC<NFTCardProps> = (props) => {
     return nftInfo.expires > current ? 'renting' : 'lending'
   }, [nftInfo])
 
+  // 获取 NFT URL 用于 Rangers 链情况
   const { data: baseurl } = useContractRead({
     addressOrName: nftInfo.nftAddress,
     contractInterface: erc721ABI,
     functionName: "tokenURI",
-    chainId: 9527,
+    chainId: CHAIN_ID_MAP[nftInfo.chain] as number,
     args: [BigNumber.from(nftInfo.tokenId)],
-    enabled: nftInfo.chain === "rpg-testnet"
+    enabled: ['rpg-testnet', 'rpg'].includes(nftInfo.chain)
   })
 
   const fetchNFTInfo = async () => {
-    // TODO: 处理 Rangers 正式链环境逻辑
-    if (nftInfo.chain === 'rpg-testnet' && baseurl) {
+    // 处理 Rangers 链环境逻辑
+    if (['rpg-testnet', 'rpg'].includes(nftInfo.chain) && baseurl) {
       // 获取 JSON
       const metadata = await fetch(baseurl as unknown as string)
       const metaJson = await metadata.json()

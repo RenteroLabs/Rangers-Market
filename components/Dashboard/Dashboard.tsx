@@ -19,7 +19,7 @@ import { useLazyQuery, useQuery } from "@apollo/client"
 import { LeaseItem } from "../../types"
 // import { getNFTInfo } from "../../services/market"
 import { BigNumber, ethers } from "ethers"
-import { bsctestGraph, goerliGraph, rangersTestGraph } from '../../services/graphql'
+import { bsctestGraph, goerliGraph, rangersGraph, rangersTestGraph } from '../../services/graphql'
 import { AXE_RANGERS_NFT } from "../../constants/contractABI"
 import { getNFTsMetadata, META_CHAIN_NAME, refreshNFTMetadata } from "../../services/metadata"
 
@@ -133,6 +133,8 @@ const Dashboard: React.FC<DashboardProps> = () => {
         setGraphService(bsctestGraph);
         break;
       case 2025:
+        setGraphService(rangersGraph);
+        break;
       case 9527:
         setGraphService(rangersTestGraph);
         break;
