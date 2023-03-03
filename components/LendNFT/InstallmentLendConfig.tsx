@@ -73,6 +73,10 @@ const InstallmentLendConfig: React.FC<LendConfigProps> = (props) => {
   useWaitForTransaction({
     hash: listMarketTxHash,
     onSuccess: () => setLended(true),
+    onError: (err: Error) => {
+      // @ts-ignore
+      setErrorMessage(err?.error?.message || err?.message)
+    },
     onSettled: () => {
       setIsLoading(false)
       setShowTxDialog(false)

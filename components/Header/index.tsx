@@ -82,10 +82,20 @@ export default function Header() {
     signerOrProvider: signer,
   })
 
+  const rangersMIX20Token = useContract({
+    addressOrName: '0x36426B7bF5709E5c2160411C6E8B1832e3404FE1',
+    contractInterface: DEV_20TOKEN_ABI,
+    signerOrProvider: signer, 
+  })
+
+  const transferMixToken = async () => {
+    const r = await rangersMIX20Token.transfer("0x68B826b34AFB960632a56d770ff89439C00b185e", utils.parseEther('10') )
+  }
+
   // const mintRangersTentToken = async () => {
   //   // console.log(utils.parseEther('1000'))
   //   // const r = await contract20.totalSupply()
-  //   const r = await contract20.mint("0x0161f3181aebeb124ede8af3bca8d6bf3cbef6b8", utils.parseEther('1000'))
+  //   const r = await contract20.mint("0x8291507Afda0BBA820efB6DFA339f09C9465215C", utils.parseEther('1000'))
   // }
 
   // const redeem = async () => {
@@ -142,6 +152,7 @@ export default function Header() {
     {/* <Button onClick={rent}>rent</Button> */}
     {/* <Button onClick={redeem}>redeem</Button> */}
     {/* <Button onClick={approve}>approve</Button> */}
+    {/* <Button onClick={transferMixToken}>transfer</Button> */}
     <Box sx={{ display: 'flex', alignItems: 'center' }}>
       {(isMounted && isConnected) &&
         <Chip

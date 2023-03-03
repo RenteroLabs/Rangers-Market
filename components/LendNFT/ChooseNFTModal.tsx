@@ -77,7 +77,7 @@ const ChooseNFTModal: React.FC<ChooseNFTModalProps> = (props) => {
 
   useEffect(() => {
     // 在 Hehero 必须是在正确的测试链上
-    if (targetChainId && targetChainId === 9527) {
+    if (targetChainId && [9527, 2025].includes(targetChainId)) {
       if (chain?.id !== targetChainId) {
         setShowSwitchNetworkDialog(true)
       }
@@ -88,7 +88,7 @@ const ChooseNFTModal: React.FC<ChooseNFTModalProps> = (props) => {
   // 查询用户钱包地址所拥有的当前游戏 NFT 信息
   const queryWalletNFT2 = async () => {
     setIsRequestingNFT(true)
-
+    console.log("query out")
     if (MORALIS_SUPPORT_CHAINS.includes(targetChainId)) {
       try {
         const { result } = await Moralis.EvmApi.account.getNFTs({
@@ -102,12 +102,6 @@ const ChooseNFTModal: React.FC<ChooseNFTModalProps> = (props) => {
       }
     } else {
       try {
-        // const { result } = await getNFTsByAddressFromRangers({
-        //   account: address as string,
-        //   contractAddress: gameNFTCollection[0],
-        // })
-        // console.log(result)
-
         // 通过 DeHero 合约获取地址持有 NFT 数据信息
         const tokens = await contract721_New.tokensOf(address, 0, 0)
         console.log(tokens)

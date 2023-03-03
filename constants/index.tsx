@@ -98,7 +98,7 @@ export const RANGERS_CHAIN: Chain = {
 
 
 
-// TODO: 后续需把其中的测试网移除
+// 后续需把其中的测试网移除
 const MAIN_NETWORK: Chain[] = [
   // chain.mainnet,
   // chain.goerli,
@@ -122,13 +122,20 @@ export const SUPPORT_CHAINS =
     MAIN_NETWORK : ALL_NETWORK
 
 
-type EtherscanChains = "mainnet" | "ropsten" | "rinkeby" | "goerli" | "kovan" | "optimism" | "optimismKovan" | "polygon" | "polygonMumbai" | "arbitrum" | "arbitrumRinkeby"
-export const CHAIN_NAME: Record<number, EtherscanChains> = {
-  1: 'mainnet',
-  3: 'ropsten',
-  4: 'rinkeby',
-  5: "goerli",
-  137: 'polygon'
+// type EtherscanChains = "mainnet" | "ropsten" | "rinkeby" | "goerli" | "kovan" | "optimism" | "optimismKovan" | "polygon" | "polygonMumbai" | "arbitrum" | "arbitrumRinkeby"
+// export const CHAIN_NAME: Record<number, EtherscanChains> = {
+//   1: 'mainnet',
+//   3: 'ropsten',
+//   4: 'rinkeby',
+//   5: "goerli",
+//   137: 'polygon'
+// }
+
+export const CHAIN_EXPOLER_MAP: Record<string, string> = {
+  '1': "https://etherscan.io",
+  "5": "https://goerli.etherscan.io",
+  "2025": "https://scan.rangersprotocol.com",
+  "9527": "https://robin-rangersscan.rangersprotocol.com"
 }
 
 // service for thegraph chain value
@@ -137,11 +144,13 @@ export const CHAIN_ID_MAP: Record<string | number, number | string> = {
   "goerli": 5,
   "bsc-testnet": 97,
   "bsc": 56,
+  "rpg": 2025,
   "rpg-testnet": 9527,
   4: 'rinkeby',
   5: "goerli",
   97: 'bsc-testnet',
   56: 'bsc',
+  2025: "rpg",
   9527: 'rpg-testnet',
 }
 
@@ -184,6 +193,10 @@ const BSC_DAI = '0x1af3f329e8be154074d8769d1ffa4ee058b1dbc3'
 const BSC_DEV_TOKEN = '0x304af20ef7a8497aeed4a4a6ba4601988d5b11f6'
 
 export const RANGERS_DEV_TOKEN = "0x55b4c4ee5e4c2db29177cb919572e5127a302963"
+
+const RANGERS_DEV_MIX_TOKEN = "0xb895607bee24aa62ca090ce0445a1893e70ee5a0"
+// 正式环境 Rangers 链 ERC20 代币 MIX 地址
+const RANGERS_MIX_TOKEN = "0x36426b7bf5709e5c2160411c6e8b1832e3404fe1"
 
 export const TOKEN_LIST: Record<string, TokenInfo> = {
   'ETH-USDT': {
@@ -245,6 +258,18 @@ export const TOKEN_LIST: Record<string, TokenInfo> = {
     address: RANGERS_DEV_TOKEN,
     logo: SUPPORT_TOKEN_ICONS["WETH"],
     decimal: 18,
+  },
+  "RPG-DEVMIX": {
+    name: "RPG-DEVMIX",
+    address: RANGERS_DEV_MIX_TOKEN,
+    logo: SUPPORT_TOKEN_ICONS['MIX'],
+    decimal: 18
+  },
+  "RPG-MIX": {
+    name: "RPG-MIX",
+    address: RANGERS_MIX_TOKEN,
+    logo: SUPPORT_TOKEN_ICONS['MIX'],
+    decimal: 18
   }
 }
 
@@ -269,8 +294,12 @@ export const SUPPORT_TOKENS: Record<number, TokenInfo[]> = {
   97: [ // BSC testnet
     TOKEN_LIST['BSC-DEV'],
   ],
+  2025: [
+    TOKEN_LIST['RPG-MIX']
+  ],
   9527: [
-    TOKEN_LIST['RPG-DEV']
+    TOKEN_LIST['RPG-DEV'],
+    TOKEN_LIST['RPG-DEVMIX']
   ]
 }
 
@@ -284,7 +313,9 @@ export const ADDRESS_TOKEN_MAP: Record<string, TokenInfo> = {
   [BSC_BUSD]: TOKEN_LIST['BSC-BUSD'],
   [BSC_DAI]: TOKEN_LIST['BSC-DAI'],
   [BSC_DEV_TOKEN]: TOKEN_LIST['BSC-DEV'],
-  [RANGERS_DEV_TOKEN]: TOKEN_LIST['RPG-DEV']
+  [RANGERS_DEV_TOKEN]: TOKEN_LIST['RPG-DEV'],
+  [RANGERS_DEV_MIX_TOKEN]: TOKEN_LIST["RPG-DEVMIX"],
+  [RANGERS_MIX_TOKEN]: TOKEN_LIST['RPG-MIX']
 }
 
 export const DEPOSIT_DAYS = 1
@@ -301,19 +332,21 @@ export const NFT_COLLECTIONS: Record<string, string> = {
   "0x7e2997174d717b15fe029954ad1f380c5eb23169": "Axe Game",
   "0x9ee72a87d3bed794616ab4a0ad28a25732cac0c1": "Axe Game | Goerli",
   "0x6aadfe9441c35645d452bc7050cd53e43d104c18": "Axe Game | Rangers",
-  "0x6f71dd919192eedc50cd40177b5f7de51aa30d3c": "DeHero Heroes"
+  "0x6f71dd919192eedc50cd40177b5f7de51aa30d3c": "DeHero Heroes",
+  // 正式环境 Rangers 链 DeHero 游戏 NFT
+  "0xff78e0e78cae2d8e5b1027893af94534e22fff94": "DeHero Heroes"
 }
 
 export const GAME_LOGOS: Record<string, string> = {
   '0': '/rentero_logo_big.png',
   "1": '/metaline_logo.png',
-  "2": "/dehero-logo.png"
+  "2": "https://rentero-resource.s3.ap-east-1.amazonaws.com/dehero_logo.png"
 }
 
 
 export const GAME_NAMES: Record<string, string> = {
   METALINE: 'Metaline',
-  DEHERO: "DeHero"
+  DEHERO: "DeHeroGame"
 }
 
 
@@ -352,13 +385,13 @@ export const GameList: GameItem[] = [
   //   chainId: 97
   // },
   {
-    gameName: 'DeHero',
+    gameName: 'DeHeroGame',
     gameDesc: "Probably the most profitable NFT project",
-    gameCover: "https://tva1.sinaimg.cn/large/008vxvgGly1h7g7sqmmbsj30p00dw40h.jpg",
-    gameLogo: "https://tva1.sinaimg.cn/large/008vxvgGly1h7g7qpht5kj30b40b4jrq.jpg",
+    gameCover: "https://rentero-resource.s3.ap-east-1.amazonaws.com/dehero_cover.png",
+    gameLogo: "https://rentero-resource.s3.ap-east-1.amazonaws.com/dehero_logo.png",
     gameStatus: 0,
     gameNFTCollection: GAME_CONTRACTS[2],
-    chainId: 9527
+    chainId: process.env.NEXT_PUBLIC_ENV === 'PROD' ? 2025 : 9527
   }
 ]
 

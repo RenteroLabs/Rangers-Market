@@ -17,9 +17,9 @@ import { ADDRESS_TOKEN_MAP, SUPPORT_CHAINS, ZERO_ADDRESS } from "../../constants
 import { GET_MY_LENDING, GET_MY_RENTING } from "../../constants/documentNode"
 import { useLazyQuery, useQuery } from "@apollo/client"
 import { LeaseItem } from "../../types"
-import { getNFTInfo } from "../../services/market"
+// import { getNFTInfo } from "../../services/market"
 import { BigNumber, ethers } from "ethers"
-import { bsctestGraph, goerliGraph, rangersTestGraph } from '../../services/graphql'
+import { bsctestGraph, goerliGraph, rangersGraph, rangersTestGraph } from '../../services/graphql'
 import { AXE_RANGERS_NFT } from "../../constants/contractABI"
 import { getNFTsMetadata, META_CHAIN_NAME, refreshNFTMetadata } from "../../services/metadata"
 
@@ -55,10 +55,11 @@ const Dashboard: React.FC<DashboardProps> = () => {
 
   const batchRequestMetas = async (list: LeaseItem[], listType: 'renting' | 'lending') => {
     const nfts = list.map((item: LeaseItem) => ({ contract: item.nftAddress, token_id: item.tokenId }))
-    const { data = [] } = await getNFTsMetadata({
+    let { data = [] } = await getNFTsMetadata({
       chainId: targetChain,
       nfts,
     })
+    data = data || []
     console.log(data)
 
     if (data.length < list.length) {
@@ -132,6 +133,8 @@ const Dashboard: React.FC<DashboardProps> = () => {
         setGraphService(bsctestGraph);
         break;
       case 2025:
+        setGraphService(rangersGraph);
+        break;
       case 9527:
         setGraphService(rangersTestGraph);
         break;
@@ -220,6 +223,8 @@ const Dashboard: React.FC<DashboardProps> = () => {
             } catch (err) {
               console.error(err)
             }
+
+
             return <TableRow key={index}>
               <TableCell>
                 <Box className={styles.nftBoxCell}>
@@ -276,12 +281,22 @@ const Dashboard: React.FC<DashboardProps> = () => {
                     reloadTable={refetchRenting}
                   />}
                 {tableType === 'LEND' &&
-                  <WithdrawNFTModal
-                    trigger={<span className={cx({ "returnButton": true, })} >Redeem</span>}
-                    rentInfo={item}
-                    chain={item.chain}
-                    reloadTable={refetchLending}
-                  />}
+                  (
+                    // 关闭强制赎回功能
+                    nftStats === 'renting' ?
+                      <span className={cx({
+                        "returnButton": true,
+                        "returnButton_disable": true
+                      })} >Redeem</span>
+                      :
+                      <WithdrawNFTModal
+                        trigger={<span className={cx({ "returnButton": true, })} >Redeem</span>}
+                        rentInfo={item}
+                        chain={item.chain}
+                        reloadTable={refetchLending}
+                      />
+                  )
+                }
               </TableCell>
             </TableRow>
           })

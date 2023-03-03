@@ -13,7 +13,7 @@ import { PropsWithChildren, ReactElement, useEffect, useMemo, useState } from "r
 import { useRequest } from "ahooks";
 import { getNFTInfo, getNFTInfoByMoralis } from "../../services/market";
 import { formatAddress, formatTokenId } from "../../utils/format";
-import { ADDRESS_TOKEN_MAP, CHAIN_NAME, NFT_COLLECTIONS, ZERO_ADDRESS } from "../../constants";
+import { ADDRESS_TOKEN_MAP, NFT_COLLECTIONS, ZERO_ADDRESS, CHAIN_EXPOLER_MAP } from "../../constants";
 import Head from "next/head";
 import ContentCopyIcon from '@mui/icons-material/ContentCopy';
 import CheckIcon from '@mui/icons-material/Check';
@@ -105,7 +105,7 @@ const Detail: NextPageWithLayout = () => {
   const timestamp = useMemo(() => (Number(new Date) / 1000).toFixed(), [])
 
   const contractBlockExplore = useMemo(() => {
-    return `${etherscanBlockExplorers[CHAIN_NAME[3]]?.url}/address/${nftAddress}`
+    return `${CHAIN_EXPOLER_MAP[chainId]}/address/${nftAddress}`
   }, [nftAddress])
 
   const graphClient = useMemo(() => {
@@ -139,48 +139,41 @@ const Detail: NextPageWithLayout = () => {
     addressOrName: nftAddress,
     contractInterface: erc721ABI,
     functionName: "tokenURI",
-    chainId: 9527,
+    chainId: Number(chainId),
     args: [tokenId && BigNumber.from(tokenId)],
-    enabled: chainId === "9527"
+    enabled: ["9527", "2025"].includes(chainId)
   })
 
-  const { run: fetchNFTInfo } = useRequest(getNFTInfo, {
-    manual: true,
-    onSuccess: async ({ data, code }) => {
-      setMetaInfo(data)
-
-      // 中心化存储接口请求失败后逻辑
-      if (code !== 200) {
-        // 从 Ranger 测试网络获取
-        if (chainId === '9527') {
-          const metadata = await fetch(baseurl as unknown as string)
-          const metaJson = await metadata.json()
-          setMetaInfo({ ...metaJson, imageUrl: metaJson.image, metadata: JSON.stringify(metaJson) })
-        } else {
-          // 从第三方服务获取
-          const res = await getNFTInfoByMoralis({
-            tokenId: parseInt(tokenId),
-            contractAddress: nftAddress,
-            chainId: "0x" + Number(chainId).toString(16)
-          })
-          try {
-            if (res?.metadata) {
-              const metaJson = JSON.parse(res.metadata)
-              setMetaInfo({ ...res, imageUrl: metaJson.image })
-            }
-          } catch (err) {
-            console.error(err)
-          }
+  const fetchNFTInfo = async () => {
+    // 从 Ranger 网络获取数据
+    if (["9527", "2025"].includes(chainId)) {
+      const metadata = await fetch(baseurl as unknown as string)
+      const metaJson = await metadata.json()
+      setMetaInfo({ ...metaJson, imageUrl: metaJson.image, metadata: JSON.stringify(metaJson) })
+    } else {
+      // 从第三方服务获取
+      const res = await getNFTInfoByMoralis({
+        tokenId: parseInt(tokenId),
+        contractAddress: nftAddress,
+        chainId: "0x" + Number(chainId).toString(16)
+      })
+      try {
+        if (res?.metadata) {
+          const metaJson = JSON.parse(res.metadata)
+          setMetaInfo({ ...res, imageUrl: metaJson.image })
         }
+      } catch (err) {
+        console.error(err)
       }
     }
-  })
+  }
 
   useEffect(() => {
     getLeaseInfo()
     getMoreLease()
     if (nftAddress && tokenId) {
-      fetchNFTInfo({ tokenId: tokenId, contractAddress: nftAddress })
+      // fetchNFTInfo({ tokenId: tokenId, contractAddress: nftAddress })
+      fetchNFTInfo()
     }
   }, [nftAddress, tokenId])
 
@@ -256,7 +249,8 @@ const Detail: NextPageWithLayout = () => {
               </Box>
               <Box>
                 <Box>Blockchain</Box>
-                <Box>Ethereum</Box>
+                {/* TODO: 此处展示链逻辑需补充完善 */}
+                <Box>Rangers</Box>
               </Box>
             </Stack>
           </DetailCardBox>
