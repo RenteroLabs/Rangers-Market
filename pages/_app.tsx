@@ -23,7 +23,6 @@ import { NextAdapter } from 'next-query-params';
 import { QueryParamProvider } from 'use-query-params';
 import { PopupSDKOption, UniPassPopupSDK } from '@unipasswallet/popup-sdk'
 
-
 const infuraId = process.env.NEXT_PUBLIC_INFURA_ID
 
 const { chains, provider, webSocketProvider } = configureChains(SUPPORT_CHAINS, [
@@ -32,10 +31,10 @@ const { chains, provider, webSocketProvider } = configureChains(SUPPORT_CHAINS, 
 ])
 
 const unipassOption: PopupSDKOption = {
-  env: 'test',
+  env: process.env.NEXT_PUBLIC_ENV === 'PROD' ? 'prod' : 'test',
   chainType: 'rangers',
   appSettings: {
-    appName: "UniPass Wallet Demo",
+    appName: "UniPass Wallet",
     appIcon: "https://tva1.sinaimg.cn/large/008vxvgGly1h8xeyjk26rj303o03oglg.jpg",
   },
 }
@@ -44,7 +43,7 @@ const unipassOption: PopupSDKOption = {
 //   return new UniPassPopupSDK(unipassOption)
 // }, [])
 
-const unipassInstance = new UniPassPopupSDK(unipassOption) 
+const unipassInstance = new UniPassPopupSDK(unipassOption)
 
 const client = createClient({
   autoConnect: true,
