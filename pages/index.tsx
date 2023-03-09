@@ -173,6 +173,7 @@ const Home: NextPage<{ gamesInfo: Record<string, any>[] }> = ({ gamesInfo }) => 
 
   const resetGetList = () => {
     setCurrentPage(1)
+    setLeasesList([])
     getLeasesList()
   }
 

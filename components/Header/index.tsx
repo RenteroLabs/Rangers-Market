@@ -134,7 +134,7 @@ export default function Header() {
 
   return <header className={styles.header}>
     <div className={styles.logo}>
-      <a href='https://app.rentero.io' rel='noreferrer'>
+      <a href='https://rangers.rentero.io' rel='noreferrer'>
         <img src='/header_logo.svg' alt='Rentero Logo' />
       </a>
     </div>
