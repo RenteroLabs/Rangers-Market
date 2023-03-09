@@ -334,7 +334,7 @@ export const NFT_COLLECTIONS: Record<string, string> = {
   "0x6aadfe9441c35645d452bc7050cd53e43d104c18": "Axe Game | Rangers",
   "0x6f71dd919192eedc50cd40177b5f7de51aa30d3c": "DeHero Heroes",
   // 正式环境 Rangers 链 DeHero 游戏 NFT
-  "0xff78e0e78cae2d8e5b1027893af94534e22fff94": "DeHero Heroes"
+  "0x00852e9cdf414d6d9403468340f78ea93eda82d9": "DeHero Heroes"
 }
 
 export const GAME_LOGOS: Record<string, string> = {
