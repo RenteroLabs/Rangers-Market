@@ -387,7 +387,7 @@ export const GameList: GameItem[] = [
   {
     gameName: 'DeHeroGame',
     gameDesc: "Probably the most profitable NFT project",
-    gameCover: "https://rentero-resource.s3.ap-east-1.amazonaws.com/dehero_cover.png",
+    gameCover: "https://firstplay-crm.s3.ap-east-1.amazonaws.com/Wechat_IMG_599_4ce244c959.png?updated_at=2023-03-13T06:31:47.359Z",
     gameLogo: "https://rentero-resource.s3.ap-east-1.amazonaws.com/dehero_logo.png",
     gameStatus: 0,
     gameNFTCollection: GAME_CONTRACTS[2],
