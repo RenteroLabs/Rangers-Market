@@ -19,6 +19,8 @@ import Layout2 from '../components/layout2'
 import { ApolloProvider } from '@apollo/client'
 import { goerliGraph } from '../services/graphql'
 
+import { Analytics } from '@vercel/analytics/react';
+
 import { NextAdapter } from 'next-query-params';
 import { QueryParamProvider } from 'use-query-params';
 import { PopupSDKOption, UniPassPopupSDK } from '@unipasswallet/popup-sdk'
@@ -89,7 +91,10 @@ function MyApp({ Component, pageProps }: AppPropsWithLayout) {
       <QueryParamProvider adapter={NextAdapter}>
         <WagmiConfig client={client}>
           <ApolloProvider client={goerliGraph}>
-            <Layout2><Component {...pageProps} /></Layout2>
+            <Layout2>
+              <Component {...pageProps} />
+              <Analytics />
+            </Layout2>
           </ApolloProvider>
         </WagmiConfig>
       </QueryParamProvider>

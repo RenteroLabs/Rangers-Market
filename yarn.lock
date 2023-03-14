@@ -1845,6 +1845,11 @@
   resolved "https://registry.npmmirror.com/@unipasswallet/popup-types/-/popup-types-0.0.3.tgz#bf1308587190604b448937351307f20425f4bcd8"
   integrity sha512-wJdav2Jn0IcwL0VaMP16xxTBVG2edxWzkWHvSUQDa89e2XvU7Zp6zVnGsbzjZWqdUEGrnZ49zaiaOVgQd1zefg==
 
+"@vercel/analytics@^0.1.11":
+  version "0.1.11"
+  resolved "https://registry.npmmirror.com/@vercel/analytics/-/analytics-0.1.11.tgz#727a0ac655a4a89104cdea3e6925476470299428"
+  integrity sha512-mj5CPR02y0BRs1tN3oZcBNAX9a8NxsIUl9vElDPcqxnMfP0RbRc9fI9Ud7+QDg/1Izvt5uMumsr+6YsmVHcyuw==
+
 "@wagmi/core@^0.4.7":
   version "0.4.7"
   resolved "https://registry.npmjs.org/@wagmi/core/-/core-0.4.7.tgz"
