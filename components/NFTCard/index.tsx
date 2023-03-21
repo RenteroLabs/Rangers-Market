@@ -25,6 +25,9 @@ interface NFTCardProps {
 const NFTCard: React.FC<NFTCardProps> = (props) => {
   const { nftInfo, mode = '@lease', reloadList } = props
   const { address } = useAccount()
+
+  const [imageUrl, setImageUrl] = useState<string>("")
+
   const [metaInfo, setMetaInfo] = useState<Record<string, any>>({})
   const [attrList, setAttrList] = useState<Record<string, any>[]>([])
   const minMobileWidth = useMediaQuery("(max-width: 600px)")
@@ -50,9 +53,12 @@ const NFTCard: React.FC<NFTCardProps> = (props) => {
       // 获取 JSON
       const metadata = await fetch(baseurl as unknown as string)
       const metaJson = await metadata.json()
+      
+      setImageUrl(metaJson.image)
+
+      // TODO: setMetaInfo 仅用于存图片信息，后续可删除
       setMetaInfo({ ...metaJson, imageUrl: metaJson.image })
       setAttrList(metaJson.attributes)
-
     } else {
       // 通过第三方 Moralis 服务获取 NFT metadata 数据
       const res = await getNFTInfoByMoralis({
@@ -66,6 +72,9 @@ const NFTCard: React.FC<NFTCardProps> = (props) => {
         if (res?.metadata) {
           const metaJson = JSON.parse(res.metadata)
           attrs = metaJson?.attributes || []
+
+          setImageUrl(metaJson.image)
+
           setMetaInfo({ imageUrl: metaJson.image })
         }
       } catch (err) {
@@ -126,7 +135,7 @@ const NFTCard: React.FC<NFTCardProps> = (props) => {
   useEffect(() => {
     // fetchNFTInfo({ tokenId: nftInfo.tokenId, contractAddress: nftInfo.nftAddress })
     fetchNFTInfo()
-  }, [nftInfo])
+  }, [nftInfo, baseurl])
 
   const handleRentNow = (e: React.MouseEvent) => {
     e.stopPropagation()
@@ -151,10 +160,9 @@ const NFTCard: React.FC<NFTCardProps> = (props) => {
       className={cx({ "card": true, "cardTrialBackground": mode === '@trial' })}
     >
       <Box className={styles.nftImage}>
-        {metaInfo?.imageUrl &&
-          <Image
-            src={metaInfo?.imageUrl}
-            layout="fill"
+        {
+          imageUrl && <img
+            src={imageUrl}
           // TODO: 暂时移除 imageloader
           // loader={imageKitLoader}
           />}
