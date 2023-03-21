@@ -13,7 +13,7 @@ import { erc721ABI, useAccount, useContract, useContractRead, useSigner } from "
 import TakeOffNFTModal from "./Modals/TakeOffNFT"
 import LendConfig from "../LendNFT/SliptModeLendConfig"
 import CloseIcon from '@mui/icons-material/Close'
-import { ADDRESS_TOKEN_MAP, SUPPORT_CHAINS, ZERO_ADDRESS } from "../../constants"
+import { ADDRESS_TOKEN_MAP, CHAIN_ID_MAP, SUPPORT_CHAINS, ZERO_ADDRESS } from "../../constants"
 import { GET_MY_LENDING, GET_MY_RENTING } from "../../constants/documentNode"
 import { useLazyQuery, useQuery } from "@apollo/client"
 import { LeaseItem } from "../../types"
@@ -224,6 +224,7 @@ const Dashboard: React.FC<DashboardProps> = () => {
               console.error(err)
             }
 
+            const path = `/detail/${CHAIN_ID_MAP[item.chain]}/${item.nftAddress}/${item.tokenId}`
 
             return <TableRow key={index}>
               <TableCell>
@@ -233,10 +234,12 @@ const Dashboard: React.FC<DashboardProps> = () => {
                     {item.whitelist !== ZERO_ADDRESS && <span className={styles.whitelistIcon}></span>}
                   </Box>
                   <Stack sx={{ margin: 'auto 1rem' }}>
-                    <Typography className={styles.nftCollectionName}>
-                      {metadata?.name}
-                      &nbsp;#{formatTokenId(item.tokenId)}
-                    </Typography>
+                    <a href={path} target="_blank" rel='noreferrer'>
+                      <Typography className={styles.nftCollectionName}>
+                        {metadata?.name}
+                        &nbsp;#{formatTokenId(item.tokenId)}
+                      </Typography>
+                    </a>
                     <Typography className={styles.nftAddress}>
                       {tableType === 'LEND' && nftStats === 'lending'
                         ? '-'
