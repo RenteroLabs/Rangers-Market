@@ -41,7 +41,8 @@ const InstallmentLendConfig: React.FC<LendConfigProps> = (props) => {
   const [maxDuration, setMaxDuration] = useState<number>(365)
   const [paymentCoinType, setPaymentCoinType] = useState<string>(SUPPORT_TOKENS[CHAIN_ID_MAP[nftInfo.chain] as number][0].name)
   const [payPeriod, setPayPeriod] = useState<number>(1)
-  const [isNeedDeposit, setNeedDeposit] = useState<boolean>(true) // 默认需要押金
+  // 0321: 为了一次性付清操作，关闭押金配置，改为默认不需要押金 
+  const [isNeedDeposit, setNeedDeposit] = useState<boolean>(false) // 默认需要押金
   const [isShowMoreOptions, setShowMoreOption] = useState<boolean>(false)
 
   const { data: signer } = useSigner()
@@ -167,7 +168,7 @@ const InstallmentLendConfig: React.FC<LendConfigProps> = (props) => {
         whitelist || ZERO_ADDRESS, // whitelist address
         isNeedDeposit ? rentDailyPrice.mul(DEPOSIT_DAYS) : 0, // deposit
         rentDailyPrice, // daily rent price
-        payPeriod, // pay period
+        maxDuration || payPeriod, // pay period  用最大可租借天数设置为结算周期
         minDuration, // min rent day
         maxDuration // max rent day
       )
@@ -199,7 +200,7 @@ const InstallmentLendConfig: React.FC<LendConfigProps> = (props) => {
         whitelist || ZERO_ADDRESS, // whitelist address
         isNeedDeposit ? rentDailyPrice.mul(DEPOSIT_DAYS) : 0, // deposit
         rentDailyPrice, // daily rent price
-        payPeriod, // pay period
+        maxDuration || payPeriod, // pay period 用最大可租借天数设置为结算周期
         minDuration, // min rent day
         maxDuration
       ])
@@ -241,7 +242,7 @@ const InstallmentLendConfig: React.FC<LendConfigProps> = (props) => {
         whitelist || ZERO_ADDRESS, // whitelist address
         isNeedDeposit ? rentDailyPrice.mul(DEPOSIT_DAYS) : 0, // deposit
         rentDailyPrice, // daily rent price
-        payPeriod, // pay period
+        maxDuration || payPeriod, // pay period 用最大可租借天数设置为结算周期
         minDuration, // min rent day
         maxDuration // max rent day 
       )
@@ -272,7 +273,7 @@ const InstallmentLendConfig: React.FC<LendConfigProps> = (props) => {
         whitelist || ZERO_ADDRESS, // whitelist address
         isNeedDeposit ? rentDailyPrice.mul(DEPOSIT_DAYS) : 0, // deposit
         rentDailyPrice, // daily rent price
-        payPeriod, // pay period
+        maxDuration || payPeriod, // pay period 用最大可租借天数设置为结算周期
         minDuration, // min rent day
         maxDuration
       ])
@@ -409,7 +410,7 @@ const InstallmentLendConfig: React.FC<LendConfigProps> = (props) => {
           </Stack>
         </Box>
 
-        <Box className={styles.lendFormItemBox}>
+        {/* <Box className={styles.lendFormItemBox}>
           <Typography>Payment Cycle</Typography>
           <Box className={styles.billingCycle}>
             <InputNumber
@@ -424,7 +425,7 @@ const InstallmentLendConfig: React.FC<LendConfigProps> = (props) => {
             />
             <Typography>Days</Typography>
           </Box>
-        </Box>
+        </Box> */}
 
         {
           isShowMoreOptions &&
@@ -449,13 +450,14 @@ const InstallmentLendConfig: React.FC<LendConfigProps> = (props) => {
               </Box>
               {isErrorFormatAddress && <Typography className={styles.errorFormat}><ErrorOutlineIcon />&nbsp; Error format address</Typography>}
             </Box>
-            <Box className={styles.renetDeposit}>
+
+            {/* <Box className={styles.renetDeposit}>
               <Typography>
                 <span>Renter pays deposit</span>
                 <Switch checked={isNeedDeposit} onChange={(_, checked: boolean) => setNeedDeposit(checked)} />
               </Typography>
               <Box>* The deposit amount is one day rent. It will compensate You  when the Renter defaults.</Box>
-            </Box>
+            </Box> */}
           </>
         }
         <Box className={styles.moreOptions}>

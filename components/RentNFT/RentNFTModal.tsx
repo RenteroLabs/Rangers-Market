@@ -300,7 +300,8 @@ const RentNFTModal: React.FC<RentNFTModalProps> = (props) => {
             </Typography>
           </Box>
         </Stack>
-
+        {/* 为了一次性支持，隐藏此处逻辑 */}
+        {/* 
         <Stack className={styles.totalBox}>
           <Box>
             <Typography variant='h3'>Pay Now</Typography>
@@ -324,7 +325,7 @@ const RentNFTModal: React.FC<RentNFTModalProps> = (props) => {
               {rentInfo && firstPay}
             </Typography>
           </Box>
-        </Stack>
+        </Stack> */}
 
         {txError && <Alert
           variant="outlined"

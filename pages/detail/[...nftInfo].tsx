@@ -348,7 +348,9 @@ const Detail: NextPageWithLayout = () => {
             </Box>}
           >
             <Stack spacing="1.33rem" className={styles.rentInfoList}>
-              {(!rentInfo?.deposit || parseInt(rentInfo?.deposit || '0') !== 0) && <Box>
+
+              {/* 为了一次性付清逻辑，不需要押金 */}
+              {/* {(!rentInfo?.deposit || parseInt(rentInfo?.deposit || '0') !== 0) && <Box>
                 <Box>Deposit</Box>
                 <Box>
                   {
@@ -358,7 +360,8 @@ const Detail: NextPageWithLayout = () => {
                     </> : '-'
                   }
                 </Box>
-              </Box>}
+              </Box>} */}
+
               <Box>
                 <Box>Rent</Box>
                 <Box>
