@@ -128,7 +128,7 @@ const ConnectWallet: React.FC<ConnectWalletProps> = (props) => {
 
         <Box className={styles.walletItem}>
           <div
-            onClick={() => handleConnect(connectors[0])}>
+            onClick={() => handleConnect(MetaMaskConnector)}>
             <span className={styles.itemMetamaskLogo}></span>
             <p>MetaMask</p>
             {MetaMaskConnecting ? <CircularProgress /> : <ArrowRightAltRoundedIcon />}
